@@ -14,9 +14,8 @@
   a{ color:var(--amber); text-decoration:none; }
   .wrap{ max-width:960px; margin:0 auto; padding:0 22px; }
   header{ text-align:center; padding:70px 22px 40px; }
-  .logo{ width:96px; height:96px; border-radius:26px; margin:0 auto 22px;
-         background:radial-gradient(circle at 30% 25%, #a855f7, #6d28d9 70%);
-         display:flex; align-items:center; justify-content:center; font-size:52px;
+  .logo{ width:104px; height:104px; border-radius:28px; margin:0 auto 22px;
+         object-fit:cover; background:#000; display:block;
          box-shadow:0 12px 40px rgba(124,58,237,.45); }
   h1{ font-size:2.6rem; letter-spacing:-1px; }
   .tag{ color:var(--muted); font-size:1.15rem; margin-top:12px; }
@@ -54,7 +53,7 @@
 <body>
 
 <header>
-  <div class="logo">🧹</div>
+  <img class="logo" src="/logo.png" alt="SubClean logo">
   <h1>SubClean</h1>
   <p class="tag">YouTube aboneliklerini saniyeler içinde sadeleştir.</p>
   <p class="tag-en">Declutter your YouTube subscriptions in seconds.</p>
