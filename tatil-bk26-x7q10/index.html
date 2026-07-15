@@ -314,6 +314,7 @@ ul.expenses li:active{background:var(--bg);}
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
 var CATS = [
   {id:"yemek", name:"Yemek", emoji:"🍽️"},
@@ -511,18 +512,31 @@ function initSync(){
       updatePill();
       if(state.connected) flushQueue();
     });
-    state.db.ref("app").on("value", function(snap){
-      var v = snap.val();
-      state.data = v || { activeTrip: null, trips: {} };
-      if(!state.data.trips) state.data.trips = {};
-      state.queue.forEach(function(o){ applyLocal(o.p, o.v); });
-      lsSet("cache", state.data);
-      ensureTrip();
-      render();
-      updatePill();
-    }, function(err){
-      var pill = document.getElementById("syncPill");
-      pill.className = "pill off"; pill.textContent = "⚠️ erişim hatası";
+    var dbStarted = false;
+    var startAppListener = function(){
+      if(dbStarted) return;
+      dbStarted = true;
+      state.db.ref("app").on("value", function(snap){
+        var v = snap.val();
+        state.data = v || { activeTrip: null, trips: {} };
+        if(!state.data.trips) state.data.trips = {};
+        state.queue.forEach(function(o){ applyLocal(o.p, o.v); });
+        lsSet("cache", state.data);
+        ensureTrip();
+        render();
+        updatePill();
+      }, function(err){
+        var pill = document.getElementById("syncPill");
+        pill.className = "pill off"; pill.textContent = "⚠️ erişim hatası";
+      });
+      flushQueue();
+    };
+    firebase.auth().onAuthStateChanged(function(u){ if(u) startAppListener(); });
+    firebase.auth().signInAnonymously().catch(function(e){
+      if(!dbStarted){
+        var pill = document.getElementById("syncPill");
+        pill.className = "pill off"; pill.textContent = "giriş bekleniyor...";
+      }
     });
   }catch(e){
     state.db = null;
