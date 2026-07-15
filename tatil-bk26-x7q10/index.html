@@ -178,6 +178,11 @@ ul.expenses li:active{background:var(--bg);}
 .installbar button.go{background:var(--teal); color:#fff; border:none; border-radius:10px;
   padding:10px 14px; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;}
 .installbar button.x{background:none; border:none; color:var(--teal-dark); font-size:15px; cursor:pointer; padding:4px;}
+.settlebtn{width:100%; margin-top:12px; padding:12px; background:var(--teal-light); color:var(--teal-dark);
+  border:1.5px solid var(--teal); border-radius:12px; font-size:14px; font-weight:600; cursor:pointer;}
+.srow{display:flex; align-items:center; justify-content:space-between; font-size:12px;
+  color:var(--muted); padding:5px 0; border-top:1px solid var(--line); margin-top:6px;}
+.srow button{background:none; border:none; color:#9ca3af; font-size:13px; cursor:pointer; padding:2px 6px;}
 </style>
 </head>
 <body>
@@ -219,6 +224,8 @@ ul.expenses li:active{background:var(--bg);}
     <h2>Kim kime borçlu?</h2>
     <div id="balanceBox" class="balance-line balance-ok">Henüz masraf yok 🙂</div>
     <div class="hint" id="paidBreak"></div>
+    <div id="settleList"></div>
+    <button class="settlebtn" id="settleBtn" style="display:none" onclick="settleUp()">💸 Ödeştik — borcu kapat</button>
   </div>
 
   <div class="card">
@@ -740,6 +747,19 @@ function saveSettings(){
   if(fbText !== prev){ location.reload(); }
 }
 
+function settleUp(){
+  if(!state.curDebt || state.curDebt.amt < 0.01) return;
+  var d = state.curDebt;
+  if(!confirm(d.fromName + " → " + d.toName + " " + fmt(d.amt) + " ödendi olarak işaretlensin mi?")) return;
+  var id = "s" + Date.now();
+  op("trips/" + state.data.activeTrip + "/settles/" + id,
+    { from: d.from, to: d.to, amt: Math.round(d.amt * 100) / 100, ts: Date.now() });
+}
+function delSettle(id){
+  if(!confirm("Bu ödeşme kaydı silinsin mi?")) return;
+  op("trips/" + state.data.activeTrip + "/settles/" + id, null);
+}
+
 function dailyStats(items){
   var byDay = {};
   items.forEach(function(e){
@@ -1046,23 +1066,46 @@ function render(){
 
   var bal = document.getElementById("balanceBox");
   var brk = document.getElementById("paidBreak");
-  var diff = paid1 - paid2;
-  var settled = (total > 0 && Math.abs(diff) < 0.01);
+  var sBtn = document.getElementById("settleBtn");
+  var sList = document.getElementById("settleList");
+  var settles = trip.settles || {};
+  var s12 = 0, s21 = 0, sRows = [];
+  for(var sk in settles){
+    var sv = settles[sk];
+    if(!sv || typeof sv.amt !== "number") continue;
+    if(sv.from === "p1") s12 += sv.amt; else s21 += sv.amt;
+    sRows.push({ id: sk, from: sv.from, amt: sv.amt, ts: sv.ts });
+  }
+  var debt = (paid1 - paid2) / 2 - s21 + s12;
+  var settled = (total > 0 && Math.abs(debt) < 0.01);
   if(settled && state.prevSettled === false) confetti();
   state.prevSettled = settled;
   if(total === 0){
     bal.textContent = "Henüz masraf yok 🙂"; bal.className = "balance-line balance-ok";
-    brk.textContent = "";
+    brk.textContent = ""; sBtn.style.display = "none"; state.curDebt = null;
   } else if(settled){
     bal.textContent = "Ödeştiniz! 🎉"; bal.className = "balance-line balance-ok";
     brk.textContent = P1 + ": " + fmt(paid1) + " · " + P2 + ": " + fmt(paid2);
+    sBtn.style.display = "none"; state.curDebt = null;
   } else {
-    var debtor = diff > 0 ? P2 : P1;
-    var creditor = diff > 0 ? P1 : P2;
-    bal.textContent = debtor + " → " + creditor + ": " + fmt(Math.abs(diff) / 2);
+    var debtorP = debt > 0 ? "p2" : "p1";
+    var debtor = debt > 0 ? P2 : P1;
+    var creditor = debt > 0 ? P1 : P2;
+    bal.textContent = debtor + " → " + creditor + ": " + fmt(Math.abs(debt));
     bal.className = "balance-line";
     brk.textContent = P1 + " ödedi: " + fmt(paid1) + " · " + P2 + " ödedi: " + fmt(paid2);
+    state.curDebt = { from: debtorP, to: debt > 0 ? "p1" : "p2", amt: Math.abs(debt), fromName: debtor, toName: creditor };
+    sBtn.style.display = "block";
   }
+  var sHtml = "";
+  sRows.sort(function(a,b){ return b.ts - a.ts; });
+  var sf = new Intl.DateTimeFormat("tr-TR", {day:"numeric", month:"short"});
+  sRows.forEach(function(r){
+    sHtml += '<div class="srow"><span>💸 ' + sf.format(new Date(r.ts)) + ' · ' +
+      (r.from === "p1" ? P1 + " → " + P2 : P2 + " → " + P1) + ' · ' + fmt(r.amt) + '</span>' +
+      '<button onclick="delSettle(\'' + r.id + '\')">✕</button></div>';
+  });
+  sList.innerHTML = sHtml;
 
   renderDaily(items, budget);
   renderSummary(items, budget);
