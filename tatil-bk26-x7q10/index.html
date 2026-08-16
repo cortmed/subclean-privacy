@@ -207,20 +207,30 @@ html[data-theme=lavanta]{ --p1c:#7c3aed; }
 .v1{color:var(--p1c); font-weight:700;} .v2{color:var(--p2c); font-weight:700;}
 .vok{color:var(--ok); font-weight:700;} .vdue{color:var(--due); font-weight:700;}
 .daysum{font-weight:700; color:var(--ink); font-size:12px;}
+.anrow{display:flex; align-items:center; gap:10px; padding:9px 0; border-top:1px solid var(--line);}
+.anrow:first-child{border-top:none;}
+.anrow .ae{width:34px; height:34px; border-radius:10px; background:var(--teal-light);
+  display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0;}
+.anrow .ai{flex:1; min-width:0;}
+.anrow .an{font-weight:600; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.anrow .as{font-size:12px; color:var(--muted); margin-top:1px;}
+.anrow .av{font-weight:700; font-size:14px; white-space:nowrap;}
+.anhead{font-size:12px; font-weight:600; color:var(--muted); text-transform:uppercase;
+  letter-spacing:.4px; margin:14px 0 2px;}
+.anhead:first-child{margin-top:0;}
+.anins{background:var(--bg); border-radius:12px; padding:11px 13px; font-size:13px;
+  line-height:1.6; margin-top:12px;}
+.wchips{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+.wchip{background:var(--teal-light); color:var(--teal-dark); border-radius:14px;
+  padding:5px 11px; font-size:12px;}
+.wchip b{font-weight:700;}
 .splitwrap{margin-top:10px;}
 .splitbtn{background:none; border:none; color:var(--teal); font-size:13px; font-weight:600;
   cursor:pointer; padding:6px 0;}
 html[data-theme=gece] .splitbtn{color:var(--teal-dark);}
 .splitpanel{display:none;}
 .splitpanel.open{display:block; animation:fadeup .3s ease both;}
-.fairbar{position:relative; height:32px; border-radius:10px; overflow:hidden; display:flex;
-  background:var(--line); margin:10px 0 5px;}
-.fairbar .seg{display:flex; align-items:center; justify-content:center; font-size:11px;
-  font-weight:700; color:#fff; overflow:hidden; white-space:nowrap; transition:width .4s ease;}
-.fairbar .s1{background:var(--p1c);} .fairbar .s2{background:var(--p2c);}
-.fairline{position:absolute; left:50%; top:-2px; bottom:-2px; width:2px; background:var(--ink);}
-.fairlbl{display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-bottom:2px;}
-.fairnote{font-size:12px; color:var(--muted); line-height:1.5; margin-top:6px;}
+.splitnote{font-size:12px; color:var(--muted); line-height:1.5; margin:8px 0 2px;}
 .steps{margin-top:10px; font-size:13px;}
 .steps>div{display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-top:1px solid var(--line);}
 .steps b{white-space:nowrap;}
@@ -257,12 +267,6 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
 .rwbody{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center;
   max-width:460px; margin:0 auto; width:100%; position:relative; z-index:2; pointer-events:none;}
 .rwbody button, .rwbody input{pointer-events:auto;}
-.rwguess{width:100%; max-width:230px; align-self:center; margin-top:16px; padding:13px 14px;
-  font-size:22px; text-align:center; border:2px solid rgba(255,255,255,.45); border-radius:14px;
-  background:rgba(255,255,255,.14); color:#fff; outline:none; font-weight:700;}
-.rwguess:focus{border-color:#fff;}
-.rwguess::placeholder{color:rgba(255,255,255,.55); font-weight:400; font-size:17px;}
-.rwtap{font-size:12px; opacity:.65; margin-top:14px;}
 .rwk{font-size:12px; letter-spacing:2px; text-transform:uppercase; opacity:.8;}
 .rwbig{font-size:50px; font-weight:800; line-height:1.05; margin:8px 0;}
 .rwmid{font-size:28px; font-weight:700; margin:6px 0; line-height:1.2;}
@@ -353,6 +357,11 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
   <div class="card">
     <h2>Kategoriler</h2>
     <div id="catBox"><div class="hint">Masraf girince burada dağılım görünür.</div></div>
+  </div>
+
+  <div class="card" id="anCard" style="display:none">
+    <h2>🔎 Masraf analizi</h2>
+    <div id="anBox"></div>
   </div>
 
   <div class="card">
@@ -893,6 +902,129 @@ function restoreBackup(file){
   r.readAsText(file);
 }
 
+var AN_THEMES = [
+  { id:"konak",  emoji:"🏨", name:"Konaklama",       re:/OTEL|HOTEL|PANSİYON|PANSIYON|AIRBNB|APART|RESORT|KONAKLAMA|GECELİK|VİLLA|BUNGALOV/ },
+  { id:"ulasim", emoji:"🚕", name:"Ulaşım",          re:/TAKSİ|TAKSI|TAXI|UBER|DOLMUŞ|OTOBÜS|OTOBUS|FERİBOT|FERIBOT|VAPUR|BENZİN|BENZIN|MAZOT|OTOPARK|HGS|OGS|UÇAK|UCAK|TRANSFER|ARAÇ KİRA|RENT/ },
+  { id:"market", emoji:"🛒", name:"Market",          re:/MARKET|MİGROS|MIGROS|\bBİM\b|\bBIM\b|A101|ŞOK\b|CARREFOUR|BAKKAL|MANAV/ },
+  { id:"kahvalti", emoji:"🍳", name:"Kahvaltı",      re:/KAHVALTI|BRUNCH|SERPME|MENEMEN|BÖREK|POĞAÇA|SİMİT/ },
+  { id:"kahve",  emoji:"☕", name:"Kahve & çay",     re:/KAHVE|LATTE|ESPRESSO|CAPPUCC|AMERICANO|MOCHA|ÇAY\b|CAY\b|STARBUCKS|GLORIA|CAFFE|COFFEE|KAFE\b/ },
+  { id:"restoran", emoji:"🍽️", name:"Restoran",      re:/RESTORAN|RESTAURANT|LOKANTA|YEMEK|PİDE|KEBAP|DÖNER|BURGER|PIZZA|MEZE|OCAKBAŞI|BALIK/ },
+  { id:"tatli",  emoji:"🍦", name:"Tatlı & atıştırma", re:/DONDURMA|TATLI|PASTA\b|BAKLAVA|WAFFLE|ÇİKOLATA|KURABIYE|ATIŞTIR|CIPS/ },
+  { id:"gece",   emoji:"🍹", name:"Gece & bar",      re:/\bBAR\b|\bPUB\b|BİRA|BIRA|KOKTEYL|RAKI|ŞARAP|SARAP|CLUB|KULÜP|MEYHANE|GECE KULÜ/ },
+  { id:"deniz",  emoji:"🏖️", name:"Deniz & plaj",    re:/PLAJ|BEACH|ŞEZLONG|SEZLONG|TEKNE|DALIŞ|SNORKEL|SAHİL|DENİZ/ },
+  { id:"gezi",   emoji:"🎟️", name:"Gezi & bilet",    re:/BİLET|BILET|MÜZE|MUZE|ÖREN|TUR\b|TURU|GİRİŞ|GIRIS|BALON|TELEFERİK|ANTİK|REHBER/ },
+  { id:"hediye", emoji:"🎁", name:"Hediye & alışveriş", re:/HEDİYE|HEDIYE|MAGNET|SOUVENIR|HATIRA|ALIŞVERİŞ|ALISVERIS|KIYAFET|MAĞAZA|TAKI|ÇANTA/ },
+  { id:"saglik", emoji:"💊", name:"Sağlık",          re:/ECZANE|İLAÇ|ILAC|DOKTOR|HASTANE|AĞRI KESİCİ|GÜNEŞ KREMİ/ }
+];
+var AN_STOP = { "ve":1,"ile":1,"için":1,"bir":1,"bu":1,"şu":1,"da":1,"de":1,"mi":1,"çok":1,"az":1,
+  "tl":1,"adet":1,"the":1,"of":1,"küçük":1,"büyük":1,"yeni":1,"bizim":1,"bir de":1 };
+
+function anNorm(x){
+  return String(x || "").toLocaleLowerCase("tr-TR").replace(/[^0-9a-zçğıöşü\s]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function analyzeDescriptions(items){
+  var repMap = {}, themes = {}, words = {}, withDesc = 0;
+  items.forEach(function(e){
+    var raw = (e.desc || "").trim();
+    if(!raw) return;
+    withDesc++;
+    var key = anNorm(raw);
+    if(key){
+      if(!repMap[key]) repMap[key] = { label: raw, n: 0, total: 0, last: 0 };
+      var r = repMap[key];
+      r.n++; r.total += e.amt;
+      if(e.ts > r.last){ r.last = e.ts; r.label = raw; }
+    }
+    var up = raw.toLocaleUpperCase("tr-TR");
+    for(var i = 0; i < AN_THEMES.length; i++){
+      var th = AN_THEMES[i];
+      if(th.re.test(up)){
+        if(!themes[th.id]) themes[th.id] = { t: th, n: 0, total: 0 };
+        themes[th.id].n++; themes[th.id].total += e.amt;
+        break;
+      }
+    }
+    key.split(" ").forEach(function(w){
+      if(w.length < 3 || AN_STOP[w] || /^\d+$/.test(w)) return;
+      if(!words[w]) words[w] = { w: w, n: 0, total: 0 };
+      words[w].n++; words[w].total += e.amt;
+    });
+  });
+  var reps = [];
+  for(var k in repMap){ if(repMap[k].n >= 2) reps.push(repMap[k]); }
+  reps.sort(function(a, b){ return b.total - a.total; });
+  var thl = [];
+  for(var t in themes) thl.push(themes[t]);
+  thl.sort(function(a, b){ return b.total - a.total; });
+  var wl = [];
+  for(var w in words){ if(words[w].n >= 2) wl.push(words[w]); }
+  wl.sort(function(a, b){ return b.n - a.n || b.total - a.total; });
+  return { reps: reps, themes: thl, words: wl, withDesc: withDesc };
+}
+
+function renderAnalysis(items, dayCount){
+  var card = document.getElementById("anCard");
+  var box = document.getElementById("anBox");
+  var a = analyzeDescriptions(items);
+  if(a.withDesc < 3 || (!a.reps.length && !a.themes.length)){
+    card.style.display = "none"; box.innerHTML = ""; return;
+  }
+  card.style.display = "block";
+  var total = 0;
+  items.forEach(function(e){ total += e.amt; });
+  var html = "";
+
+  if(a.reps.length){
+    html += '<div class="anhead">🔁 En çok tekrar edenler</div>';
+    a.reps.slice(0, 4).forEach(function(r){
+      html += '<div class="anrow"><div class="ae">🔁</div><div class="ai">' +
+        '<div class="an">' + escapeHtml(r.label) + '</div>' +
+        '<div class="as">' + r.n + ' kez · ortalama ' + fmt(Math.round(r.total / r.n)) + '</div></div>' +
+        '<div class="av">' + fmt(r.total) + '</div></div>';
+    });
+  }
+
+  if(a.themes.length){
+    html += '<div class="anhead">🏷️ Açıklamalardan çıkan temalar</div>';
+    a.themes.slice(0, 5).forEach(function(t){
+      var pct = total > 0 ? Math.round(t.total / total * 100) : 0;
+      html += '<div class="anrow"><div class="ae">' + t.t.emoji + '</div><div class="ai">' +
+        '<div class="an">' + t.t.name + '</div>' +
+        '<div class="as">' + t.n + ' masraf · toplamın %' + pct + '\u2019i</div></div>' +
+        '<div class="av">' + fmt(t.total) + '</div></div>';
+    });
+  }
+
+  var ins = [];
+  var kahve = null, top = a.themes[0];
+  a.themes.forEach(function(t){ if(t.t.id === "kahve") kahve = t; });
+  if(kahve && dayCount > 0){
+    var per = kahve.n / dayCount;
+    ins.push("☕ " + kahve.n + " kez kahve/çay: " + fmt(kahve.total) +
+      (per >= 1.5 ? " — günde ortalama " + (Math.round(per * 10) / 10) + " tane, hakkını verdiniz 😄" : ""));
+  }
+  if(a.reps.length){
+    var r0 = a.reps[0];
+    ins.push("🔁 En sadık olduğunuz kalem: <b>" + escapeHtml(r0.label) + "</b> — " + r0.n +
+      " kez, toplam " + fmt(r0.total));
+  }
+  if(top && total > 0 && top.total / total >= 0.3){
+    ins.push(top.t.emoji + " Paranın en büyük kısmı <b>" + top.t.name.toLocaleLowerCase("tr-TR") +
+      "</b> tarafına gitmiş (%" + Math.round(top.total / total * 100) + ").");
+  }
+  if(ins.length) html += '<div class="anins">' + ins.join("<br>") + '</div>';
+
+  if(a.words.length > 2){
+    html += '<div class="anhead">💬 Sık geçen kelimeler</div><div class="wchips">';
+    a.words.slice(0, 8).forEach(function(w){
+      html += '<span class="wchip">' + escapeHtml(w.w) + ' <b>' + w.n + '</b></span>';
+    });
+    html += '</div>';
+  }
+  box.innerHTML = html;
+}
+
 function quickTemplates(limit){
   var map = {}, trips = state.data.trips || {};
   for(var tid in trips){
@@ -952,41 +1084,27 @@ function toggleSplit(){
   }
 }
 
-function splitSign(x){
-  if(Math.abs(x) < 0.01) return "tam payı kadar";
-  return x > 0 ? ("payından " + fmt(x) + " fazla") : ("payından " + fmt(-x) + " eksik");
-}
-
 function renderSplit(total, paid1, paid2, s12, s21, debt){
   var wrap = document.getElementById("splitWrap");
   var p = document.getElementById("splitPanel");
   if(!total || total <= 0){ wrap.style.display = "none"; p.innerHTML = ""; return; }
   wrap.style.display = "block";
   var share = total / 2;
-  var w1 = paid1 / total * 100;
-  if(!isFinite(w1)) w1 = 50;
-  var d1 = paid1 - share, d2 = paid2 - share;
+  var diff = Math.abs(paid1 - paid2);
+  var half = diff / 2;
   var net = s21 - s12;
-  var res = Math.abs(debt) < 0.01 ? "Ödeştiniz 🎉"
+  var dirTxt = diff < 0.01 ? "yok" : ((paid1 > paid2 ? P2 + " → " + P1 : P1 + " → " + P2));
+  var res = Math.abs(debt) < 0.01 ? "Ödeştiniz ✅"
     : ((debt > 0 ? P2 + " → " + P1 : P1 + " → " + P2) + " " + fmt(Math.abs(debt)));
   var html =
-    '<div class="fairbar">' +
-      '<div class="seg s1" style="width:' + w1.toFixed(1) + '%">' + (w1 >= 20 ? P1 : "") + '</div>' +
-      '<div class="seg s2" style="width:' + (100 - w1).toFixed(1) + '%">' + (w1 <= 80 ? P2 : "") + '</div>' +
-      '<div class="fairline"></div>' +
-    '</div>' +
-    '<div class="fairlbl"><span>' + P1 + ' %' + Math.round(w1) + '</span>' +
-      '<span>↑ adil çizgi (%50)</span><span>' + P2 + ' %' + Math.round(100 - w1) + '</span></div>' +
-    '<div class="fairnote">Her masraf ikiye bölünür. Renkli alanın adil çizgiyi aştığı kadar, o kişi fazladan ödemiş demektir.<br>' +
-      '<span class="pdot p1"></span>' + P1 + ' &nbsp; <span class="pdot p2"></span>' + P2 +
-      ' &nbsp; <span style="color:var(--ok)">●</span> kapatılan &nbsp; <span style="color:var(--due)">●</span> kalan</div>' +
+    '<div class="splitnote">Her masraf ikiye bölünür. İkinizin ödediği tutar arasındaki farkın yarısı borç olarak kalır.</div>' +
     '<div class="steps">' +
       '<div><span>Toplam harcama</span><b>' + fmt(total) + '</b></div>' +
-      '<div><span>Kişi başı adil pay (÷2)</span><b>' + fmt(share) + '</b></div>' +
+      '<div><span>Kişi başı pay (÷2)</span><b>' + fmt(share) + '</b></div>' +
       '<div><span><span class="pdot p1"></span>' + P1 + ' ödedi</span><b class="v1">' + fmt(paid1) + '</b></div>' +
-      '<div><span style="opacity:.75">↳ ' + splitSign(d1) + '</span><b></b></div>' +
       '<div><span><span class="pdot p2"></span>' + P2 + ' ödedi</span><b class="v2">' + fmt(paid2) + '</b></div>' +
-      '<div><span style="opacity:.75">↳ ' + splitSign(d2) + '</span><b></b></div>' +
+      '<div><span>Aradaki fark</span><b>' + fmt(diff) + '</b></div>' +
+      '<div><span>Farkın yarısı' + (diff >= 0.01 ? ' (' + dirTxt + ')' : '') + '</span><b>' + fmt(half) + '</b></div>' +
       (Math.abs(net) > 0.001 ? '<div><span>✅ Elden kapatılan</span><b class="vok">' +
         (net > 0 ? P2 + " → " + P1 : P1 + " → " + P2) + " " + fmt(Math.abs(net)) + '</b></div>' : '') +
       '<div class="res"><span>Kalan borç</span><b class="' + (Math.abs(debt) < 0.01 ? "vok" : "vdue") + '">' + res + '</b></div>' +
@@ -998,7 +1116,6 @@ function renderSplit(total, paid1, paid2, s12, s21, debt){
     document.getElementById("splitBtn").textContent = "🧮 Hesabı gizle";
   }
 }
-
 function ymd(ts){ return dayKey(ts); }
 function setDate(off){
   var d = new Date();
@@ -1101,8 +1218,6 @@ function rwOpen(cards){
   rwDraw();
 }
 function rwGo(d){
-  var cur = rw.cards[rw.i];
-  if(d > 0 && cur && cur.guess && !cur.revealed){ rwNudge(); return; }
   var n = rw.i + d;
   if(n < 0) return;
   if(n >= rw.cards.length){ rwClose(); return; }
@@ -1119,45 +1234,6 @@ function rwCount(el, to){
   }
   requestAnimationFrame(step);
 }
-function rwVerdict(guess, real){
-  if(!guess || guess <= 0 || !real) return "";
-  var d = Math.abs(guess - real) / real * 100;
-  var dir = guess < real ? "az tahmin ettin" : "fazla tahmin ettin";
-  var v;
-  if(d <= 5) v = "🎯 İnanılmaz, neredeyse tam isabet!";
-  else if(d <= 15) v = "👏 Çok iyi tahmin";
-  else if(d <= 30) v = "🙂 Fena değil";
-  else if(d <= 60) v = "😅 Epey uzaktın";
-  else v = "🤯 Hiç yaklaşamadın";
-  return "Tahminin: " + fmt(guess) + " · %" + Math.round(d) + " " + dir + "<br>" + v;
-}
-function rwGuessCard(bg, top, total, subHtml, kicker){
-  return { bg: bg, top: top, num: total, guess: true,
-    h: '<div class="rwemoji">🤔</div>' +
-       '<div class="rwk">' + kicker + '</div>' +
-       '<div class="rwmid">Sence ne kadar harcadık?</div>' +
-       '<input class="rwguess" id="rwGuess" type="number" inputmode="numeric" placeholder="tahminin (isteğe bağlı)">' +
-       '<button class="rwbtn" style="color:' + bg + '" onclick="rwReveal()">👀 Göster</button>' +
-       '<div class="rwtap">önce bir tahmin edin bakalım 😄</div>',
-    hr: '<div class="rwk">' + kicker + '</div>' +
-        '<div class="rwbig" id="rwNum">0</div>' + subHtml +
-        '<div class="rwsub" id="rwVerdict" style="margin-top:12px"></div>' };
-}
-function rwReveal(){
-  var c = rw.cards[rw.i];
-  if(!c || !c.guess || c.revealed) return;
-  var g = document.getElementById("rwGuess");
-  var v = g ? parseFloat(g.value) : NaN;
-  c.guessVal = (isFinite(v) && v > 0) ? v : null;
-  c.revealed = true;
-  rwDraw();
-  confetti();
-}
-function rwNudge(){
-  var b = document.getElementById("rwBody");
-  b.classList.add("shake");
-  setTimeout(function(){ b.classList.remove("shake"); }, 600);
-}
 function rwDraw(){
   var c = rw.cards[rw.i];
   document.getElementById("rw").style.background = c.bg;
@@ -1165,18 +1241,8 @@ function rwDraw(){
   for(var i = 0; i < rw.cards.length; i++) bars += '<i class="' + (i <= rw.i ? "on" : "") + '"></i>';
   document.getElementById("rwBars").innerHTML = bars;
   document.getElementById("rwTitle").textContent = c.top || "";
-  var open = c.guess && !c.revealed;
-  document.getElementById("rwBody").innerHTML = open ? c.h : (c.guess ? c.hr : c.h);
-  if(open){
-    var gi = document.getElementById("rwGuess");
-    if(gi && gi.addEventListener) gi.addEventListener("keydown", function(e){ if(e.key === "Enter") rwReveal(); });
-    return;
-  }
+  document.getElementById("rwBody").innerHTML = c.h;
   if(c.num) rwCount(document.getElementById("rwNum"), c.num);
-  if(c.guess && c.guessVal){
-    var vd = document.getElementById("rwVerdict");
-    if(vd) vd.innerHTML = rwVerdict(c.guessVal, c.num);
-  }
   if(c.boom) confetti();
 }
 
@@ -1247,10 +1313,12 @@ function rwTripCards(trip){
     '<div class="rwsub">' + rwRange(o.first, o.last) + '<br>Bakalım neler olmuş 👀</div>' +
     '<div class="rwsub" style="margin-top:18px;opacity:.7">ilerlemek için sağa dokun ›</div>' });
 
-  cards.push(rwGuessCard(RWC[1], "Toplam", o.total,
+  cards.push({ bg: RWC[1], top: "Toplam", num: o.total, h:
+    '<div class="rwk">Bu tatilde toplam</div>' +
+    '<div class="rwbig" id="rwNum">0</div>' +
     '<div class="rwsub">' + o.n + ' masraf · ' + o.days.length + ' gün' +
     (budget > 0 ? '<br>' + (o.total <= budget ? '🎯 Bütçenin içinde kaldınız!' : '🔥 Bütçeyi ' + fmt(o.total - budget) + ' aştınız') : '') +
-    '</div>', "Bu tatilde toplam"));
+    '</div>' });
 
   cards.push({ bg: RWC[2], top: "Günlük ritim", h:
     '<div class="rwemoji">📅</div>' +
@@ -1301,6 +1369,29 @@ function rwTripCards(trip){
       '<div class="rwmid" style="font-size:20px">' + escapeHtml(o.big.desc) + '</div>' +
       '<div class="rwsub">' + bf.format(new Date(o.big.ts)) + ' · ' +
         (o.big.payer === "p1" ? P1 : P2) + ' ödedi<br>değdi mi? 😄</div>' });
+  }
+
+  var an = analyzeDescriptions(items);
+  if(an.reps.length || an.themes.length){
+    var inner = "";
+    if(an.reps.length){
+      var r0 = an.reps[0];
+      inner += '<div class="rwemoji">🔁</div>' +
+        '<div class="rwk">En çok tekrar eden</div>' +
+        '<div class="rwmid">' + escapeHtml(r0.label) + '</div>' +
+        '<div class="rwbig" style="font-size:34px">' + r0.n + ' kez</div>' +
+        '<div class="rwsub">toplam ' + fmt(r0.total) + ' · ortalama ' + fmt(Math.round(r0.total / r0.n)) + '</div>';
+    } else {
+      var t0 = an.themes[0];
+      inner += '<div class="rwemoji">' + t0.t.emoji + '</div>' +
+        '<div class="rwk">Tatilin teması</div>' +
+        '<div class="rwmid">' + t0.t.name + '</div>' +
+        '<div class="rwbig" style="font-size:34px">' + fmt(t0.total) + '</div>';
+    }
+    var extra = an.themes.slice(0, 3).map(function(t){
+      return '<div class="rwrow"><span>' + t.t.emoji + ' ' + t.t.name + '</span><b>' + fmt(t.total) + '</b></div>';
+    }).join("");
+    cards.push({ bg: RWC[2], top: "Alışkanlıklar", h: inner + '<div style="margin-top:14px">' + extra + '</div>' });
   }
 
   var badges = rwBadges(o, budget).map(function(x){ return '<span class="rwbadge">' + x + '</span>'; }).join("");
@@ -1354,9 +1445,10 @@ function rwAllCards(){
     '<div class="rwsub">' + rwRange(o.first, o.last) + '</div>' +
     '<div class="rwsub" style="margin-top:18px;opacity:.7">ilerlemek için sağa dokun ›</div>' });
 
-  cards.push(rwGuessCard(RWC[1], "Toplam", o.total,
-    '<div class="rwsub">' + rows.length + ' tatil · ' + totalDays + ' gün · ' + o.n + ' masraf</div>',
-    "Bugüne kadar birlikte"));
+  cards.push({ bg: RWC[1], top: "Toplam", num: o.total, h:
+    '<div class="rwk">Bugüne kadar birlikte</div>' +
+    '<div class="rwbig" id="rwNum">0</div>' +
+    '<div class="rwsub">' + rows.length + ' tatil · ' + totalDays + ' gün · ' + o.n + ' masraf</div>' });
 
   var rank = rows.slice(0, 5).map(function(r, i){
     return '<div class="rwrow"><span>' + ["🥇","🥈","🥉","4.","5."][i] + ' ' + escapeHtml(r.name) +
@@ -1780,6 +1872,7 @@ function render(){
   renderDaily(items, budget);
   renderSummary(items, budget);
   renderCalendar(items);
+  renderAnalysis(items, dailyStats(items).keys.length);
 
   var catBox = document.getElementById("catBox");
   if(total === 0){
