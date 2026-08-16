@@ -69,7 +69,8 @@ ul.expenses li:last-child{border-bottom:none;}
 .einfo .m{font-size:12px; color:var(--muted); margin-top:2px;}
 .eamt{font-weight:700; font-size:15px; white-space:nowrap;}
 .del{background:none; border:none; color:#9ca3af; font-size:17px; cursor:pointer; padding:6px;}
-.datehdr{font-size:12px; font-weight:600; color:var(--muted); margin:14px 0 4px; text-transform:uppercase;}
+.datehdr{display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+  font-size:12px; font-weight:600; color:var(--muted); margin:14px 0 4px; text-transform:uppercase;}
 .fab{position:fixed; right:50%; transform:translateX(50%); bottom:calc(20px + env(safe-area-inset-bottom));
   background:var(--teal); color:#fff; border:none; border-radius:50px; padding:16px 32px;
   font-size:17px; font-weight:600; box-shadow:0 6px 16px rgba(0,0,0,.25); cursor:pointer; z-index:50;}
@@ -178,11 +179,110 @@ ul.expenses li:active{background:var(--bg);}
 .installbar button.go{background:var(--teal); color:#fff; border:none; border-radius:10px;
   padding:10px 14px; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;}
 .installbar button.x{background:none; border:none; color:var(--teal-dark); font-size:15px; cursor:pointer; padding:4px;}
+.daterow{display:flex; gap:8px; align-items:center;}
+.daterow input{flex:1; min-width:0;}
+.daterow button{padding:12px 14px; border:1.5px solid var(--line); background:var(--bg);
+  border-radius:12px; font-size:14px; font-weight:600; color:var(--muted); cursor:pointer; white-space:nowrap;}
+.daterow button:active{background:var(--teal-light); border-color:var(--teal); color:var(--teal-dark);}
+.dhint{font-weight:600; color:var(--teal); text-transform:none; letter-spacing:0;}
+:root{ --ok:#16a34a; --okbg:#dcfce7; --oktx:#166534;
+  --due:#d97706; --duebg:#fef3c7; --duetx:#92400e; --p1c:#0f766e; --p2c:#d97706; }
+html[data-theme=gece]{ --ok:#4ade80; --okbg:#14532d; --oktx:#bbf7d0;
+  --due:#fbbf24; --duebg:#78350f; --duetx:#fde68a; --p1c:#2dd4bf; --p2c:#fbbf24; }
+html[data-theme=gunbatimi]{ --p1c:#c2410c; }
+html[data-theme=lavanta]{ --p1c:#7c3aed; }
+.balpill{display:inline-flex; align-items:center; gap:8px; padding:11px 15px; border-radius:14px;
+  font-size:17px; font-weight:700; line-height:1.3;}
+.balpill.due{background:var(--duebg); color:var(--duetx);}
+.balpill.ok{background:var(--okbg); color:var(--oktx);}
+.balnote{font-size:12px; color:var(--muted); margin-top:8px; line-height:1.5;}
+.debtbar{display:flex; height:12px; border-radius:6px; overflow:hidden; background:var(--line); margin:12px 0 5px;}
+.debtbar .g{background:var(--ok); transition:width .4s ease;}
+.debtbar .o{background:var(--due); transition:width .4s ease;}
+.debtlbl{display:flex; justify-content:space-between; font-size:11px; font-weight:600;}
+.debtlbl .g{color:var(--ok);} .debtlbl .o{color:var(--due);}
+.paidrow{display:flex; gap:14px; font-size:13px; color:var(--muted); margin-top:8px; flex-wrap:wrap;}
+.pdot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:6px; vertical-align:middle;}
+.pdot.p1{background:var(--p1c);} .pdot.p2{background:var(--p2c);}
+.v1{color:var(--p1c); font-weight:700;} .v2{color:var(--p2c); font-weight:700;}
+.vok{color:var(--ok); font-weight:700;} .vdue{color:var(--due); font-weight:700;}
+.daysum{font-weight:700; color:var(--ink); font-size:12px;}
+.splitwrap{margin-top:10px;}
+.splitbtn{background:none; border:none; color:var(--teal); font-size:13px; font-weight:600;
+  cursor:pointer; padding:6px 0;}
+html[data-theme=gece] .splitbtn{color:var(--teal-dark);}
+.splitpanel{display:none;}
+.splitpanel.open{display:block; animation:fadeup .3s ease both;}
+.fairbar{position:relative; height:32px; border-radius:10px; overflow:hidden; display:flex;
+  background:var(--line); margin:10px 0 5px;}
+.fairbar .seg{display:flex; align-items:center; justify-content:center; font-size:11px;
+  font-weight:700; color:#fff; overflow:hidden; white-space:nowrap; transition:width .4s ease;}
+.fairbar .s1{background:var(--p1c);} .fairbar .s2{background:var(--p2c);}
+.fairline{position:absolute; left:50%; top:-2px; bottom:-2px; width:2px; background:var(--ink);}
+.fairlbl{display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-bottom:2px;}
+.fairnote{font-size:12px; color:var(--muted); line-height:1.5; margin-top:6px;}
+.steps{margin-top:10px; font-size:13px;}
+.steps>div{display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-top:1px solid var(--line);}
+.steps b{white-space:nowrap;}
+.steps .res{font-weight:700; color:var(--teal); border-top:2px solid var(--teal);}
+html[data-theme=gece] .steps .res{color:var(--teal-dark); border-top-color:var(--teal-dark);}
+.steps .chk{color:var(--muted); font-size:12px; border-top:none; justify-content:flex-start;}
+.qwrap{margin-top:14px; display:none;}
+.qwrap>span{display:block; font-size:13px; font-weight:600; color:var(--muted); margin-bottom:6px;}
+.qchips{display:flex; flex-wrap:wrap; gap:7px;}
+.qchip{border:1.5px solid var(--line); background:var(--bg); color:var(--ink); border-radius:20px;
+  padding:9px 13px; font-size:13px; cursor:pointer;}
+.qchip b{color:var(--teal); margin-left:3px;}
+html[data-theme=gece] .qchip b{color:var(--teal-dark);}
+.qchip:active{background:var(--teal-light); border-color:var(--teal);}
 .settlebtn{width:100%; margin-top:12px; padding:12px; background:var(--teal-light); color:var(--teal-dark);
   border:1.5px solid var(--teal); border-radius:12px; font-size:14px; font-weight:600; cursor:pointer;}
 .srow{display:flex; align-items:center; justify-content:space-between; font-size:12px;
-  color:var(--muted); padding:5px 0; border-top:1px solid var(--line); margin-top:6px;}
-.srow button{background:none; border:none; color:#9ca3af; font-size:13px; cursor:pointer; padding:2px 6px;}
+  color:var(--oktx); background:var(--okbg); border-radius:10px; padding:7px 10px; margin-top:6px;}
+.srow button{background:none; border:none; color:var(--oktx); opacity:.6; font-size:13px; cursor:pointer; padding:2px 6px;}
+.srow b{font-weight:700;}
+.rw{position:fixed; inset:0; z-index:400; display:none; flex-direction:column; background:#0f766e;
+  color:#fff; padding:calc(14px + env(safe-area-inset-top)) 18px calc(26px + env(safe-area-inset-bottom));
+  overflow:hidden; transition:background .45s ease;}
+.rw.open{display:flex;}
+.rwbars{display:flex; gap:4px; margin-bottom:12px; position:relative; z-index:3;}
+.rwbars i{flex:1; height:3px; background:rgba(255,255,255,.28); border-radius:2px; transition:background .3s;}
+.rwbars i.on{background:#fff;}
+.rwtop{display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; position:relative; z-index:3;}
+.rwtop span{font-size:12px; letter-spacing:1.5px; text-transform:uppercase; opacity:.85;}
+.rwtop button{background:rgba(255,255,255,.18); border:none; color:#fff; width:32px; height:32px;
+  border-radius:10px; font-size:15px; cursor:pointer;}
+.rwnav{position:absolute; top:64px; bottom:0; z-index:1; cursor:pointer;}
+.rwnav.l{left:0; width:32%;} .rwnav.r{right:0; width:68%;}
+.rwbody{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center;
+  max-width:460px; margin:0 auto; width:100%; position:relative; z-index:2; pointer-events:none;}
+.rwbody button, .rwbody input{pointer-events:auto;}
+.rwguess{width:100%; max-width:230px; align-self:center; margin-top:16px; padding:13px 14px;
+  font-size:22px; text-align:center; border:2px solid rgba(255,255,255,.45); border-radius:14px;
+  background:rgba(255,255,255,.14); color:#fff; outline:none; font-weight:700;}
+.rwguess:focus{border-color:#fff;}
+.rwguess::placeholder{color:rgba(255,255,255,.55); font-weight:400; font-size:17px;}
+.rwtap{font-size:12px; opacity:.65; margin-top:14px;}
+.rwk{font-size:12px; letter-spacing:2px; text-transform:uppercase; opacity:.8;}
+.rwbig{font-size:50px; font-weight:800; line-height:1.05; margin:8px 0;}
+.rwmid{font-size:28px; font-weight:700; margin:6px 0; line-height:1.2;}
+.rwsub{font-size:15px; opacity:.92; line-height:1.65;}
+.rwemoji{font-size:60px; line-height:1;}
+.rwrow{display:flex; justify-content:space-between; gap:10px; font-size:15px; padding:9px 2px;
+  border-top:1px solid rgba(255,255,255,.22);}
+.rwrow b{white-space:nowrap;}
+.rwrow span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.rwbadge{display:inline-block; background:rgba(255,255,255,.17); border-radius:14px;
+  padding:9px 13px; margin:4px 3px; font-size:13px;}
+.rwbtn{background:#fff; border:none; border-radius:14px; padding:13px 20px; font-size:15px;
+  font-weight:700; cursor:pointer; margin-top:18px; align-self:center;}
+@keyframes rwin{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:none;}}
+.rwbody>*{animation:rwin .5s ease both;}
+.rwbody>*:nth-child(2){animation-delay:.07s}
+.rwbody>*:nth-child(3){animation-delay:.14s}
+.rwbody>*:nth-child(4){animation-delay:.21s}
+.rwbody>*:nth-child(5){animation-delay:.28s}
+.rwbody>*:nth-child(6){animation-delay:.35s}
 </style>
 </head>
 <body>
@@ -194,6 +294,7 @@ ul.expenses li:active{background:var(--bg);}
       <div class="sub"><span id="syncPill" class="pill off">yerel mod</span></div>
     </div>
     <div class="hbtns">
+      <button class="iconbtn" onclick="rwStart()" aria-label="Rewind">✨</button>
       <button class="iconbtn" onclick="openSheet('trips')" aria-label="Tatillerim">🧳</button>
       <button class="iconbtn" onclick="openSheet('settings')" aria-label="Ayarlar">⚙️</button>
     </div>
@@ -226,6 +327,10 @@ ul.expenses li:active{background:var(--bg);}
     <div class="hint" id="paidBreak"></div>
     <div id="settleList"></div>
     <button class="settlebtn" id="settleBtn" style="display:none" onclick="settleUp()">💸 Ödeştik — borcu kapat</button>
+    <div class="splitwrap" id="splitWrap" style="display:none">
+      <button class="splitbtn" id="splitBtn" onclick="toggleSplit()">🧮 Hesabı göster</button>
+      <div class="splitpanel" id="splitPanel"></div>
+    </div>
   </div>
 
   <div class="card">
@@ -242,6 +347,7 @@ ul.expenses li:active{background:var(--bg);}
     <h2>📈 Genel özet</h2>
     <div id="sumBox"><div class="hint">Masraf girince özet burada.</div></div>
     <button class="ghost" onclick="openKarne()">🏅 Tatil karnesini aç</button>
+    <button class="ghost" onclick="rwStart()">✨ Rewind'i başlat</button>
   </div>
 
   <div class="card">
@@ -265,10 +371,17 @@ ul.expenses li:active{background:var(--bg);}
   <button class="scanbtn" onclick="document.getElementById('fPhoto').click()">📷 Fişi tara — otomatik doldur</button>
   <input type="file" id="fPhoto" accept="image/*" capture="environment" style="display:none" onchange="scanReceipt(this.files[0]); this.value='';">
   <div id="scanStatus" class="hint" style="display:none; margin-top:8px;"></div>
+  <div class="qwrap" id="fQuickWrap"><span>⚡ Hızlı ekle</span><div class="qchips" id="fQuick"></div></div>
   <label>Tutar (TL)</label>
   <input type="number" id="fAmt" inputmode="decimal" placeholder="0" step="0.01">
   <label>Açıklama</label>
   <input type="text" id="fDesc" placeholder="Örn: Akşam yemeği">
+  <label>Tarih <span id="fDateHint" class="dhint"></span></label>
+  <div class="daterow">
+    <input type="date" id="fDate" onchange="dateHint()">
+    <button type="button" onclick="setDate(0)">Bugün</button>
+    <button type="button" onclick="setDate(-1)">Dün</button>
+  </div>
   <label>Kim ödedi?</label>
   <div class="seg" id="fPayer"></div>
   <label>Kategori</label>
@@ -280,6 +393,7 @@ ul.expenses li:active{background:var(--bg);}
 <div class="sheet" id="sheet-trips">
   <h3>🧳 Tatillerim</h3>
   <div id="tripList"></div>
+  <button class="ghost" onclick="rwAll()">✨ Tüm zamanlar rewind'i</button>
   <div id="newTripForm" style="display:none">
     <label>Yeni tatil adı</label>
     <input type="text" id="tName" placeholder="Örn: Bodrum 2026">
@@ -309,7 +423,17 @@ ul.expenses li:active{background:var(--bg);}
   <div class="setupbox" style="margin-top:6px">Senkron zaten açık ✓ — internet yokken girilenler bağlanınca otomatik gönderilir. Bu kutu yalnızca farklı bir veritabanına geçmek için.</div>
   <button class="primary" onclick="saveSettings()">Kaydet</button>
   <button class="ghost" onclick="downloadBackup()">💾 Tüm veriyi yedekle (JSON indir)</button>
+  <button class="ghost" onclick="document.getElementById('fRestore').click()">📥 Yedekten geri yükle</button>
+  <input type="file" id="fRestore" accept="application/json,.json" style="display:none" onchange="restoreBackup(this.files[0]); this.value='';">
   <button class="ghost" onclick="closeSheets()">Kapat</button>
+</div>
+
+<div class="rw" id="rw">
+  <div class="rwbars" id="rwBars"></div>
+  <div class="rwtop"><span id="rwTitle"></span><button onclick="rwClose()" aria-label="Kapat">✕</button></div>
+  <div class="rwnav l" onclick="rwGo(-1)"></div>
+  <div class="rwnav r" onclick="rwGo(1)"></div>
+  <div class="rwbody" id="rwBody"></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -384,6 +508,7 @@ function escapeHtml(s){
 }
 
 function applyLocal(path, val){
+  if(path === ""){ state.data = val || { activeTrip:null, trips:{} }; return; }
   var parts = path.split("/");
   var node = state.data;
   for(var i = 0; i < parts.length - 1; i++){
@@ -414,7 +539,7 @@ function flushQueue(){
   var timer = setTimeout(function(){
     if(!done){ done = true; flushing = false; updatePill(); }
   }, 8000);
-  state.db.ref("app/" + item.p).set(item.v).then(function(){
+  state.db.ref(item.p ? "app/" + item.p : "app").set(item.v).then(function(){
     if(done) return;
     done = true; clearTimeout(timer);
     state.queue.shift();
@@ -557,6 +682,7 @@ function openSheet(which){
       var ee = currentTrip().expenses[state.editId];
       document.getElementById("fAmt").value = ee.amt;
       document.getElementById("fDesc").value = ee.desc || "";
+      document.getElementById("fDate").value = ymd(ee.ts);
       state.selPayer = ee.payer; state.selCat = ee.cat;
       document.getElementById("addTitle").textContent = "Masraf düzenle ✏️";
       document.getElementById("saveBtn").textContent = "Güncelle";
@@ -564,11 +690,14 @@ function openSheet(which){
       state.editId = null;
       document.getElementById("fAmt").value = "";
       document.getElementById("fDesc").value = "";
+      document.getElementById("fDate").value = ymd(Date.now());
       document.getElementById("addTitle").textContent = "Masraf ekle";
       document.getElementById("saveBtn").textContent = "Kaydet";
     }
     var st = document.getElementById("scanStatus");
     st.style.display = "none"; st.textContent = "";
+    dateHint();
+    buildQuick();
     buildPayerSeg(); buildCatGrid();
     document.getElementById("sheet-add").classList.add("open");
     setTimeout(function(){ document.getElementById("fAmt").focus(); }, 300);
@@ -717,6 +846,193 @@ function switchTrip(id){
   closeSheets();
 }
 
+function opRoot(d){
+  state.data = d;
+  if(!state.data.trips) state.data.trips = {};
+  lsSet("cache", state.data);
+  if(state.db){
+    state.queue.push({ p:"", v:state.data });
+    lsSet("queue", state.queue);
+    flushQueue();
+  }
+  render();
+}
+
+function restoreBackup(file){
+  if(!file) return;
+  if(typeof FileReader !== "function"){ alert("Bu tarayıcı dosya okumayı desteklemiyor 😕"); return; }
+  var r = new FileReader();
+  r.onload = function(){
+    var d = null;
+    try { d = JSON.parse(r.result); } catch(e){ d = null; }
+    if(!d || typeof d !== "object" || !d.trips || typeof d.trips !== "object"){
+      alert("Bu geçerli bir tatil yedeği değil 😕\nAyarlar'dan indirdiğiniz .json dosyasını seçin.");
+      return;
+    }
+    var tn = 0, en = 0, names = [];
+    for(var t in d.trips){
+      var tr = d.trips[t]; if(!tr || !tr.meta) continue;
+      tn++; names.push(tr.meta.name || "Tatil");
+      en += Object.keys(tr.expenses || {}).length;
+    }
+    if(!tn){ alert("Yedekte hiç tatil bulunamadı 😕"); return; }
+    var cur = 0;
+    for(var c in (state.data.trips || {})) cur += Object.keys(state.data.trips[c].expenses || {}).length;
+    if(!confirm("Yedek içeriği:\n" + tn + " tatil, " + en + " masraf\n(" + names.slice(0,4).join(", ") +
+      (names.length > 4 ? "..." : "") + ")\n\nŞu anki " + cur + " masraf bununla DEĞİŞTİRİLECEK.\nDevam edilsin mi?")) return;
+    if(!confirm("Son onay: mevcut veriler silinip yedek yüklenecek.\nGeri alınamaz — istersen önce mevcut veriyi yedekle.")) return;
+    state.calMonth = null;
+    opRoot(d);
+    ensureTrip();
+    render();
+    closeSheets();
+    confetti();
+    alert("✅ Yedek yüklendi: " + tn + " tatil, " + en + " masraf");
+  };
+  r.onerror = function(){ alert("Dosya okunamadı 😕"); };
+  r.readAsText(file);
+}
+
+function quickTemplates(limit){
+  var map = {}, trips = state.data.trips || {};
+  for(var tid in trips){
+    var ex = trips[tid].expenses || {};
+    for(var k in ex){
+      var e = ex[k];
+      if(!e || typeof e.amt !== "number" || !isFinite(e.amt)) continue;
+      var d = (e.desc || "").trim();
+      if(!d) continue;
+      var key = (e.cat || "diger") + "|" + d.toLocaleLowerCase("tr-TR");
+      if(!map[key]) map[key] = { desc:d, cat:e.cat || "diger", n:0, last:0, amt:e.amt };
+      var m = map[key];
+      m.n++;
+      if(e.ts > m.last){ m.last = e.ts; m.amt = e.amt; m.desc = d; }
+    }
+  }
+  var arr = [];
+  for(var kk in map){ if(map[kk].n >= 2) arr.push(map[kk]); }
+  arr.sort(function(a, b){ return (b.n - a.n) || (b.last - a.last); });
+  return arr.slice(0, limit || 5);
+}
+
+function buildQuick(){
+  var wrap = document.getElementById("fQuickWrap");
+  var el = document.getElementById("fQuick");
+  var t = quickTemplates(5);
+  state.quick = t;
+  if(!t.length){ wrap.style.display = "none"; el.innerHTML = ""; return; }
+  wrap.style.display = "block";
+  el.innerHTML = "";
+  t.forEach(function(x, i){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "qchip";
+    b.innerHTML = catById(x.cat).emoji + " " + escapeHtml(x.desc) + " <b>" + fmtS(x.amt) + "</b>";
+    b.onclick = function(){ applyQuick(i); };
+    el.appendChild(b);
+  });
+}
+
+function applyQuick(i){
+  var x = state.quick && state.quick[i];
+  if(!x) return;
+  document.getElementById("fAmt").value = x.amt;
+  document.getElementById("fDesc").value = x.desc;
+  state.selCat = x.cat;
+  buildCatGrid();
+}
+
+function toggleSplit(){
+  var p = document.getElementById("splitPanel");
+  var b = document.getElementById("splitBtn");
+  if(p.classList.contains("open")){
+    p.classList.remove("open"); b.textContent = "🧮 Hesabı göster"; lsSet("splitOpen", 0);
+  } else {
+    p.classList.add("open"); b.textContent = "🧮 Hesabı gizle"; lsSet("splitOpen", 1);
+  }
+}
+
+function splitSign(x){
+  if(Math.abs(x) < 0.01) return "tam payı kadar";
+  return x > 0 ? ("payından " + fmt(x) + " fazla") : ("payından " + fmt(-x) + " eksik");
+}
+
+function renderSplit(total, paid1, paid2, s12, s21, debt){
+  var wrap = document.getElementById("splitWrap");
+  var p = document.getElementById("splitPanel");
+  if(!total || total <= 0){ wrap.style.display = "none"; p.innerHTML = ""; return; }
+  wrap.style.display = "block";
+  var share = total / 2;
+  var w1 = paid1 / total * 100;
+  if(!isFinite(w1)) w1 = 50;
+  var d1 = paid1 - share, d2 = paid2 - share;
+  var net = s21 - s12;
+  var res = Math.abs(debt) < 0.01 ? "Ödeştiniz 🎉"
+    : ((debt > 0 ? P2 + " → " + P1 : P1 + " → " + P2) + " " + fmt(Math.abs(debt)));
+  var html =
+    '<div class="fairbar">' +
+      '<div class="seg s1" style="width:' + w1.toFixed(1) + '%">' + (w1 >= 20 ? P1 : "") + '</div>' +
+      '<div class="seg s2" style="width:' + (100 - w1).toFixed(1) + '%">' + (w1 <= 80 ? P2 : "") + '</div>' +
+      '<div class="fairline"></div>' +
+    '</div>' +
+    '<div class="fairlbl"><span>' + P1 + ' %' + Math.round(w1) + '</span>' +
+      '<span>↑ adil çizgi (%50)</span><span>' + P2 + ' %' + Math.round(100 - w1) + '</span></div>' +
+    '<div class="fairnote">Her masraf ikiye bölünür. Renkli alanın adil çizgiyi aştığı kadar, o kişi fazladan ödemiş demektir.<br>' +
+      '<span class="pdot p1"></span>' + P1 + ' &nbsp; <span class="pdot p2"></span>' + P2 +
+      ' &nbsp; <span style="color:var(--ok)">●</span> kapatılan &nbsp; <span style="color:var(--due)">●</span> kalan</div>' +
+    '<div class="steps">' +
+      '<div><span>Toplam harcama</span><b>' + fmt(total) + '</b></div>' +
+      '<div><span>Kişi başı adil pay (÷2)</span><b>' + fmt(share) + '</b></div>' +
+      '<div><span><span class="pdot p1"></span>' + P1 + ' ödedi</span><b class="v1">' + fmt(paid1) + '</b></div>' +
+      '<div><span style="opacity:.75">↳ ' + splitSign(d1) + '</span><b></b></div>' +
+      '<div><span><span class="pdot p2"></span>' + P2 + ' ödedi</span><b class="v2">' + fmt(paid2) + '</b></div>' +
+      '<div><span style="opacity:.75">↳ ' + splitSign(d2) + '</span><b></b></div>' +
+      (Math.abs(net) > 0.001 ? '<div><span>✅ Elden kapatılan</span><b class="vok">' +
+        (net > 0 ? P2 + " → " + P1 : P1 + " → " + P2) + " " + fmt(Math.abs(net)) + '</b></div>' : '') +
+      '<div class="res"><span>Kalan borç</span><b class="' + (Math.abs(debt) < 0.01 ? "vok" : "vdue") + '">' + res + '</b></div>' +
+      '<div class="chk">✓ Kontrol: ' + fmt(paid1) + ' + ' + fmt(paid2) + ' = ' + fmt(total) + '</div>' +
+    '</div>';
+  p.innerHTML = html;
+  if(lsGet("splitOpen", 0)){
+    p.classList.add("open");
+    document.getElementById("splitBtn").textContent = "🧮 Hesabı gizle";
+  }
+}
+
+function ymd(ts){ return dayKey(ts); }
+function setDate(off){
+  var d = new Date();
+  d.setDate(d.getDate() + off);
+  document.getElementById("fDate").value = ymd(d.getTime());
+  dateHint();
+}
+function dateHint(){
+  var v = document.getElementById("fDate").value;
+  var el = document.getElementById("fDateHint");
+  if(!v){ el.textContent = ""; return; }
+  var today = ymd(Date.now());
+  var yest = ymd(Date.now() - 86400000);
+  if(v === today) el.textContent = "· bugün";
+  else if(v === yest) el.textContent = "· dün";
+  else {
+    var p = v.split("-");
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    var diff = Math.round((new Date(ymd(Date.now())).getTime() - d.getTime()) / 86400000);
+    el.textContent = diff > 0 ? ("· " + diff + " gün önce") : (diff < 0 ? "· ileri tarih ⚠️" : "");
+  }
+}
+function tsFromForm(baseTs){
+  var v = document.getElementById("fDate").value;
+  var now = new Date();
+  if(!v) return baseTs || now.getTime();
+  var p = v.split("-");
+  if(p.length !== 3) return baseTs || now.getTime();
+  var src = baseTs ? new Date(baseTs) : now;
+  var d = new Date(+p[0], +p[1] - 1, +p[2], src.getHours(), src.getMinutes(), src.getSeconds(), 0);
+  var t = d.getTime();
+  return isFinite(t) ? t : (baseTs || now.getTime());
+}
+
 function editExpense(id){
   var e = (currentTrip().expenses || {})[id];
   if(!e) return;
@@ -731,10 +1047,10 @@ function saveExpense(){
   var id, ts;
   if(state.editId && (currentTrip().expenses || {})[state.editId]){
     id = state.editId;
-    ts = currentTrip().expenses[id].ts;
+    ts = tsFromForm(currentTrip().expenses[id].ts);
   } else {
     id = "e" + Date.now() + Math.floor(Math.random()*1000);
-    ts = Date.now();
+    ts = tsFromForm(null);
   }
   state.justAdded = id;
   setTimeout(function(){ state.justAdded = null; }, 900);
@@ -773,6 +1089,325 @@ function delSettle(id){
   if(!confirm("Bu ödeşme kaydı silinsin mi?")) return;
   op("trips/" + state.data.activeTrip + "/settles/" + id, null);
 }
+
+var RWC = ["#0f766e","#6d28d9","#c2410c","#be185d","#1d4ed8","#15803d","#b45309","#4338ca","#0e7490"];
+var rw = { cards: [], i: 0 };
+
+function rwClose(){ document.getElementById("rw").classList.remove("open"); }
+function rwOpen(cards){
+  if(!cards || !cards.length){ alert("Rewind için önce birkaç masraf girmek lazım 🙂"); return; }
+  rw.cards = cards; rw.i = 0;
+  document.getElementById("rw").classList.add("open");
+  rwDraw();
+}
+function rwGo(d){
+  var cur = rw.cards[rw.i];
+  if(d > 0 && cur && cur.guess && !cur.revealed){ rwNudge(); return; }
+  var n = rw.i + d;
+  if(n < 0) return;
+  if(n >= rw.cards.length){ rwClose(); return; }
+  rw.i = n; rwDraw();
+}
+function rwCount(el, to){
+  if(!el || typeof requestAnimationFrame !== "function"){ if(el) el.textContent = fmt(to); return; }
+  var t0 = performance.now(), dur = 950;
+  function step(t){
+    var p = Math.min(1, (t - t0) / dur);
+    p = 1 - Math.pow(1 - p, 3);
+    el.textContent = fmt(Math.round(to * p));
+    if(p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function rwVerdict(guess, real){
+  if(!guess || guess <= 0 || !real) return "";
+  var d = Math.abs(guess - real) / real * 100;
+  var dir = guess < real ? "az tahmin ettin" : "fazla tahmin ettin";
+  var v;
+  if(d <= 5) v = "🎯 İnanılmaz, neredeyse tam isabet!";
+  else if(d <= 15) v = "👏 Çok iyi tahmin";
+  else if(d <= 30) v = "🙂 Fena değil";
+  else if(d <= 60) v = "😅 Epey uzaktın";
+  else v = "🤯 Hiç yaklaşamadın";
+  return "Tahminin: " + fmt(guess) + " · %" + Math.round(d) + " " + dir + "<br>" + v;
+}
+function rwGuessCard(bg, top, total, subHtml, kicker){
+  return { bg: bg, top: top, num: total, guess: true,
+    h: '<div class="rwemoji">🤔</div>' +
+       '<div class="rwk">' + kicker + '</div>' +
+       '<div class="rwmid">Sence ne kadar harcadık?</div>' +
+       '<input class="rwguess" id="rwGuess" type="number" inputmode="numeric" placeholder="tahminin (isteğe bağlı)">' +
+       '<button class="rwbtn" style="color:' + bg + '" onclick="rwReveal()">👀 Göster</button>' +
+       '<div class="rwtap">önce bir tahmin edin bakalım 😄</div>',
+    hr: '<div class="rwk">' + kicker + '</div>' +
+        '<div class="rwbig" id="rwNum">0</div>' + subHtml +
+        '<div class="rwsub" id="rwVerdict" style="margin-top:12px"></div>' };
+}
+function rwReveal(){
+  var c = rw.cards[rw.i];
+  if(!c || !c.guess || c.revealed) return;
+  var g = document.getElementById("rwGuess");
+  var v = g ? parseFloat(g.value) : NaN;
+  c.guessVal = (isFinite(v) && v > 0) ? v : null;
+  c.revealed = true;
+  rwDraw();
+  confetti();
+}
+function rwNudge(){
+  var b = document.getElementById("rwBody");
+  b.classList.add("shake");
+  setTimeout(function(){ b.classList.remove("shake"); }, 600);
+}
+function rwDraw(){
+  var c = rw.cards[rw.i];
+  document.getElementById("rw").style.background = c.bg;
+  var bars = "";
+  for(var i = 0; i < rw.cards.length; i++) bars += '<i class="' + (i <= rw.i ? "on" : "") + '"></i>';
+  document.getElementById("rwBars").innerHTML = bars;
+  document.getElementById("rwTitle").textContent = c.top || "";
+  var open = c.guess && !c.revealed;
+  document.getElementById("rwBody").innerHTML = open ? c.h : (c.guess ? c.hr : c.h);
+  if(open){
+    var gi = document.getElementById("rwGuess");
+    if(gi && gi.addEventListener) gi.addEventListener("keydown", function(e){ if(e.key === "Enter") rwReveal(); });
+    return;
+  }
+  if(c.num) rwCount(document.getElementById("rwNum"), c.num);
+  if(c.guess && c.guessVal){
+    var vd = document.getElementById("rwVerdict");
+    if(vd) vd.innerHTML = rwVerdict(c.guessVal, c.num);
+  }
+  if(c.boom) confetti();
+}
+
+function rwAgg(items){
+  var o = { total:0, paid1:0, paid2:0, c1:0, c2:0, byCat:{}, catCnt:{}, byDay:{},
+    first:0, last:0, big:null, night:0, morning:0, n:items.length };
+  items.forEach(function(e){
+    o.total += e.amt;
+    if(e.payer === "p1"){ o.paid1 += e.amt; o.c1++; } else { o.paid2 += e.amt; o.c2++; }
+    o.byCat[e.cat] = (o.byCat[e.cat] || 0) + e.amt;
+    o.catCnt[e.cat] = (o.catCnt[e.cat] || 0) + 1;
+    var k = dayKey(e.ts);
+    o.byDay[k] = (o.byDay[k] || 0) + e.amt;
+    if(!o.first || e.ts < o.first) o.first = e.ts;
+    if(e.ts > o.last) o.last = e.ts;
+    if(!o.big || e.amt > o.big.amt) o.big = e;
+    var h = new Date(e.ts).getHours();
+    if(h >= 22 || h < 4) o.night++;
+    if(h < 9) o.morning++;
+  });
+  o.days = Object.keys(o.byDay);
+  o.avg = o.days.length ? o.total / o.days.length : 0;
+  o.maxDay = ""; o.maxDayVal = 0;
+  var self = o;
+  o.days.forEach(function(k){ if(self.byDay[k] > self.maxDayVal){ self.maxDayVal = self.byDay[k]; self.maxDay = k; } });
+  o.catSorted = Object.keys(o.byCat).sort(function(a,b){ return o.byCat[b] - o.byCat[a]; });
+  return o;
+}
+
+function rwRange(first, last){
+  var f = new Intl.DateTimeFormat("tr-TR", {day:"numeric", month:"long", year:"numeric"});
+  if(!first) return "";
+  return f.format(new Date(first)) + (dayKey(first) !== dayKey(last) ? " – " + f.format(new Date(last)) : "");
+}
+
+function rwBadges(o, budget){
+  var b = [];
+  if(budget > 0 && o.total <= budget) b.push("🎯 Bütçe kahramanı");
+  if(budget > 0 && o.total > budget) b.push("🔥 Bütçe delici");
+  if(o.night >= 3) b.push("🌙 Gece kuşu · " + o.night + " gece masrafı");
+  if(o.morning >= 3) b.push("☀️ Erkenci · " + o.morning + " sabah masrafı");
+  if(o.total > 0 && (o.byCat.yemek || 0) / o.total >= 0.4) b.push("🍽️ Yemek düşkünü");
+  if(o.total > 0 && (o.byCat.eglence || 0) / o.total >= 0.2) b.push("🎉 Eğlence düşkünü");
+  if(o.total > 0 && (o.byCat.konak || 0) / o.total >= 0.35) b.push("🏨 Konfor sever");
+  if((o.catCnt.market || 0) >= 5) b.push("🛒 Market avcısı");
+  if((o.catCnt.ulasim || 0) >= 5) b.push("🚕 Yollarda geçen tatil");
+  if(o.total > 0 && Math.abs(o.paid1 - o.paid2) / o.total < 0.05) b.push("⚖️ Denge ustası");
+  else if(o.total > 0 && o.paid1 / o.total >= 0.65) b.push("💸 Kasa " + P1);
+  else if(o.total > 0 && o.paid2 / o.total >= 0.65) b.push("💸 Kasa " + P2);
+  if(o.n >= 20) b.push("📋 Titiz kayıtçı · " + o.n + " masraf");
+  if(o.days.length >= 7) b.push("🏖️ Uzun tatilci · " + o.days.length + " gün");
+  if(!b.length) b.push("🌴 Tatil modu");
+  return b.slice(0, 6);
+}
+
+function rwTripCards(trip){
+  var items = validItems(trip);
+  if(!items.length) return null;
+  var o = rwAgg(items);
+  var budget = trip.meta.budget || 0;
+  var name = escapeHtml(trip.meta.name || "Tatil");
+  var cards = [];
+
+  cards.push({ bg: RWC[0], top: "Rewind", h:
+    '<div class="rwemoji">✨</div>' +
+    '<div class="rwk">Tatil rewind</div>' +
+    '<div class="rwmid">' + name + '</div>' +
+    '<div class="rwsub">' + rwRange(o.first, o.last) + '<br>Bakalım neler olmuş 👀</div>' +
+    '<div class="rwsub" style="margin-top:18px;opacity:.7">ilerlemek için sağa dokun ›</div>' });
+
+  cards.push(rwGuessCard(RWC[1], "Toplam", o.total,
+    '<div class="rwsub">' + o.n + ' masraf · ' + o.days.length + ' gün' +
+    (budget > 0 ? '<br>' + (o.total <= budget ? '🎯 Bütçenin içinde kaldınız!' : '🔥 Bütçeyi ' + fmt(o.total - budget) + ' aştınız') : '') +
+    '</div>', "Bu tatilde toplam"));
+
+  cards.push({ bg: RWC[2], top: "Günlük ritim", h:
+    '<div class="rwemoji">📅</div>' +
+    '<div class="rwk">Günde ortalama</div>' +
+    '<div class="rwbig">' + fmt(Math.round(o.avg)) + '</div>' +
+    '<div class="rwsub">' + o.days.length + ' günün her birinde<br>ortalama bu kadar harcadınız</div>' });
+
+  var dayItems = items.filter(function(e){ return dayKey(e.ts) === o.maxDay; })
+    .sort(function(a, b){ return b.amt - a.amt; });
+  var dayTop = dayItems.slice(0, 3).map(function(e){
+    return '<div class="rwrow"><span>' + catById(e.cat).emoji + ' ' + escapeHtml(e.desc) + '</span><b>' + fmt(e.amt) + '</b></div>';
+  }).join("");
+  cards.push({ bg: RWC[3], top: "En yüklü gün", h:
+    '<div class="rwemoji">🔥</div>' +
+    '<div class="rwk">' + (o.maxDay ? dayLabel(o.maxDay) : "") + '</div>' +
+    '<div class="rwbig">' + fmt(o.maxDayVal) + '</div>' +
+    '<div class="rwsub">o gün kasada hareket vardı</div>' +
+    '<div style="margin-top:14px">' + dayTop + '</div>' });
+
+  var tc = o.catSorted[0];
+  if(tc){
+    var tcc = catById(tc);
+    var rest = o.catSorted.slice(1, 5).map(function(c){
+      var cc = catById(c);
+      return '<div class="rwrow"><span>' + cc.emoji + ' ' + cc.name + '</span><b>' + fmt(o.byCat[c]) + '</b></div>';
+    }).join("");
+    cards.push({ bg: RWC[4], top: "Kategori şampiyonu", h:
+      '<div class="rwemoji">' + tcc.emoji + '</div>' +
+      '<div class="rwmid">' + tcc.name + '</div>' +
+      '<div class="rwbig" style="font-size:40px">' + fmt(o.byCat[tc]) + '</div>' +
+      '<div class="rwsub">toplamın %' + Math.round(o.byCat[tc] / o.total * 100) + '’i</div>' +
+      '<div style="margin-top:14px">' + rest + '</div>' });
+  }
+
+  cards.push({ bg: RWC[5], top: "Birlikte", h:
+    '<div class="rwemoji">🤝</div>' +
+    '<div class="rwk">Ortak kasa</div>' +
+    '<div class="rwbig" style="font-size:38px">' + fmt(o.total) + '</div>' +
+    '<div class="rwsub">' + o.n + ' masrafın hepsi ikinize ait<br>kişi başı ' + fmt(Math.round(o.total / 2)) + '</div>' });
+
+  if(o.big){
+    var bc = catById(o.big.cat);
+    var bf = new Intl.DateTimeFormat("tr-TR", {day:"numeric", month:"long"});
+    cards.push({ bg: RWC[6], top: "En pahalı an", h:
+      '<div class="rwemoji">' + bc.emoji + '</div>' +
+      '<div class="rwk">Tek seferde en büyük</div>' +
+      '<div class="rwbig" style="font-size:44px">' + fmt(o.big.amt) + '</div>' +
+      '<div class="rwmid" style="font-size:20px">' + escapeHtml(o.big.desc) + '</div>' +
+      '<div class="rwsub">' + bf.format(new Date(o.big.ts)) + ' · ' +
+        (o.big.payer === "p1" ? P1 : P2) + ' ödedi<br>değdi mi? 😄</div>' });
+  }
+
+  var badges = rwBadges(o, budget).map(function(x){ return '<span class="rwbadge">' + x + '</span>'; }).join("");
+  cards.push({ bg: RWC[7], top: "Rozetler", h:
+    '<div class="rwemoji">🏅</div>' +
+    '<div class="rwk">Bu tatilden kalanlar</div>' +
+    '<div style="margin-top:14px">' + badges + '</div>' });
+
+  var others = Object.keys(state.data.trips || {}).length > 1;
+  cards.push({ bg: RWC[8], top: "Bitti", boom: true, h:
+    '<div class="rwemoji">🌴</div>' +
+    '<div class="rwk">' + name + '</div>' +
+    '<div class="rwbig" style="font-size:40px">' + fmt(o.total) + '</div>' +
+    '<div class="rwsub">' + o.days.length + ' gün · ' + o.n + ' masraf · sayısız anı</div>' +
+    '<div class="rwmid" style="margin-top:16px">' + P1 + ' <span class="hb">❤️</span> ' + P2 + '</div>' +
+    (others ? '<button class="rwbtn" style="color:' + RWC[8] + '" onclick="rwAll()">🌍 Tüm zamanlar rewind’i</button>' : '') });
+
+  return cards;
+}
+
+function rwAllCards(){
+  var trips = state.data.trips || {};
+  var ids = Object.keys(trips);
+  var rows = [], all = [];
+  ids.forEach(function(id){
+    var items = validItems(trips[id]);
+    if(!items.length) return;
+    var t = 0, first = 0, last = 0, dset = {};
+    items.forEach(function(e){
+      t += e.amt; dset[dayKey(e.ts)] = 1;
+      if(!first || e.ts < first) first = e.ts;
+      if(e.ts > last) last = e.ts;
+      all.push(e);
+    });
+    rows.push({ name: trips[id].meta.name || "Tatil", total: t, days: Object.keys(dset).length,
+      n: items.length, first: first, last: last });
+  });
+  if(!rows.length) return null;
+  if(rows.length === 1) return rwTripCards(trips[ids[0]]);
+
+  var o = rwAgg(all);
+  rows.sort(function(a, b){ return b.total - a.total; });
+  var totalDays = 0;
+  rows.forEach(function(r){ totalDays += r.days; });
+  var cards = [];
+
+  cards.push({ bg: RWC[8], top: "Tüm zamanlar", h:
+    '<div class="rwemoji">🌍</div>' +
+    '<div class="rwk">Tüm zamanlar rewind</div>' +
+    '<div class="rwmid">' + rows.length + ' tatil, tek hikâye</div>' +
+    '<div class="rwsub">' + rwRange(o.first, o.last) + '</div>' +
+    '<div class="rwsub" style="margin-top:18px;opacity:.7">ilerlemek için sağa dokun ›</div>' });
+
+  cards.push(rwGuessCard(RWC[1], "Toplam", o.total,
+    '<div class="rwsub">' + rows.length + ' tatil · ' + totalDays + ' gün · ' + o.n + ' masraf</div>',
+    "Bugüne kadar birlikte"));
+
+  var rank = rows.slice(0, 5).map(function(r, i){
+    return '<div class="rwrow"><span>' + ["🥇","🥈","🥉","4.","5."][i] + ' ' + escapeHtml(r.name) +
+      '</span><b>' + fmt(r.total) + '</b></div>';
+  }).join("");
+  cards.push({ bg: RWC[2], top: "Sıralama", h:
+    '<div class="rwemoji">🏆</div>' +
+    '<div class="rwk">En pahalı tatiller</div>' +
+    '<div style="margin-top:14px">' + rank + '</div>' });
+
+  var tc = o.catSorted[0];
+  if(tc){
+    var tcc = catById(tc);
+    var rest = o.catSorted.slice(1, 5).map(function(c){
+      var cc = catById(c);
+      return '<div class="rwrow"><span>' + cc.emoji + ' ' + cc.name + '</span><b>' + fmt(o.byCat[c]) + '</b></div>';
+    }).join("");
+    cards.push({ bg: RWC[4], top: "Değişmeyen zevk", h:
+      '<div class="rwemoji">' + tcc.emoji + '</div>' +
+      '<div class="rwk">Her tatilin vazgeçilmezi</div>' +
+      '<div class="rwmid">' + tcc.name + '</div>' +
+      '<div class="rwbig" style="font-size:36px">' + fmt(o.byCat[tc]) + '</div>' +
+      '<div style="margin-top:14px">' + rest + '</div>' });
+  }
+
+  cards.push({ bg: RWC[5], top: "Birlikte", h:
+    '<div class="rwemoji">🤝</div>' +
+    '<div class="rwk">Tüm zamanların ortak kasası</div>' +
+    '<div class="rwbig" style="font-size:38px">' + fmt(o.total) + '</div>' +
+    '<div class="rwsub">' + o.n + ' masraf · kişi başı ' + fmt(Math.round(o.total / 2)) + '</div>' });
+
+  var longest = rows.slice().sort(function(a, b){ return b.days - a.days; })[0];
+  cards.push({ bg: RWC[3], top: "Rekorlar", h:
+    '<div class="rwemoji">📊</div>' +
+    '<div class="rwrow"><span>🏖️ En uzun tatil</span><b>' + escapeHtml(longest.name) + ' · ' + longest.days + ' gün</b></div>' +
+    '<div class="rwrow"><span>💎 En pahalı tatil</span><b>' + escapeHtml(rows[0].name) + '</b></div>' +
+    '<div class="rwrow"><span>📅 Toplam tatil günü</span><b>' + totalDays + '</b></div>' +
+    '<div class="rwrow"><span>💸 Günlük ortalama</span><b>' + fmt(Math.round(o.total / Math.max(1, totalDays))) + '</b></div>' });
+
+  cards.push({ bg: RWC[0], top: "Bitti", boom: true, h:
+    '<div class="rwemoji">🌴</div>' +
+    '<div class="rwk">' + rows.length + ' tatil · ' + totalDays + ' gün</div>' +
+    '<div class="rwbig" style="font-size:40px">' + fmt(o.total) + '</div>' +
+    '<div class="rwsub">daha nice tatillere ✨</div>' +
+    '<div class="rwmid" style="margin-top:16px">' + P1 + ' <span class="hb">❤️</span> ' + P2 + '</div>' });
+
+  return cards;
+}
+
+function rwStart(){ closeSheets(); rwOpen(rwTripCards(currentTrip())); }
+function rwAll(){ closeSheets(); rwOpen(rwAllCards()); }
 
 function dailyStats(items){
   var byDay = {};
@@ -929,7 +1564,7 @@ function validItems(trip){
   for(var k in ex){
     var e = ex[k];
     if(!e || typeof e.amt !== "number" || !isFinite(e.amt)) continue;
-    e._id = k; items.push(e);
+    items.push({ _id:k, amt:e.amt, desc:e.desc, cat:e.cat, payer:e.payer, ts:e.ts });
   }
   return items;
 }
@@ -1094,20 +1729,40 @@ function render(){
   var settled = (total > 0 && Math.abs(debt) < 0.01);
   if(settled && state.prevSettled === false) confetti();
   state.prevSettled = settled;
+  var gross = (paid1 - paid2) / 2;
+  var netS = s21 - s12;
+  var sameDir = (gross > 0 && netS > 0) || (gross < 0 && netS < 0);
+  var closed = sameDir ? Math.min(Math.abs(netS), Math.abs(gross)) : 0;
+  var paidLine = '<div class="paidrow"><span><span class="pdot p1"></span>' + P1 + ' ödedi <b class="v1">' +
+    fmt(paid1) + '</b></span><span><span class="pdot p2"></span>' + P2 + ' ödedi <b class="v2">' +
+    fmt(paid2) + '</b></span></div>';
+
   if(total === 0){
-    bal.textContent = "Henüz masraf yok 🙂"; bal.className = "balance-line balance-ok";
-    brk.textContent = ""; sBtn.style.display = "none"; state.curDebt = null;
+    bal.innerHTML = '<div class="balpill ok">🙂 Henüz masraf yok</div>';
+    brk.innerHTML = ""; sBtn.style.display = "none"; state.curDebt = null;
   } else if(settled){
-    bal.textContent = "Ödeştiniz! 🎉"; bal.className = "balance-line balance-ok";
-    brk.textContent = P1 + ": " + fmt(paid1) + " · " + P2 + ": " + fmt(paid2);
+    bal.innerHTML = '<div class="balpill ok">✅ Ödeştiniz!</div>';
+    brk.innerHTML = paidLine +
+      '<div class="balnote">Tatilin tamamı hesaplandı, kimsenin kimseye borcu kalmadı.</div>';
     sBtn.style.display = "none"; state.curDebt = null;
   } else {
     var debtorP = debt > 0 ? "p2" : "p1";
     var debtor = debt > 0 ? P2 : P1;
     var creditor = debt > 0 ? P1 : P2;
-    bal.textContent = debtor + " → " + creditor + ": " + fmt(Math.abs(debt));
-    bal.className = "balance-line";
-    brk.textContent = P1 + " ödedi: " + fmt(paid1) + " · " + P2 + " ödedi: " + fmt(paid2);
+    bal.innerHTML = '<div class="balpill due">⏳ ' + debtor + ' → ' + creditor + ' <span>' +
+      fmt(Math.abs(debt)) + '</span></div>';
+    var bar = "";
+    if(closed > 0.001){
+      var tot = closed + Math.abs(debt);
+      var gp = tot > 0 ? (closed / tot * 100) : 0;
+      bar = '<div class="debtbar"><div class="g" style="width:' + gp.toFixed(1) + '%"></div>' +
+        '<div class="o" style="width:' + (100 - gp).toFixed(1) + '%"></div></div>' +
+        '<div class="debtlbl"><span class="g">✅ kapatıldı ' + fmt(closed) + '</span>' +
+        '<span class="o">⏳ kalan ' + fmt(Math.abs(debt)) + '</span></div>';
+    }
+    brk.innerHTML = paidLine + bar +
+      '<div class="balnote">📌 Bu rakam <b>bugünün harcaması değil</b>; tatilin başından bugüne kadarki ' +
+      items.length + ' masrafın tamamı ikiye bölündükten sonra kalan farktır.</div>';
     state.curDebt = { from: debtorP, to: debt > 0 ? "p1" : "p2", amt: Math.abs(debt), fromName: debtor, toName: creditor };
     sBtn.style.display = "block";
   }
@@ -1115,11 +1770,12 @@ function render(){
   sRows.sort(function(a,b){ return b.ts - a.ts; });
   var sf = new Intl.DateTimeFormat("tr-TR", {day:"numeric", month:"short"});
   sRows.forEach(function(r){
-    sHtml += '<div class="srow"><span>💸 ' + sf.format(new Date(r.ts)) + ' · ' +
-      (r.from === "p1" ? P1 + " → " + P2 : P2 + " → " + P1) + ' · ' + fmt(r.amt) + '</span>' +
+    sHtml += '<div class="srow"><span>✅ ' + sf.format(new Date(r.ts)) + ' · ' +
+      (r.from === "p1" ? P1 + " → " + P2 : P2 + " → " + P1) + ' · <b>' + fmt(r.amt) + '</b> kapatıldı</span>' +
       '<button onclick="delSettle(\'' + r.id + '\')">✕</button></div>';
   });
   sList.innerHTML = sHtml;
+  renderSplit(total, paid1, paid2, s12, s21, debt);
 
   renderDaily(items, budget);
   renderSummary(items, budget);
@@ -1148,17 +1804,25 @@ function render(){
     var out = "", lastDay = "";
     var fmtDay = new Intl.DateTimeFormat("tr-TR", {day:"numeric", month:"long", weekday:"long"});
     var fmtTime = new Intl.DateTimeFormat("tr-TR", {hour:"2-digit", minute:"2-digit"});
+    var dayTot = {};
+    items.forEach(function(e){ var k = dayKey(e.ts); dayTot[k] = (dayTot[k] || 0) + e.amt; });
+    var todayK = dayKey(Date.now());
     items.forEach(function(e){
       var d = new Date(e.ts);
-      var day = fmtDay.format(d);
-      if(day !== lastDay){ out += '<div class="datehdr">' + day + '</div>'; lastDay = day; }
+      var dk = dayKey(e.ts);
+      if(dk !== lastDay){
+        out += '<div class="datehdr"><span>' + fmtDay.format(d) + (dk === todayK ? ' · bugün' : '') +
+          '</span><span class="daysum">' + fmt(dayTot[dk]) + '</span></div>';
+        lastDay = dk;
+      }
       var c = catById(e.cat);
       var payerName = e.payer === "p1" ? P1 : P2;
       out += '<ul class="expenses"><li' + (e._id === state.justAdded ? ' class="pop"' : '') +
         ' onclick="editExpense(\'' + e._id + '\')">' +
         '<div class="emoji">' + c.emoji + '</div>' +
         '<div class="einfo"><div class="d">' + escapeHtml(e.desc) + '</div>' +
-        '<div class="m">' + payerName + ' ödedi · ' + fmtTime.format(d) + '</div></div>' +
+        '<div class="m"><span class="pdot ' + (e.payer === "p1" ? "p1" : "p2") + '"></span>' +
+        payerName + ' ödedi · ' + fmtTime.format(d) + '</div></div>' +
         '<div class="eamt">' + fmt(e.amt) + '</div>' +
         '<button class="del" onclick="event.stopPropagation(); delExpense(\'' + e._id + '\')">✕</button>' +
         '</li></ul>';
@@ -1325,6 +1989,23 @@ function dismissInstall(){
 
 applyTheme(lsGet("theme", "deniz"));
 showInstallUI();
+document.addEventListener("keydown", function(e){
+  if(!document.getElementById("rw").classList.contains("open")) return;
+  if(e.key === "ArrowRight" || e.key === " ") rwGo(1);
+  else if(e.key === "ArrowLeft") rwGo(-1);
+  else if(e.key === "Escape") rwClose();
+});
+(function(){
+  var x0 = null;
+  var el = document.getElementById("rw");
+  el.addEventListener("touchstart", function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  el.addEventListener("touchend", function(e){
+    if(x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    x0 = null;
+    if(Math.abs(dx) > 60) rwGo(dx < 0 ? 1 : -1);
+  }, {passive:true});
+})();
 window.addEventListener("online", function(){ flushQueue(); updatePill(); });
 window.addEventListener("offline", updatePill);
 if("serviceWorker" in navigator && location.protocol !== "file:"){
