@@ -278,6 +278,10 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
 .rwrow span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 .rwbadge{display:inline-block; background:rgba(255,255,255,.17); border-radius:14px;
   padding:9px 13px; margin:4px 3px; font-size:13px;}
+.rwchip{display:inline-block; background:rgba(255,255,255,.16); border-radius:16px;
+  padding:8px 14px; margin:4px 3px; font-size:14px;}
+.rwchip b{font-weight:800; margin-left:4px; opacity:.85;}
+.rwchip.big{font-size:19px; padding:11px 18px;}
 .rwbtn{background:#fff; border:none; border-radius:14px; padding:13px 20px; font-size:15px;
   font-weight:700; cursor:pointer; margin-top:18px; align-self:center;}
 @keyframes rwin{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:none;}}
@@ -1298,6 +1302,56 @@ function rwBadges(o, budget){
   return b.slice(0, 6);
 }
 
+function rwAnalysisCards(items, opts){
+  var an = analyzeDescriptions(items);
+  var out = [];
+  var kicker = (opts && opts.kicker) || "Bu tatilde";
+  var C = (opts && opts.colors) || [RWC[2], RWC[6], RWC[7]];
+
+  if(an.reps.length){
+    var r0 = an.reps[0];
+    var rest = an.reps.slice(1, 5).map(function(r){
+      return '<div class="rwrow"><span>' + escapeHtml(r.label) + '</span><b>' + r.n + ' kez · ' + fmtS(r.total) + '</b></div>';
+    }).join("");
+    out.push({ bg: C[0], top: "Tekrar edenler", h:
+      '<div class="rwemoji">🔁</div>' +
+      '<div class="rwk">' + kicker + ' en çok tekrar eden</div>' +
+      '<div class="rwmid">' + escapeHtml(r0.label) + '</div>' +
+      '<div class="rwbig" style="font-size:36px">' + r0.n + ' kez</div>' +
+      '<div class="rwsub">toplam ' + fmt(r0.total) + ' · ortalama ' + fmt(Math.round(r0.total / r0.n)) + '</div>' +
+      (rest ? '<div style="margin-top:14px">' + rest + '</div>' : '') });
+  }
+
+  if(an.themes.length){
+    var t0 = an.themes[0];
+    var tot = 0;
+    items.forEach(function(e){ tot += e.amt; });
+    var list = an.themes.slice(0, 5).map(function(t){
+      return '<div class="rwrow"><span>' + t.t.emoji + ' ' + t.t.name + '</span><b>' + fmt(t.total) + '</b></div>';
+    }).join("");
+    out.push({ bg: C[1], top: "Temalar", h:
+      '<div class="rwemoji">' + t0.t.emoji + '</div>' +
+      '<div class="rwk">Açıklamalardan çıkan tema</div>' +
+      '<div class="rwmid">' + t0.t.name + '</div>' +
+      '<div class="rwsub">' + t0.n + ' masraf' + (tot > 0 ? ' · toplamın %' + Math.round(t0.total / tot * 100) + '\u2019i' : '') + '</div>' +
+      '<div style="margin-top:14px">' + list + '</div>' });
+  }
+
+  if(an.words.length >= 3){
+    var mx = an.words[0].n;
+    var chips = an.words.slice(0, 9).map(function(w){
+      return '<span class="rwchip' + (w.n === mx ? ' big' : '') + '">' + escapeHtml(w.w) + '<b>' + w.n + '</b></span>';
+    }).join("");
+    out.push({ bg: C[2], top: "Kelimeler", h:
+      '<div class="rwemoji">💬</div>' +
+      '<div class="rwk">Açıklamalarınızda en çok geçen</div>' +
+      '<div style="margin-top:14px">' + chips + '</div>' +
+      '<div class="rwsub" style="margin-top:14px">“' + escapeHtml(an.words[0].w) + '” kelimesini ' +
+      an.words[0].n + ' kez yazmışsınız</div>' });
+  }
+  return out;
+}
+
 function rwTripCards(trip){
   var items = validItems(trip);
   if(!items.length) return null;
@@ -1371,28 +1425,7 @@ function rwTripCards(trip){
         (o.big.payer === "p1" ? P1 : P2) + ' ödedi<br>değdi mi? 😄</div>' });
   }
 
-  var an = analyzeDescriptions(items);
-  if(an.reps.length || an.themes.length){
-    var inner = "";
-    if(an.reps.length){
-      var r0 = an.reps[0];
-      inner += '<div class="rwemoji">🔁</div>' +
-        '<div class="rwk">En çok tekrar eden</div>' +
-        '<div class="rwmid">' + escapeHtml(r0.label) + '</div>' +
-        '<div class="rwbig" style="font-size:34px">' + r0.n + ' kez</div>' +
-        '<div class="rwsub">toplam ' + fmt(r0.total) + ' · ortalama ' + fmt(Math.round(r0.total / r0.n)) + '</div>';
-    } else {
-      var t0 = an.themes[0];
-      inner += '<div class="rwemoji">' + t0.t.emoji + '</div>' +
-        '<div class="rwk">Tatilin teması</div>' +
-        '<div class="rwmid">' + t0.t.name + '</div>' +
-        '<div class="rwbig" style="font-size:34px">' + fmt(t0.total) + '</div>';
-    }
-    var extra = an.themes.slice(0, 3).map(function(t){
-      return '<div class="rwrow"><span>' + t.t.emoji + ' ' + t.t.name + '</span><b>' + fmt(t.total) + '</b></div>';
-    }).join("");
-    cards.push({ bg: RWC[2], top: "Alışkanlıklar", h: inner + '<div style="margin-top:14px">' + extra + '</div>' });
-  }
+  rwAnalysisCards(items, { kicker: "Bu tatilde" }).forEach(function(x){ cards.push(x); });
 
   var badges = rwBadges(o, budget).map(function(x){ return '<span class="rwbadge">' + x + '</span>'; }).join("");
   cards.push({ bg: RWC[7], top: "Rozetler", h:
@@ -1479,6 +1512,9 @@ function rwAllCards(){
     '<div class="rwk">Tüm zamanların ortak kasası</div>' +
     '<div class="rwbig" style="font-size:38px">' + fmt(o.total) + '</div>' +
     '<div class="rwsub">' + o.n + ' masraf · kişi başı ' + fmt(Math.round(o.total / 2)) + '</div>' });
+
+  rwAnalysisCards(all, { kicker: "Tüm tatillerde", colors: [RWC[2], RWC[6], RWC[7]] })
+    .forEach(function(x){ cards.push(x); });
 
   var longest = rows.slice().sort(function(a, b){ return b.days - a.days; })[0];
   cards.push({ bg: RWC[3], top: "Rekorlar", h:
