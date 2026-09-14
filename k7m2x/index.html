@@ -7,12 +7,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Fit İkili">
+<meta name="apple-mobile-web-app-title" content="Formdayız">
 <meta name="description" content="İki kişilik diyet, adım, su ve hareket takibi">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-192.png">
-<title>Fit İkili</title>
+<title>Formdayız</title>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -35,7 +35,7 @@ html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:n
   --bg:#FFF9F4; --bg2:#FFFFFF; --bg3:#FDF0E7; --ink:#2A1C16; --ink2:#8B7468;
   --line:#F0DFD2; --acc:#F2603C; --acc2:#F2A93B; --acc-soft:#FFE7DE;
   --good:#1F9D6B; --warn:#D98A1F; --bad:#D8455C; --track:#F3E3D7; --aqua:#2BA4D6;
-  --shadow:0 1px 2px rgba(80,40,20,.05),0 8px 24px -12px rgba(80,40,20,.18); --r:18px;
+  --shadow:0 1px 2px rgba(80,40,20,.05),0 8px 24px -12px rgba(80,40,20,.18); --r:18px; --on-acc:#fff;
 }
 @media (prefers-color-scheme:dark){:root:not([data-t]){
   --bg:#131020; --bg2:#1C1830; --bg3:#241F3C; --ink:#F3F0FF; --ink2:#9A92B8;
@@ -77,6 +77,11 @@ html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:n
   --line:#2E2848; --acc:#8F7BFF; --acc2:#FF7EC7; --acc-soft:#282046;
   --good:#3DD69C; --warn:#F2B950; --bad:#FF6B86; --track:#2A2444; --aqua:#54C6F0;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px -14px rgba(0,0,0,.7);}
+:root[data-t="fener"]{
+  --bg:#0D1A3C; --bg2:#152652; --bg3:#1C3163; --ink:#FFF8DE; --ink2:#AEB9DC;
+  --line:#26396E; --acc:#FFD200; --acc2:#FFB000; --acc-soft:#2A3D75; --on-acc:#0D1A3C;
+  --good:#3DD69C; --warn:#FFB000; --bad:#FF6B86; --track:#233672; --aqua:#5CC9F5;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px -14px rgba(0,0,0,.75);}
 :root[data-t="carbon"]{
   --bg:#0E1113; --bg2:#161B1E; --bg3:#1D2429; --ink:#E9F2F3; --ink2:#8A9AA0;
   --line:#252E33; --acc:#2FD69B; --acc2:#4FB8E8; --acc-soft:#16302A;
@@ -245,7 +250,7 @@ input,select{font:inherit;color:inherit}
 .progcard .meta{display:flex;gap:7px;margin-top:6px;flex-wrap:wrap}
 .tag{font-size:9.5px;font-weight:800;background:var(--bg2);border:1px solid var(--line);border-radius:7px;padding:2px 6px;color:var(--ink2)}
 .tag.k{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 40%,var(--line))}
-.progcard .go{width:34px;height:34px;border-radius:12px;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:14px}
+.progcard .go{width:34px;height:34px;border-radius:12px;background:var(--acc);color:var(--on-acc);display:grid;place-items:center;font-size:14px}
 .exdetail{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
 .exdetail ol{margin:0;padding-left:17px;font-size:12.5px;line-height:1.65}
 .exdetail li{margin-bottom:3px}
@@ -281,7 +286,7 @@ input,select{font:inherit;color:inherit}
 .food:active{transform:scale(.98)}
 .food .e{font-size:18px} .food .n{display:block;font-size:13px;font-weight:600;line-height:1.25}
 .food .c{font-size:11.5px;color:var(--ink2);font-weight:800}
-.food .add{width:26px;height:26px;border-radius:9px;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:16px;font-weight:700;line-height:1}
+.food .add{width:26px;height:26px;border-radius:9px;background:var(--acc);color:var(--on-acc);display:grid;place-items:center;font-size:16px;font-weight:700;line-height:1}
 .seg{display:flex;gap:4px;background:var(--bg3);padding:4px;border-radius:12px}
 .seg button{flex:1;padding:7px 3px;border-radius:9px;font-size:11.5px;font-weight:700;color:var(--ink2);transition:.2s;white-space:nowrap}
 .seg button.on{background:var(--bg2);color:var(--ink);box-shadow:var(--shadow)}
@@ -312,7 +317,7 @@ input,select{font:inherit;color:inherit}
 .inp{background:var(--bg3);border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font-size:15px;font-weight:600;width:100%}
 .inp:focus{border-color:var(--acc);outline:none}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{background:var(--acc);color:#fff;border-radius:13px;padding:13px 18px;font-size:14.5px;font-weight:800;width:100%;
+.btn{background:var(--acc);color:var(--on-acc);border-radius:13px;padding:13px 18px;font-size:14.5px;font-weight:800;width:100%;
   transition:transform .15s;box-shadow:0 6px 16px -8px var(--acc)}
 .btn:active{transform:scale(.97)}
 .btn.ghost{background:var(--bg3);color:var(--ink);box-shadow:none}
@@ -444,6 +449,16 @@ details[open]>summary::after{transform:rotate(180deg)}
 .race .runner{animation:runbob .9s ease-in-out infinite}
 @keyframes runbob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-4px)}}
 .race .runner.lead{animation-duration:.55s}
+.gsteps{display:flex;flex-direction:column;gap:10px}
+.gstep{display:grid;grid-template-columns:30px 44px 1fr;gap:10px;align-items:center;background:var(--bg3);border-radius:15px;padding:13px 12px}
+.gnum{width:30px;height:30px;border-radius:10px;background:var(--acc);color:var(--on-acc);display:grid;place-items:center;font-weight:800;font-size:14px}
+.gicon{width:44px;height:44px;border-radius:12px;background:var(--bg2);border:1px solid var(--line);display:grid;place-items:center;font-size:24px;color:var(--ink)}
+.gstep > span > b{display:block;font-size:14px;line-height:1.3} .gstep small{display:block;font-size:11.5px;color:var(--ink2);font-weight:600;margin-top:3px;line-height:1.5} .gstep small b{display:inline;color:var(--ink)}
+.gstep u{text-decoration:none;color:var(--acc);font-weight:800}
+.gwarn{background:color-mix(in srgb,var(--warn) 16%,var(--bg2));border:1px solid color-mix(in srgb,var(--warn) 40%,var(--line));border-radius:14px;padding:12px;font-size:12.5px;font-weight:600;line-height:1.5}
+.gor{text-align:center;font-size:11px;font-weight:800;color:var(--ink2);letter-spacing:.1em;text-transform:uppercase;margin:4px 0}
+.copyrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin:-2px 0 2px 40px}
+.copyrow code{font-size:10.5px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;word-break:break-all;line-height:1.4}
 .lvlup{text-align:center;padding:14px 0 6px}
 .lvlup .big{font-size:78px;line-height:1;display:inline-block;animation:lvlSpin 1.1s cubic-bezier(.34,1.56,.64,1)}
 @keyframes lvlSpin{0%{transform:scale(.2) rotate(-180deg);opacity:0}70%{transform:scale(1.15) rotate(8deg);opacity:1}100%{transform:scale(1) rotate(0)}}
@@ -457,12 +472,12 @@ details[open]>summary::after{transform:rotate(180deg)}
 <body>
 <div id="shell">
   <div id="boot" class="onb"><div style="text-align:center">
-    <div style="font-size:52px">🦁💪</div><h1 style="font-size:30px;margin-top:8px">Fit İkili</h1>
+    <div style="font-size:52px">💛💙</div><h1 style="font-size:30px;margin-top:8px">Formdayız</h1>
     <p class="hint" style="margin-top:6px">Yükleniyor…</p></div></div>
   <div id="onboard" class="onb" hidden></div>
   <div id="app" hidden>
     <div class="topbar">
-      <button class="who" id="whoBtn"><span class="av" id="whoAv">🦁</span>
+      <button class="who" id="whoBtn"><span class="av" id="whoAv">🙂</span>
         <span style="text-align:left;min-width:0"><b id="whoName">—</b><small id="whoSub">—</small></span></button>
       <span class="spacer"></span>
       <button class="pill xp" id="xpBtn"><span>⚡</span><span class="num" id="xpN">0</span></button>
@@ -687,10 +702,11 @@ function progInfo(pr,kg){
 const THEMES=[
  {k:'',n:'Otomatik',c:['#F2603C','#F2A93B','#FFF9F4']},{k:'sunrise',n:'Gün Doğumu',c:['#F2603C','#F2A93B','#FFF9F4']},
  {k:'lila',n:'Lila',c:['#7C4DFF','#C77DFF','#F8F5FF']},{k:'galaxy',n:'Galaksi',c:['#B388FF','#FF6FD8','#120E24']},
+ {k:'fener',n:'Sarı Lacivert 💛💙',c:['#FFD200','#FFB000','#0D1A3C']},
  {k:'mint',n:'Nane',c:['#0E9B76','#3FA9D9','#F3F8F5']},{k:'berry',n:'Böğürtlen',c:['#D62F7E','#8A5CF0','#FFF5F9']},
  {k:'midnight',n:'Gece',c:['#8F7BFF','#FF7EC7','#131020']},{k:'carbon',n:'Karbon',c:['#2FD69B','#4FB8E8','#0E1113']}];
 const ACT=[{k:1.2,l:'Masa başı'},{k:1.375,l:'Hafif'},{k:1.55,l:'Orta'},{k:1.725,l:'Yüksek'}];
-const AVATARS=['🦁','🐱','🐶','🐯','🐻','🐼','🦊','🐨','🐵','🐷','🐮','🐸','🐙','🦄','🐬','🦋','🐺','🦅','🦖','🐳','🦔','🐧','🦉','🐢','🌻','🍀','⚡','🔥','💎','🏆','🚀','🌙'];
+const AVATARS=['🐤','🐱','🐶','🐯','🐻','🐼','🦊','🐨','🐵','🐷','🐮','🐸','🐙','🦄','🐬','🦋','🐺','🦅','🦖','🐳','🦔','🐧','🦉','🐢','🌻','🍀','⚡','🔥','💎','🏆','🚀','🌙'];
 const LEVELS=[{x:0,n:'Çaylak',e:'🌱'},{x:250,n:'Hevesli',e:'🌿'},{x:700,n:'Düzenli',e:'⭐'},
  {x:1500,n:'Fit',e:'💪'},{x:3000,n:'Güçlü',e:'🔥'},{x:5500,n:'Şampiyon',e:'🏆'},{x:9000,n:'Efsane',e:'👑'}];
 const BADGES=[
@@ -779,8 +795,8 @@ async function initFirebase(){
 }
 function inviteLink(){const u=new URL(location.href);u.search='';u.hash='';return u.toString()+'?ev='+(HOME||'')}
 async function shareInvite(){
-  const url=inviteLink(),text='Fit İkili — birlikte takip edelim 💪 Linke dokun, profilini kur, bitti:';
-  if(navigator.share){try{await navigator.share({title:'Fit İkili',text,url});return}catch(e){}}
+  const url=inviteLink(),text='Formdayız — birlikte takip edelim 💪 Linke dokun, profilini kur, bitti:';
+  if(navigator.share){try{await navigator.share({title:'Formdayız',text,url});return}catch(e){}}
   try{await navigator.clipboard.writeText(url);toast('🔗 Davet linki kopyalandı')}catch(e){openSheet(`<h3>🔗 Davet linki</h3><p class="hint" style="margin:8px 0">Kopyala ve gönder:</p><input class="inp" readonly value="${esc(url)}" onclick="this.select()">`)}
 }
 const LS={get(k){try{const v=localStorage.getItem('fi_'+k);return v?JSON.parse(v):null}catch(e){return null}},
@@ -1374,7 +1390,7 @@ function renderMove(){
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       <button class="btn ghost sm" id="stepSensor">${motionOn?'🟢 Sayaç açık':'▶️ Canlı sayacı aç'}</button>
       <button class="btn ghost sm" id="stepManual">✏️ Adım gir</button></div>
-    <p class="hint">${gl.auto?'Adım hedefini VKİ, yaş ve hareket düzeyine göre ben belirledim.':'Adım hedefini sen belirledin.'}</p>
+    <p class="hint">${gl.auto?'Adım hedefini VKİ, yaş ve hareket düzeyine göre ben belirledim.':'Adım hedefini sen belirledin.'} · <button class="chip" id="stepsGuideBtn" style="padding:4px 9px;font-size:11px">Otomatik gelsin →</button></p>
   </div>
 
   <div class="card stack">
@@ -1571,8 +1587,8 @@ function renderSet(){
 
   ${isStandalone()?'':`<div class="card stack hl">
     <p class="eyebrow">📲 Telefona kur</p>
-    <p class="hint">${installEvt?'Tek dokunuş: uygulama ana ekranına simge olarak yüklenir, tam ekran açılır.':isIOS()?'iPhone\'da 2 dokunuş: Paylaş → Ana Ekrana Ekle. Sana adım adım göstereyim.':'Tarayıcının menüsünden "Ana ekrana ekle" ile kurabilirsin.'}</p>
-    <button class="btn" id="installBtn">${installEvt?'📲 Uygulamayı yükle':isIOS()?'📲 Nasıl kurulur (10 sn)':'📲 Kurulum'}</button>
+    <p class="hint">Ana ekrana simge olarak eklenir, tam ekran açılır, çevrimdışı çalışır.</p>
+    <button class="btn" id="installBtn">${installEvt&&!isIOS()?'📲 Tek dokunuşla yükle':'📲 Nasıl kurulur (3 adım)'}</button>
   </div>`}
 
   <div class="card stack">
@@ -1635,14 +1651,9 @@ function renderSet(){
   </div>
 
   <div class="card stack">
-    <details><summary>👟 iPhone: adımlar her gece kendiliğinden yazılsın</summary>
-      <ol class="steps-guide" style="margin-top:12px">
-        <li><b>Kısayollar</b> → <b>+</b> → <b>Sağlık Örneklerini Bul</b> (Tür: Adım, Aralık: bugün, İşlem: Topla).</li>
-        <li><b>URL'yi Aç</b> ekle → <code>${esc(url)}?p=${esc(p.id)}&s=</code> ve sonuna adım değişkenini koy. Kaydet.</li>
-        <li><b>Otomasyon</b> → Günün Saati 23:45 → Her Gün → bu kısayolu seç → "Çalıştırmadan Önce Sor"u kapat.</li>
-      </ol>
-      <p class="hint" style="margin-top:10px">Android'de: Hareket sekmesinde <b>✏️ Adım gir</b>.</p>
-    </details>
+    <p class="eyebrow">👟 Adımlar kendiliğinden gelsin</p>
+    <p class="hint">iPhone'da bir kez kurulur, her gece otomatik gelir. Android'de günde bir kez elle (10 sn).</p>
+    <button class="btn ghost" id="stepsGuideBtn">Nasıl yapılır →</button>
   </div>
 
   <div class="card stack">
@@ -1673,28 +1684,28 @@ function buildIcs(){
       'DTSTART:'+icsDate(tomorrow,h,m),'DURATION:PT10M','RRULE:'+rule,
       'SUMMARY:'+sum,'DESCRIPTION:'+desc,'BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY',
       'DESCRIPTION:'+sum,'END:VALARM','END:VEVENT')};
-  if(S.notif.lunch)ev(12,0,'FREQ=DAILY','💪 Fit İkili — Günün yarısı bitti!',
+  if(S.notif.lunch)ev(12,0,'FREQ=DAILY','💪 Formdayız — Günün yarısı bitti!',
     'Harika gidiyorsun 🔥 Bir bardak su iç 💧\\, 10 dakika yürü 🚶 ve öğle öğününü kaydet 🍽️ Bugün senin günün!');
-  if(S.notif.weigh)ev(8,30,'FREQ=WEEKLY;BYDAY=SU','⚖️ Fit İkili — Tartı günü!',
+  if(S.notif.weigh)ev(8,30,'FREQ=WEEKLY;BYDAY=SU','⚖️ Formdayız — Tartı günü!',
     'Haftalık ölçüm zamanı 🌅 Sayı ne çıkarsa çıksın\\, sen bu hafta emek verdin 💛 Uygulamaya girip kilonu kaydet.');
   if(S.notif.water){
     [[10,0,'💧 Su zamanı — güne iyi başla!'],[14,0,'💧 Öğleden sonra molası 🙌'],
      [16,0,'💧 Bir bardak daha\\, enerjin yerinde kalsın ⚡'],[18,0,'💧 Akşama doğru bir bardak 🌇'],
      [20,0,'💧 Günün son bardakları 🌙']].forEach(([h,m,s])=>
-      ev(h,m,'FREQ=DAILY','💧 Fit İkili — Su vakti',s));
+      ev(h,m,'FREQ=DAILY','💧 Formdayız — Su vakti',s));
   }
   L.push('END:VCALENDAR');
   return L.join('\r\n');
 }
 async function backupDown(){
-  const out={app:'fit-ikili',version:1,home:HOME,exported:new Date().toISOString(),profiles:S.profiles,days:[],challenge,lastWin};
+  const out={app:'formdayiz',version:1,home:HOME,exported:new Date().toISOString(),profiles:S.profiles,days:[],challenge,lastWin};
   for(const pr of S.profiles){const h=await Store.history(pr.id);out.days.push(...h)}
-  saveFile('fit-ikili-yedek-'+TODAY()+'.json',JSON.stringify(out,null,1),'application/json');
+  saveFile('formdayiz-yedek-'+TODAY()+'.json',JSON.stringify(out,null,1),'application/json');
   toast('💾 Yedek indirildi · '+out.days.length+' gün');
 }
 async function backupUp(file){
   let j;try{j=JSON.parse(await file.text())}catch(e){return toast('Dosya okunamadı 😕')}
-  if(!j||j.app!=='fit-ikili'||!Array.isArray(j.profiles))return toast('Bu bir Fit İkili yedeği değil');
+  if(!j||(j.app!=='formdayiz'&&j.app!=='fit-ikili')||!Array.isArray(j.profiles))return toast('Bu bir Formdayız yedeği değil');
   confirmSheet('Yedek geri yüklensin mi?','<b>'+j.profiles.length+' profil</b> ve <b>'+(j.days||[]).length+' günlük kayıt</b> mevcut verilerin üstüne yazılacak (aynı gün varsa yedektekiyle değişir).','Geri yükle',async()=>{
     const all=LS.get('days')||{};
     for(const pr of j.profiles){Store.save('profiles/'+pr.id,pr)}
@@ -1709,7 +1720,7 @@ function saveFile(name,data,type){
 }
 function downloadIcs(){
   if(!S.notif.lunch&&!S.notif.weigh&&!S.notif.water)return toast('Önce en az bir bildirim seç 🙂');
-  saveFile('fit-ikili-bildirimler.ics',buildIcs(),'text/calendar;charset=utf-8');
+  saveFile('formdayiz-bildirimler.ics',buildIcs(),'text/calendar;charset=utf-8');
   toast('📅 İndi! Dosyayı açıp takvimine ekle');chime('win');
 }
 
@@ -1964,6 +1975,13 @@ document.addEventListener('click',e=>{
   if(T.closest('#shareInv')){shareInvite();return}
   if(T.closest('#copyInv')){(async()=>{try{await navigator.clipboard.writeText(inviteLink());toast('🔗 Link kopyalandı')}catch(e){openSheet(`<h3>🔗 Davet linki</h3><input class="inp" readonly value="${esc(inviteLink())}" onclick="this.select()" style="margin-top:10px">`)}})();return}
   if(T.closest('#installBtn')||T.closest('#installHome')){doInstall();return}
+  const gp=T.closest('[data-gplat]');if(gp){installGuide(gp.dataset.gplat);return}
+  const sp=T.closest('[data-splat]');if(sp){stepsGuide(sp.dataset.splat);return}
+  if(T.closest('#gInstallNow')){closeSheet();setTimeout(doInstall,150);return}
+  if(T.closest('#gCopyUrl')){(async()=>{try{await navigator.clipboard.writeText(location.origin+location.pathname);toast('🔗 Kopyalandı — Safari\'ye yapıştır')}catch(e){toast(location.origin+location.pathname)}})();return}
+  const cp=T.closest('[data-copy]');if(cp){(async()=>{try{await navigator.clipboard.writeText(cp.dataset.copy);toast('📋 Kopyalandı');cp.textContent='✓ Kopyalandı'}catch(e){openSheet(`<h3>Kopyala</h3><textarea class="inp" rows="4" readonly onclick="this.select()" style="margin-top:10px">${esc(cp.dataset.copy)}</textarea>`)}})();return}
+  if(T.closest('#stepsGuideBtn')){stepsGuide();return}
+  if(T.closest('#stepsCheck')){stepsSync(true);return}
   if(T.closest('#installLater')){LS.set('installDismiss',Date.now());render();return}
   if(T.closest('#bkDown')){backupDown();return}
   if(T.closest('#bkUp')){$('#bkFile').click();return}
@@ -2178,7 +2196,7 @@ function startMotion(){
 /* ===== profil akışı ===== */
 function onboardHTML(first){
   return `<div style="text-align:center">
-    <div style="font-size:46px">🦁🔥</div><h1 style="font-size:28px;margin-top:6px">${first?'Fit İkili':'Yeni kişi'}</h1>
+    <div style="font-size:46px">💪🔥</div><h1 style="font-size:28px;margin-top:6px">${first?'Formdayız':'Yeni kişi'}</h1>
     <p class="hint" style="margin-top:5px">${first?'İkinizin ilerlemesi tek yerde. Hedefi sen belirle, gerisini birlikte hallederiz 💪':'Bu cihazdan ikinci profili ekle'}</p></div>
   <div class="card stack">
     <p class="eyebrow">Avatarını seç</p>
@@ -2272,6 +2290,8 @@ async function boot2(){
     if(S.tab==='home'||S.tab==='set')render()});
   setInterval(()=>{if(S.day&&S.day.date!==TODAY())location.reload();else if(S.tab==='home')render()},60*1000);
   applyFreeze();checkReached();
+  stepsSync(false);setInterval(()=>stepsSync(false),5*60*1000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)stepsSync(false)});
 }
 /* seri dondurma: haftada 1 kez, 1 günlük boşluğu affet */
 function applyFreeze(){
@@ -2306,23 +2326,103 @@ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=
 const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 const isIOS=()=>/iPhone|iPad|iPod/.test(navigator.userAgent)&&!window.MSStream;
 async function doInstall(){
-  if(installEvt){try{installEvt.prompt();const r=await installEvt.userChoice;installEvt=null;
-    if(r&&r.outcome==='accepted'){party();chime('win');toast('📲 Yüklendi! Ana ekranından aç')}render()}catch(e){}}
-  else if(isIOS())iosGuide();
-  else toast('Tarayıcının menüsünden "Ana ekrana ekle"yi seç');
+  if(installEvt&&!isIOS()){try{installEvt.prompt();const r=await installEvt.userChoice;installEvt=null;
+    if(r&&r.outcome==='accepted'){party();chime('win');toast('📲 Yüklendi! Ana ekranından aç');render();return}}catch(e){}}
+  installGuide();
 }
-function iosGuide(){
-  openSheet(`<h3>📲 iPhone'a kurulum — 2 dokunuş</h3>
-    <p class="hint" style="margin:8px 0 16px;font-size:13px">Apple, uygulamaların tek dokunuşla kurulmasına izin vermiyor; ama şu iki adım 10 saniye sürer:</p>
-    <div class="card stack">
-      <div class="steps-guide">
-        <li style="list-style:none;display:grid;grid-template-columns:23px 1fr;gap:10px;font-size:13.5px;line-height:1.5"><b>1</b><span>Ekranın altındaki <b>Paylaş</b> düğmesine dokun ⬆️ (kare içinde yukarı ok)</span></li>
-        <li style="list-style:none;display:grid;grid-template-columns:23px 1fr;gap:10px;font-size:13.5px;line-height:1.5"><b>2</b><span>Listede <b>"Ana Ekrana Ekle"</b>ye dokun → <b>Ekle</b></span></li>
-      </div>
-      <div style="text-align:center;font-size:44px;animation:bob 1.4s ease-in-out infinite">⬇️</div>
-      <p class="hint" style="text-align:center">Paylaş düğmesi tam bu okun altında 👇</p>
+const ICON_SHARE=`<svg width="30" height="34" viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21V3"/><path d="M9 9l6-6 6 6"/><path d="M6 14H4v17h22V14h-2"/></svg>`;
+const ICON_DOTS=`<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2.4"/><circle cx="12" cy="12" r="2.4"/><circle cx="12" cy="19" r="2.4"/></svg>`;
+const ICON_PLUS=`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>`;
+const ICON_INSTALL=`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 7v6M9.5 10.5L12 13l2.5-2.5M8 20h8"/></svg>`;
+function guideStep(n,icon,title,sub){
+  return `<div class="gstep"><span class="gnum">${n}</span><span class="gicon">${icon}</span><span><b>${title}</b>${sub?`<small>${sub}</small>`:''}</span></div>`;
+}
+function installGuide(which){
+  const ua=navigator.userAgent;
+  const plat=which||(isIOS()?'ios':/Android/i.test(ua)?'android':'pc');
+  const inSafari=isIOS()&&!/CriOS|FxiOS|OPiOS|EdgiOS/.test(ua);
+  const url=location.origin+location.pathname;
+  let body='';
+  if(plat==='ios'){
+    body=(inSafari?'':`<div class="gwarn">Şu an Safari'de değilsin. Kurulum sadece Safari'den yapılır: linki kopyala, Safari'ye yapıştır, oradan buraya gel.<br><button class="btn sm" id="gCopyUrl" style="margin-top:8px">Linki kopyala</button></div>`)
+      +guideStep(1,ICON_SHARE,'Alttaki paylaş simgesine dokun','Ekranın en altında, ortada. Kare içinde yukarı ok.')
+      +guideStep(2,ICON_PLUS,'"Ana Ekrana Ekle"ye dokun','Listeyi biraz aşağı kaydırman gerekebilir.')
+      +guideStep(3,'✅','Sağ üstte "Ekle"','Bitti. Ana ekranda simge çıkar, tam ekran açılır.');
+  }else if(plat==='android'){
+    body=(installEvt?`<button class="btn" id="gInstallNow" style="font-size:16px;padding:16px">📲 Tek dokunuşla yükle</button><p class="hint" style="text-align:center;margin-top:8px">Telefon bir onay penceresi açar → "Yükle".</p><div class="gor">ya da elle:</div>`:'')
+      +guideStep(1,ICON_DOTS,'Sağ üstteki üç noktaya dokun','Chrome\'un menüsü.')
+      +guideStep(2,ICON_INSTALL,'"Ana ekrana ekle" ya da "Uygulamayı yükle"','Menünün ortalarında.')
+      +guideStep(3,'✅','"Yükle" / "Ekle"','Bitti. Uygulama çekmecesinde ve ana ekranda.');
+  }else{
+    body=guideStep(1,ICON_INSTALL,'Adres çubuğunun sağındaki yükle simgesi','Chrome, Edge ve Opera\'da çıkar. Yoksa: ⋮ menü → "Uygulamayı yükle".')
+      +guideStep(2,'✅','"Yükle"','Bitti. Kendi penceresinde açılır.')
+      +`<p class="hint" style="margin-top:12px">Asıl kullanım telefonda. Bu adresi telefona gönder: <button class="btn ghost sm" id="gCopyUrl">Linki kopyala</button></p>`;
+  }
+  openSheet(`<h3>📲 Telefona kur</h3>
+    <div class="seg" style="margin:12px 0 16px">${[['ios','📱 iPhone'],['android','🤖 Android'],['pc','💻 Bilgisayar']].map(([k,l])=>`<button data-gplat="${k}" class="${plat===k?'on':''}">${l}</button>`).join('')}</div>
+    <div class="gsteps">${body}</div>
+    <p class="hint" style="margin-top:14px">Kurulunca tarayıcı çubuğu kaybolur, uygulama gibi açılır, çevrimdışı da çalışır.</p>`,false);
+}
+
+/* ===== ADIM OTOMASYONU (iPhone: Kısayollar → Firestore; kilitliyken de çalışır) ===== */
+function stepsRestUrl(){
+  const c=window.FIREBASE_CONFIG;
+  return `https://firestore.googleapis.com/v1/projects/${c.projectId}/databases/(default)/documents/homes/${HOME}/steps/${S.me.id}?key=${c.apiKey}`;
+}
+const STEPS_BODY='{"fields":{"n":{"stringValue":"ADIM"}}}';
+function stepsGuide(which){
+  const plat=which||(isIOS()?'ios':'android');
+  let body='';
+  if(plat==='ios'){
+    body=`<p class="hint" style="margin-bottom:12px">Bir kez kurulur, sonra her gece 23:50'de adımların <b>telefon kilitliyken bile</b> kendiliğinden gelir. 3 dakika.</p>
+    <div class="gsteps">
+      ${guideStep(1,'⏰','Kısayollar → <u>Otomasyon</u> → +','<b>Günün Saati</b> → 23:50 → <b>Her Gün</b> → <b>Hemen Çalıştır</b> → İleri → <b>Yeni Boş Otomasyon</b>')}
+      ${guideStep(2,'🩺','Eylem ekle: <u>Sağlık Örneklerini Bul</u>','Tür: <b>Adım Sayısı</b> · Filtre Ekle → <b>Başlangıç Tarihi</b> → <b>bugün</b>')}
+      ${guideStep(3,'➕','Eylem ekle: <u>İstatistikleri Hesapla</u>','İşlem: <b>Toplam</b>. (Girdi kendiliğinden 2. adımın sonucudur.)')}
+      ${guideStep(4,'📝','Eylem ekle: <u>Metin</u>','Aşağıdaki metni yapıştır. Sonra <b>ADIM</b> yazan yeri sil, oraya dokunup alttaki değişken çubuğundan <b>İstatistikler</b>i seç.')}
+      <div class="copyrow"><code>${esc(STEPS_BODY)}</code><button class="btn sm" data-copy="${esc(STEPS_BODY)}">Kopyala</button></div>
+      ${guideStep(5,'🌐','Eylem ekle: <u>URL İçeriğini Al</u>','URL: aşağıdakini yapıştır · <b>Yöntem: PATCH</b> · Başlıklar → <b>Content-Type</b> = <b>application/json</b> · İstek Gövdesi: <b>Dosya</b> → <b>Metin</b> (4. adım)')}
+      <div class="copyrow"><code>${esc(stepsRestUrl())}</code><button class="btn sm" data-copy="${esc(stepsRestUrl())}">Kopyala</button></div>
+      ${guideStep(6,'▶️','Bitti → sağ alttaki ▶ ile bir kez çalıştır','Aşağıdaki satır dolarsa kurulum doğru. Yarından sonra her gece kendi gelir.')}
     </div>
-    <p class="hint" style="margin-top:12px">${/CriOS|FxiOS/.test(navigator.userAgent)?'<b>Not:</b> Şu an Chrome/Firefox\'tasın. Bu sayfayı <b>Safari</b>\'de açman gerekiyor — linki Safari\'ye yapıştır.':'Kurulunca tam ekran açılır, tarayıcı çubuğu kaybolur.'}</p>`,true);
+    <div class="card" style="margin-top:14px"><p class="eyebrow">Son gelen otomatik adım</p><p class="motiv" id="stepsLast" style="margin-top:6px">${stepsLastTxt()}</p>
+      <button class="btn ghost sm" id="stepsCheck" style="margin-top:10px">🔄 Şimdi kontrol et</button></div>`;
+  }else{
+    body=`<p class="motiv" style="margin-bottom:12px">Dürüst cevap: Android'de telefonun kendi araçlarıyla bu <b>otomatik yapılamıyor</b>; Apple'daki Kısayollar'ın karşılığı yok. İki yol var, ikisi de 10 saniye:</p>
+    <div class="gsteps">
+      ${guideStep('A','📱','Google Fit / Samsung Health\'i aç, günün adımına bak','Sonra burada <b>Hareket → ✏️ Adım gir</b>. Hızlı düğmeler var (+1.000, +3.000).')}
+      ${guideStep('B','🚶','Yürüyüşe çıkarken <u>Canlı sayacı aç</u>','Hareket sekmesinde. Telefon cebindeyken uygulama sayar; eve gelince kapat.')}
+    </div>
+    <p class="hint" style="margin-top:12px">Tam otomatik istiyorsan tek yol küçük bir Android uygulaması derlemek — o ayrı bir iş, istersen konuşuruz.</p>`;
+  }
+  openSheet(`<h3>👟 Adımlar kendiliğinden gelsin</h3>
+    <div class="seg" style="margin:12px 0 14px"><button data-splat="ios" class="${plat==='ios'?'on':''}">📱 iPhone</button><button data-splat="android" class="${plat==='android'?'on':''}">🤖 Android</button></div>${body}`,false);
+}
+function stepsLastTxt(){
+  const l=LS.get('stepsLast_'+(S.me&&S.me.id));
+  return l?('👟 <b>'+nf(l.n)+' adım</b> · '+new Date(l.at).toLocaleString('tr-TR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' ✅'):'Henüz gelmedi.';
+}
+async function stepsSync(manual){
+  if(!S.me||!HOME||!window.FIREBASE_CONFIG)return;
+  try{
+    const r=await fetch(stepsRestUrl(),{cache:'no-store'});
+    if(r.status===404){if(manual)toast('Henüz otomatik adım gelmemiş');return}
+    if(!r.ok){if(manual)toast('Okunamadı ('+r.status+') — Firestore kuralları yayınlandı mı?');return}
+    const j=await r.json();
+    const n=parseInt((j.fields&&j.fields.n&&(j.fields.n.stringValue||j.fields.n.integerValue))||'0',10);
+    const at=new Date(j.updateTime).getTime();
+    if(!(n>0)||!at)return;
+    const day=iso(new Date(at));
+    const prev=LS.get('stepsLast_'+S.me.id);
+    if(prev&&prev.at===at){if(manual)toast('Yeni veri yok · son: '+nf(prev.n)+' adım');return}
+    LS.set('stepsLast_'+S.me.id,{n,at});
+    if(day===TODAY()){if(n>(S.day.steps||0)){S.day.steps=n;animate=true;touch()}}
+    else{const h=S.hist.find(x=>x.date===day);
+      if(h&&n>(h.steps||0)){h.steps=n;h.xp=dayXp(S.me,h);Store.save('days/'+S.me.id+'__'+day,h);
+        const all=LS.get('days')||{};all[S.me.id+'__'+day]=h;LS.set('days',all)}}
+    toast('👟 '+nf(n)+' adım otomatik geldi ('+day.slice(8)+'.'+day.slice(5,7)+')');chime('ping');
+    const el=$('#stepsLast');if(el)el.innerHTML=stepsLastTxt();
+  }catch(e){if(manual)toast('Bağlanılamadı')}
 }
 async function boot(){
   applyTheme(LS.get('theme')||'');

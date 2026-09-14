@@ -1,4 +1,4 @@
-# Fit İkili — Kurulum (yaklaşık 15 dakika, bir kez)
+# Formdayız — Kurulum (yaklaşık 15 dakika, bir kez)
 
 Bu klasördeki dosyalar uygulamanın tamamıdır. Üç adım var: **Firebase** (veriler), **subclean.app** (barındırma), **telefonlar** (kurulum). Yapay zekâ yok; anahtar, üyelik, ek maliyet yok.
 
@@ -41,8 +41,9 @@ Uygulama **`https://subclean.app/k7m2x/`** adresinde yaşayacak (rastgele bir kl
 **Bildirimler**
 Ayarlar → 🔔 → **Takvimime ekle**. İnen dosyaya dokun → takvime eklenir → öğlen 12:00 motivasyon, Pazar tartı günü, su saatleri gerçek bildirim olarak gelir.
 
-**Adım (iPhone, otomatik)**
-Ayarlar → 👟 Otomatik adım kurulumu → Kısayol tarifi. Adımlar her gece kendiliğinden yazılır.
+**Adımlar kendiliğinden gelsin**
+Uygulama → Ayarlar → **👟 Adımlar kendiliğinden gelsin → Nasıl yapılır**. iPhone'da 3 dakikalık Kısayol otomasyonu (kopyala düğmeleriyle, telefon kilitliyken de çalışır); Android'de günde bir kez elle giriş — Android'in bunun için bir sistem otomasyonu yok.
+> Bunun çalışması için Firebase'de **firestore.rules** dosyasının GÜNCEL halinin yayınlanmış olması gerekir (adım 1.5). Daha önce yayınladıysan bu yeni dosyayla bir kez daha yayınla.
 
 ---
 
@@ -51,7 +52,7 @@ Ayarlar → 👟 Otomatik adım kurulumu → Kısayol tarifi. Adımlar her gece 
 | Dosya | Ne işe yarar |
 |---|---|
 | `index.html` | Uygulamanın tamamı |
-| `firestore.rules` | Firebase konsoluna yapıştırılacak güvenlik kuralları |
+| `firestore.rules` | Firebase konsoluna yapıştırılacak güvenlik kuralları (adım otomasyonu için güncel olmalı) |
 | `manifest.json` | Telefona kurulabilmesi için uygulama kimliği |
 | `sw.js` | Çevrimdışı çalışma ve hız |
 | `icon-*.png` | Ana ekran simgeleri |

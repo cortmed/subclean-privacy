@@ -2,9 +2,13 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     // Her "ev" kendi kodunun altında yaşar. Kodu bilen (davet linkini alan) herkes o evi okur/yazar.
-    // Anonim giriş zorunlu; başka her şey kapalı.
     match /homes/{home}/{document=**} {
       allow read, write: if request.auth != null;
+    }
+    // iPhone Kısayollar otomasyonu adım sayısını buraya yazar (giriş yapamaz, o yüzden açık).
+    // Sadece bu küçük belge açık; başka hiçbir şey değil.
+    match /homes/{home}/steps/{pid} {
+      allow read, write: if true;
     }
     match /{document=**} {
       allow read, write: if false;
