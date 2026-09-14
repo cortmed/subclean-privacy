@@ -16,7 +16,16 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js"></script>
+<script>
+window.FIREBASE_CONFIG = {
+  apiKey: "AIzaSyB-eOTcwMkmNtGjV6SMp4cVaZ8QrO3l1JA",
+  authDomain: "fit-ikili.firebaseapp.com",
+  projectId: "fit-ikili",
+  storageBucket: "fit-ikili.firebasestorage.app",
+  messagingSenderId: "933086216026",
+  appId: "1:933086216026:web:2c4986cf43d13ac32a3d63"
+};
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
@@ -738,9 +747,20 @@ function mkDB(fs,code){
       onSnapshot:(cb,err)=>ref(path).onSnapshot(r=>cb(wrapSnap(r)),err||(()=>{}))}),
     collection:c=>wrapQ(home.collection(c))};
 }
+function fbErr(e){
+  const c=(e&&e.code)||'',m=(e&&e.message)||'';
+  if(/operation-not-allowed/.test(c))return'Firebase → Authentication → Sign-in method → Anonymous kapalı. Aç ve kaydet.';
+  if(/permission-denied/.test(c))return'Firestore kuralları yayınlanmamış. Firestore → Rules → firestore.rules içeriğini yapıştır → Publish.';
+  if(/not-found/.test(c)||/does not exist/i.test(m))return'Firestore veritabanı henüz oluşturulmamış. Firestore Database → Create database.';
+  if(/network|unavailable|timeout/i.test(c+m))return'Sunucuya ulaşılamadı — internet ya da geçici kesinti. Az sonra yenile.';
+  if(/unauthorized-domain|api-key/i.test(c+m))return'Alan adı izinli değil. Authentication → Settings → Authorized domains → subclean.app ekle.';
+  return'Bağlantı hatası: '+(c||m||'bilinmiyor');
+}
 async function initFirebase(){
+  HOME=LS.get('home')||genCode();LS.set('home',HOME);
   const cfg=window.FIREBASE_CONFIG;
-  if(!window.firebase||!cfg||!cfg.apiKey||/BURAYA|YOUR_/i.test(cfg.apiKey)){fbNote='Firebase ayarı girilmemiş (firebase-config.js)';return}
+  if(!window.firebase){fbNote='Firebase kütüphanesi yüklenemedi (internet?)';return}
+  if(!cfg||!cfg.apiKey){fbNote='Firebase ayarı eksik';return}
   try{
     if(!firebase.apps.length)firebase.initializeApp(cfg);
     const fs=firebase.firestore();
@@ -750,9 +770,12 @@ async function initFirebase(){
       await new Promise((res,rej)=>{const un=auth.onAuthStateChanged(u=>{un();res(u)},rej);setTimeout(()=>{un();res(null)},4000)});
       if(!auth.currentUser)await auth.signInAnonymously();
     }
-    HOME=LS.get('home')||genCode();LS.set('home',HOME);
-    DB=mkDB(fs,HOME);online=true;fbNote='';
-  }catch(e){DB=null;online=false;fbNote=(e&&e.code)||(e&&e.message)||'bağlantı hatası'}
+    DB=mkDB(fs,HOME);
+    // gerçek bir yazma denemesi: kural / veritabanı sorunlarını burada yakala
+    await Promise.race([DB.doc('meta/ping').set({t:Date.now()}),
+      new Promise((_,rej)=>setTimeout(()=>rej({code:'timeout'}),8000))]);
+    online=true;fbNote='';
+  }catch(e){online=false;fbNote=fbErr(e);if(!DB||/permission|not-found|does not exist/i.test(((e&&e.code)||'')+((e&&e.message)||'')))DB=null}
 }
 function inviteLink(){const u=new URL(location.href);u.search='';u.hash='';return u.toString()+'?ev='+(HOME||'')}
 async function shareInvite(){
@@ -1536,12 +1559,14 @@ function renderSet(){
   const p=S.me,curT=(LS.get('theme')||''),tc=targetComment(p),gl=goals(p),a=autoGoals(p);
   const url=location.origin+location.pathname;
   return `
-  <div class="card stack ${online?'aq':''}">
-    <p class="eyebrow">${online?'🟢 Bulut bağlı':'🟡 Yerel mod'}</p>
-    ${online?`<p class="hint">Ev kodun: <b style="letter-spacing:.12em;font-size:14px">${esc(HOME)}</b>. Bu kodu bilen herkes aynı verileri görür; sadece davet linkiyle paylaş.</p>
-      <button class="btn" id="shareInv">👫 Davet linkini gönder</button>
-      <p class="hint">Kız arkadaşın linke dokunur → profilini kurar → bitti. Hesap, giriş, kod yazma yok.</p>`
-    :`<p class="hint">Veriler şimdilik sadece bu cihazda. ${esc(fbNote)}. README'deki Firebase adımlarını tamamlayınca senkron açılır.</p>`}
+  <div class="card stack aq">
+    <p class="eyebrow">👫 Birlikte kullan</p>
+    <p class="hint">Ev kodun: <b style="letter-spacing:.14em;font-size:15px;color:var(--ink)">${esc(HOME||'')}</b> · ${online?'<b style="color:var(--good)">🟢 bulut bağlı</b>':'<b style="color:var(--warn)">🟡 senkron kapalı</b>'}</p>
+    ${online?'':`<p class="hint" style="color:var(--warn)">${esc(fbNote||'')}</p>`}
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" id="shareInv" style="flex:1">👫 Davet linkini gönder</button>
+      <button class="btn ghost" id="copyInv" style="width:auto">Kopyala</button></div>
+    <p class="hint">Linke dokunan kişi otomatik bu eve katılır, profilini kurar — hesap, giriş yok.</p>
   </div>
 
   ${isStandalone()?'':`<div class="card stack hl">
@@ -1559,9 +1584,9 @@ function renderSet(){
     </div>
   </div>
 
-  <div class="card stack aq">
-    <p class="eyebrow">🔔 Bildirimler — tek dokunuş</p>
-    <p class="hint">Aşağıdakileri seç, <b>Takvimime ekle</b>'ye bas. İnen dosyayı açınca telefonunun takvimine eklenir ve <b>gerçek bildirim</b> olarak gelir — uygulamayı açmana gerek yok, telefon kilitliyken bile çalışır.</p>
+  <div class="card stack">
+    <p class="eyebrow">🔔 Bildirimler</p>
+    <p class="hint">Seç, <b>Takvimime ekle</b>'ye bas, inen dosyaya dokun. Takvimin bildirir — telefon kilitliyken bile.</p>
     <div>
       <div class="switch"><div><div class="tx">☀️ Öğle motivasyonu</div><div class="sub">Her gün 12:00 — "Yarısı bitti, harika gidiyorsun 💪"</div></div>
         <button class="tg${S.notif.lunch?' on':''}" data-nt="lunch" aria-label="Öğle bildirimi"></button></div>
@@ -1571,27 +1596,7 @@ function renderSet(){
         <button class="tg${S.notif.water?' on':''}" data-nt="water" aria-label="Su bildirimi"></button></div>
     </div>
     <button class="btn" id="mkIcs">📅 Takvimime ekle</button>
-    <details>
-      <summary>🔊 Bildirim sesini değiştirmek</summary>
-      <ol class="steps-guide" style="margin-top:12px">
-        <li><b>iPhone:</b> Ayarlar → Sesler ve Dokunsal Tepkiler → <b>Takvim Uyarıları</b> → beğendiğin sesi seç. Fit İkili bildirimleri artık o sesle gelir.</li>
-        <li><b>Android:</b> Takvim uygulaması → Ayarlar → Bildirimler → <b>Ses</b> → istediğin tonu seç.</li>
-        <li>Uygulama içindeki sesler zaten farklı: su için damla sesi, başarı için zafer melodisi.</li>
-      </ol>
-      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-        <button class="btn ghost sm" data-snd="water">💧 Su sesi</button>
-        <button class="btn ghost sm" data-snd="win">🏆 Başarı sesi</button>
-        <button class="btn ghost sm" data-snd="ping">🔔 Bildirim sesi</button></div>
-    </details>
-    <details>
-      <summary>📲 Alternatif: iPhone Kısayol otomasyonu</summary>
-      <ol class="steps-guide" style="margin-top:12px">
-        <li><b>Kısayollar</b> → Otomasyon → <b>+</b> → <b>Günün Saati</b> → 12:00 → Her Gün.</li>
-        <li>Eylem: <b>"Bildirim Göster"</b> → metin: <code>💪 Yarısı bitti! Bir bardak su, kısa bir yürüyüş — bugün senin günün 🔥</code></li>
-        <li><b>"Çalıştırmadan Önce Sor"</b>u kapat. Bitti.</li>
-        <li>Aynısını Pazar 08:30 için <code>⚖️ Tartı günü! Sayı ne olursa olsun, sen emek verdin 💛</code> ile kur.</li>
-      </ol>
-    </details>
+    <p class="hint">Sesini değiştirmek için: iPhone → Ayarlar → Sesler → Takvim Uyarıları · Android → Takvim → Bildirim sesi.</p>
   </div>
 
   <div class="card stack">
@@ -1630,23 +1635,14 @@ function renderSet(){
   </div>
 
   <div class="card stack">
-    <details><summary>👟 Otomatik adım kurulumu (iPhone)</summary>
+    <details><summary>👟 iPhone: adımlar her gece kendiliğinden yazılsın</summary>
       <ol class="steps-guide" style="margin-top:12px">
-        <li><b>Kısayollar</b> → <b>+</b> ile yeni kısayol.</li>
-        <li><b>Sağlık</b> → <b>"Sağlık Örneklerini Bul"</b>. Tür: <b>Adım</b>, Aralık: <b>bugün</b>, İşlem: <b>Topla</b>.</li>
-        <li><b>"URL'yi Aç"</b> ekle, URL'ye şunu yapıştır ve sonuna adım değişkenini koy:<br><code>${esc(url)}?p=${esc(p.id)}&s=</code></li>
-        <li>Kısayolu <b>"Adımları Gönder"</b> adıyla kaydet.</li>
-        <li><b>Otomasyon</b> → <b>Günün Saati</b> → 23:45 → Her Gün → kısayolu seç, <b>"Çalıştırmadan Önce Sor"</b>u kapat.</li>
-      </ol></details>
-  </div>
-  <div class="card stack">
-    <details><summary>🤖 Otomatik adım kurulumu (Android)</summary>
-      <ol class="steps-guide" style="margin-top:12px">
-        <li>Ücretsiz <b>MacroDroid</b>'i kur.</li>
-        <li>Tetikleyici: <b>Gün Saati → 23:45</b>.</li>
-        <li>Eylem: <b>Web Sayfası Aç</b> → <code>${esc(url)}?p=${esc(p.id)}&s=</code></li>
-        <li>Sonuna MacroDroid'in <b>Adım Sayacı</b> değişkenini ekle.</li>
-      </ol></details>
+        <li><b>Kısayollar</b> → <b>+</b> → <b>Sağlık Örneklerini Bul</b> (Tür: Adım, Aralık: bugün, İşlem: Topla).</li>
+        <li><b>URL'yi Aç</b> ekle → <code>${esc(url)}?p=${esc(p.id)}&s=</code> ve sonuna adım değişkenini koy. Kaydet.</li>
+        <li><b>Otomasyon</b> → Günün Saati 23:45 → Her Gün → bu kısayolu seç → "Çalıştırmadan Önce Sor"u kapat.</li>
+      </ol>
+      <p class="hint" style="margin-top:10px">Android'de: Hareket sekmesinde <b>✏️ Adım gir</b>.</p>
+    </details>
   </div>
 
   <div class="card stack">
@@ -1966,6 +1962,7 @@ document.addEventListener('click',e=>{
   const sl=T.closest('[data-sleep]');if(sl){setSleep(+sl.dataset.sleep);return}
   if(T.closest('#sleepEdit')){askSleep();return}
   if(T.closest('#shareInv')){shareInvite();return}
+  if(T.closest('#copyInv')){(async()=>{try{await navigator.clipboard.writeText(inviteLink());toast('🔗 Link kopyalandı')}catch(e){openSheet(`<h3>🔗 Davet linki</h3><input class="inp" readonly value="${esc(inviteLink())}" onclick="this.select()" style="margin-top:10px">`)}})();return}
   if(T.closest('#installBtn')||T.closest('#installHome')){doInstall();return}
   if(T.closest('#installLater')){LS.set('installDismiss',Date.now());render();return}
   if(T.closest('#bkDown')){backupDown();return}

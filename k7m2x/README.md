@@ -7,10 +7,7 @@ Bu klasördeki dosyalar uygulamanın tamamıdır. Üç adım var: **Firebase** (
 ## 1) Firebase — verilerin senkron olduğu yer (≈7 dk)
 
 1. **console.firebase.google.com** → *Proje ekle* → ad: `fit-ikili` → Google Analytics'i **kapat** → *Proje oluştur*.
-2. Proje açılınca ortadaki **`</>`** (Web) simgesine tıkla → uygulama adı `fit-ikili` → *Uygulamayı kaydet*.
-   Ekranda `const firebaseConfig = { apiKey: "...", ... }` diye bir kutu çıkar. **Süslü parantezin içini kopyala.**
-3. Bu klasördeki **`firebase-config.js`** dosyasını Not Defteri ile aç, `window.FIREBASE_CONFIG = { ... }` içindekileri kopyaladığınla değiştir, kaydet.
-   *(Bu değerler gizli değildir; güvenlik bir sonraki adımdaki kurallarla sağlanır.)*
+2. ~~Web uygulaması ve ayar~~ — **yapıldı**, uygulamanın içine gömülü.
 4. Sol menü → **Build → Firestore Database** → *Veritabanı oluştur* → konum **eur3 (europe-west)** → **Üretim modunda başlat** → *Oluştur*.
 5. Aynı ekranda üstte **Kurallar (Rules)** sekmesi → içeriği sil → **`firestore.rules`** dosyasının içeriğini yapıştır → **Yayınla**.
 6. Sol menü → **Build → Authentication** → *Başlayın* → **Sign-in method** → **Anonim (Anonymous)** → Etkinleştir → Kaydet.
@@ -26,7 +23,7 @@ Uygulama **`https://subclean.app/k7m2x/`** adresinde yaşayacak (rastgele bir kl
 4. Firebase'e dön: Authentication → Settings → **Authorized domains** → `subclean.app` ekle *(1.7 adımını bu şekilde yap)*.
 
 > Sitende bir "her adresi ana sayfaya yönlendir" kuralı (SPA rewrite) varsa `k7m2x/` klasörünü bu kuraldan hariç tut; aksi halde uygulama yerine site ana sayfası açılır.
-> Güncelleme gelince: sadece `index.html` dosyasını değiştir, `sw.js` içindeki `fit-ikili-v1` yazısını `v2` yap. O kadar.
+> Güncelleme gelince: yeni zip'teki dosyaları eskilerin üstüne at. O kadar.
 
 ## 3) Telefonlar (≈2 dk)
 
@@ -54,7 +51,6 @@ Ayarlar → 👟 Otomatik adım kurulumu → Kısayol tarifi. Adımlar her gece 
 | Dosya | Ne işe yarar |
 |---|---|
 | `index.html` | Uygulamanın tamamı |
-| `firebase-config.js` | **Senin dolduracağın** Firebase ayarı |
 | `firestore.rules` | Firebase konsoluna yapıştırılacak güvenlik kuralları |
 | `manifest.json` | Telefona kurulabilmesi için uygulama kimliği |
 | `sw.js` | Çevrimdışı çalışma ve hız |
@@ -62,7 +58,7 @@ Ayarlar → 👟 Otomatik adım kurulumu → Kısayol tarifi. Adımlar her gece 
 
 ## Sık sorulanlar
 
-- **Ayarlar'da "🟡 Yerel mod" yazıyor** → `firebase-config.js` doldurulmamış ya da Anonim giriş açılmamış (adım 1.3 ve 1.6).
+- **Ayarlar'da "🟡 senkron kapalı" yazıyor** → Altında sebebi yazar (Anonim giriş kapalı / Firestore yok / kurallar yayınlanmamış). O adımı yap, sayfayı yenile.
 - **Partnerim linke dokundu ama beni görmüyor** → İkinizin de aynı ev kodunda olması gerekir; Ayarlar'daki kod ikinizde de aynı olmalı. Değilse davet linkini tekrar gönder.
 - **Veri kaybetmek istemiyorum** → Ayarlar → 💾 Yedek indir. Ayda bir yeter.
 - **Claude'daki eski sürüm ne olacak?** → Olduğu gibi duruyor; yeni adres oturunca onu kullanmayı bırakırsınız. Eski verileri taşımak istersen orada Ayarlar → yedek yoktu; ilk günden temiz başlamak en kolayı.
