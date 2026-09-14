@@ -1,4 +1,4 @@
-# Formdayız — Kurulum (yaklaşık 15 dakika, bir kez)
+# Denge — Kurulum (yaklaşık 15 dakika, bir kez)
 
 Bu klasördeki dosyalar uygulamanın tamamıdır. Üç adım var: **Firebase** (veriler), **subclean.app** (barındırma), **telefonlar** (kurulum). Yapay zekâ yok; anahtar, üyelik, ek maliyet yok.
 

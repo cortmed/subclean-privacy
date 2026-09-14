@@ -7,12 +7,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Formdayız">
+<meta name="apple-mobile-web-app-title" content="Denge">
 <meta name="description" content="İki kişilik diyet, adım, su ve hareket takibi">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-192.png">
-<title>Formdayız</title>
+<title>Denge</title>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -472,7 +472,7 @@ details[open]>summary::after{transform:rotate(180deg)}
 <body>
 <div id="shell">
   <div id="boot" class="onb"><div style="text-align:center">
-    <div style="font-size:52px">💛💙</div><h1 style="font-size:30px;margin-top:8px">Formdayız</h1>
+    <div style="font-size:52px">⚖️</div><h1 style="font-size:30px;margin-top:8px">Denge</h1>
     <p class="hint" style="margin-top:6px">Yükleniyor…</p></div></div>
   <div id="onboard" class="onb" hidden></div>
   <div id="app" hidden>
@@ -702,7 +702,7 @@ function progInfo(pr,kg){
 const THEMES=[
  {k:'',n:'Otomatik',c:['#F2603C','#F2A93B','#FFF9F4']},{k:'sunrise',n:'Gün Doğumu',c:['#F2603C','#F2A93B','#FFF9F4']},
  {k:'lila',n:'Lila',c:['#7C4DFF','#C77DFF','#F8F5FF']},{k:'galaxy',n:'Galaksi',c:['#B388FF','#FF6FD8','#120E24']},
- {k:'fener',n:'Sarı Lacivert 💛💙',c:['#FFD200','#FFB000','#0D1A3C']},
+ {k:'fener',n:'Lacivert',c:['#FFD200','#FFB000','#0D1A3C']},
  {k:'mint',n:'Nane',c:['#0E9B76','#3FA9D9','#F3F8F5']},{k:'berry',n:'Böğürtlen',c:['#D62F7E','#8A5CF0','#FFF5F9']},
  {k:'midnight',n:'Gece',c:['#8F7BFF','#FF7EC7','#131020']},{k:'carbon',n:'Karbon',c:['#2FD69B','#4FB8E8','#0E1113']}];
 const ACT=[{k:1.2,l:'Masa başı'},{k:1.375,l:'Hafif'},{k:1.55,l:'Orta'},{k:1.725,l:'Yüksek'}];
@@ -795,8 +795,8 @@ async function initFirebase(){
 }
 function inviteLink(){const u=new URL(location.href);u.search='';u.hash='';return u.toString()+'?ev='+(HOME||'')}
 async function shareInvite(){
-  const url=inviteLink(),text='Formdayız — birlikte takip edelim 💪 Linke dokun, profilini kur, bitti:';
-  if(navigator.share){try{await navigator.share({title:'Formdayız',text,url});return}catch(e){}}
+  const url=inviteLink(),text='Denge — birlikte takip edelim 💪 Linke dokun, profilini kur, bitti:';
+  if(navigator.share){try{await navigator.share({title:'Denge',text,url});return}catch(e){}}
   try{await navigator.clipboard.writeText(url);toast('🔗 Davet linki kopyalandı')}catch(e){openSheet(`<h3>🔗 Davet linki</h3><p class="hint" style="margin:8px 0">Kopyala ve gönder:</p><input class="inp" readonly value="${esc(url)}" onclick="this.select()">`)}
 }
 const LS={get(k){try{const v=localStorage.getItem('fi_'+k);return v?JSON.parse(v):null}catch(e){return null}},
@@ -1684,28 +1684,28 @@ function buildIcs(){
       'DTSTART:'+icsDate(tomorrow,h,m),'DURATION:PT10M','RRULE:'+rule,
       'SUMMARY:'+sum,'DESCRIPTION:'+desc,'BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY',
       'DESCRIPTION:'+sum,'END:VALARM','END:VEVENT')};
-  if(S.notif.lunch)ev(12,0,'FREQ=DAILY','💪 Formdayız — Günün yarısı bitti!',
+  if(S.notif.lunch)ev(12,0,'FREQ=DAILY','💪 Denge — Günün yarısı bitti!',
     'Harika gidiyorsun 🔥 Bir bardak su iç 💧\\, 10 dakika yürü 🚶 ve öğle öğününü kaydet 🍽️ Bugün senin günün!');
-  if(S.notif.weigh)ev(8,30,'FREQ=WEEKLY;BYDAY=SU','⚖️ Formdayız — Tartı günü!',
+  if(S.notif.weigh)ev(8,30,'FREQ=WEEKLY;BYDAY=SU','⚖️ Denge — Tartı günü!',
     'Haftalık ölçüm zamanı 🌅 Sayı ne çıkarsa çıksın\\, sen bu hafta emek verdin 💛 Uygulamaya girip kilonu kaydet.');
   if(S.notif.water){
     [[10,0,'💧 Su zamanı — güne iyi başla!'],[14,0,'💧 Öğleden sonra molası 🙌'],
      [16,0,'💧 Bir bardak daha\\, enerjin yerinde kalsın ⚡'],[18,0,'💧 Akşama doğru bir bardak 🌇'],
      [20,0,'💧 Günün son bardakları 🌙']].forEach(([h,m,s])=>
-      ev(h,m,'FREQ=DAILY','💧 Formdayız — Su vakti',s));
+      ev(h,m,'FREQ=DAILY','💧 Denge — Su vakti',s));
   }
   L.push('END:VCALENDAR');
   return L.join('\r\n');
 }
 async function backupDown(){
-  const out={app:'formdayiz',version:1,home:HOME,exported:new Date().toISOString(),profiles:S.profiles,days:[],challenge,lastWin};
+  const out={app:'denge',version:1,home:HOME,exported:new Date().toISOString(),profiles:S.profiles,days:[],challenge,lastWin};
   for(const pr of S.profiles){const h=await Store.history(pr.id);out.days.push(...h)}
-  saveFile('formdayiz-yedek-'+TODAY()+'.json',JSON.stringify(out,null,1),'application/json');
+  saveFile('denge-yedek-'+TODAY()+'.json',JSON.stringify(out,null,1),'application/json');
   toast('💾 Yedek indirildi · '+out.days.length+' gün');
 }
 async function backupUp(file){
   let j;try{j=JSON.parse(await file.text())}catch(e){return toast('Dosya okunamadı 😕')}
-  if(!j||(j.app!=='formdayiz'&&j.app!=='fit-ikili')||!Array.isArray(j.profiles))return toast('Bu bir Formdayız yedeği değil');
+  if(!j||['denge','formdayiz','fit-ikili'].indexOf(j.app)<0||!Array.isArray(j.profiles))return toast('Bu bir Denge yedeği değil');
   confirmSheet('Yedek geri yüklensin mi?','<b>'+j.profiles.length+' profil</b> ve <b>'+(j.days||[]).length+' günlük kayıt</b> mevcut verilerin üstüne yazılacak (aynı gün varsa yedektekiyle değişir).','Geri yükle',async()=>{
     const all=LS.get('days')||{};
     for(const pr of j.profiles){Store.save('profiles/'+pr.id,pr)}
@@ -1720,7 +1720,7 @@ function saveFile(name,data,type){
 }
 function downloadIcs(){
   if(!S.notif.lunch&&!S.notif.weigh&&!S.notif.water)return toast('Önce en az bir bildirim seç 🙂');
-  saveFile('formdayiz-bildirimler.ics',buildIcs(),'text/calendar;charset=utf-8');
+  saveFile('denge-bildirimler.ics',buildIcs(),'text/calendar;charset=utf-8');
   toast('📅 İndi! Dosyayı açıp takvimine ekle');chime('win');
 }
 
@@ -2196,7 +2196,7 @@ function startMotion(){
 /* ===== profil akışı ===== */
 function onboardHTML(first){
   return `<div style="text-align:center">
-    <div style="font-size:46px">💪🔥</div><h1 style="font-size:28px;margin-top:6px">${first?'Formdayız':'Yeni kişi'}</h1>
+    <div style="font-size:46px">💪🔥</div><h1 style="font-size:28px;margin-top:6px">${first?'Denge':'Yeni kişi'}</h1>
     <p class="hint" style="margin-top:5px">${first?'İkinizin ilerlemesi tek yerde. Hedefi sen belirle, gerisini birlikte hallederiz 💪':'Bu cihazdan ikinci profili ekle'}</p></div>
   <div class="card stack">
     <p class="eyebrow">Avatarını seç</p>
@@ -2376,14 +2376,14 @@ function stepsGuide(which){
   if(plat==='ios'){
     body=`<p class="hint" style="margin-bottom:12px">Bir kez kurulur, sonra her gece 23:50'de adımların <b>telefon kilitliyken bile</b> kendiliğinden gelir. 3 dakika.</p>
     <div class="gsteps">
-      ${guideStep(1,'⏰','Kısayollar → <u>Otomasyon</u> → +','<b>Günün Saati</b> → 23:50 → <b>Her Gün</b> → <b>Hemen Çalıştır</b> → İleri → <b>Yeni Boş Otomasyon</b>')}
+      ${guideStep(1,'⏰','Kısayollar → <u>Otomasyon</u> → +','<b>Günün Saati</b> → saat <b>23:50</b> → tekrar: <b>Günlük</b> → <b>Hemen Çalıştır</b> → <b>İleri</b> → <b>Yeni Boş Otomasyon</b>')}
       ${guideStep(2,'🩺','Eylem ekle: <u>Sağlık Örneklerini Bul</u>','Tür: <b>Adım Sayısı</b> · Filtre Ekle → <b>Başlangıç Tarihi</b> → <b>bugün</b>')}
       ${guideStep(3,'➕','Eylem ekle: <u>İstatistikleri Hesapla</u>','İşlem: <b>Toplam</b>. (Girdi kendiliğinden 2. adımın sonucudur.)')}
       ${guideStep(4,'📝','Eylem ekle: <u>Metin</u>','Aşağıdaki metni yapıştır. Sonra <b>ADIM</b> yazan yeri sil, oraya dokunup alttaki değişken çubuğundan <b>İstatistikler</b>i seç.')}
       <div class="copyrow"><code>${esc(STEPS_BODY)}</code><button class="btn sm" data-copy="${esc(STEPS_BODY)}">Kopyala</button></div>
       ${guideStep(5,'🌐','Eylem ekle: <u>URL İçeriğini Al</u>','URL: aşağıdakini yapıştır · <b>Yöntem: PATCH</b> · Başlıklar → <b>Content-Type</b> = <b>application/json</b> · İstek Gövdesi: <b>Dosya</b> → <b>Metin</b> (4. adım)')}
       <div class="copyrow"><code>${esc(stepsRestUrl())}</code><button class="btn sm" data-copy="${esc(stepsRestUrl())}">Kopyala</button></div>
-      ${guideStep(6,'▶️','Bitti → sağ alttaki ▶ ile bir kez çalıştır','Aşağıdaki satır dolarsa kurulum doğru. Yarından sonra her gece kendi gelir.')}
+      ${guideStep(6,'▶️','Bitti → sağ alttaki ▶ ile bir kez çalıştır','Aşağıdaki satır dolarsa kurulum doğru. Bundan sonra her gece kendi gelir. (URL bu profile özel; profili silip yeniden kurarsan URL\'yi güncelle.)')}
     </div>
     <div class="card" style="margin-top:14px"><p class="eyebrow">Son gelen otomatik adım</p><p class="motiv" id="stepsLast" style="margin-top:6px">${stepsLastTxt()}</p>
       <button class="btn ghost sm" id="stepsCheck" style="margin-top:10px">🔄 Şimdi kontrol et</button></div>`;
@@ -2409,7 +2409,8 @@ async function stepsSync(manual){
     if(r.status===404){if(manual)toast('Henüz otomatik adım gelmemiş');return}
     if(!r.ok){if(manual)toast('Okunamadı ('+r.status+') — Firestore kuralları yayınlandı mı?');return}
     const j=await r.json();
-    const n=parseInt((j.fields&&j.fields.n&&(j.fields.n.stringValue||j.fields.n.integerValue))||'0',10);
+    const raw=String((j.fields&&j.fields.n&&(j.fields.n.stringValue||j.fields.n.integerValue))||'0');
+    const n=parseInt(raw.replace(/[^\d]/g,'')||'0',10);
     const at=new Date(j.updateTime).getTime();
     if(!(n>0)||!at)return;
     const day=iso(new Date(at));
