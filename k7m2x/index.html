@@ -143,10 +143,10 @@ input,select{font:inherit;color:inherit}
 .bar i.b2{background:var(--aqua)} .bar i.b3{background:var(--acc2)} .bar i.bg-good{background:var(--good)}
 .mini .v{font-size:12.5px;font-weight:800;white-space:nowrap}
 
-.macros{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.macro{background:var(--bg3);border-radius:13px;padding:10px 6px;text-align:center}
-.macro .e{font-size:16px} .macro .n{font-size:14px;font-weight:800;margin-top:2px}
-.macro .l{font-size:9.5px;color:var(--ink2);font-weight:700;letter-spacing:.03em}
+.macros{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.macro{background:var(--bg3);border-radius:13px;padding:9px 3px;text-align:center;display:flex;flex-direction:column;justify-content:flex-start}
+.macro .e{font-size:15px} .macro .n{font-size:13.5px;font-weight:800;margin-top:2px}
+.macro .l{font-size:8.5px;color:var(--ink2);font-weight:800;letter-spacing:.01em;line-height:1.25;margin-top:2px;hyphens:auto}
 .macro.over{background:color-mix(in srgb,var(--warn) 16%,var(--bg3))} .macro.over .n{color:var(--warn)}
 
 .bal{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:7px}
@@ -311,6 +311,8 @@ input,select{font:inherit;color:inherit}
 .glass.full i{height:100%}
 .nudge{display:flex;align-items:center;gap:10px;background:color-mix(in srgb,var(--aqua) 13%,var(--bg2));
   border:1px solid color-mix(in srgb,var(--aqua) 32%,var(--line));border-radius:15px;padding:12px 14px;font-size:13px;font-weight:700;animation:tabIn .4s}
+.nudge.step{background:var(--acc-soft);border-color:color-mix(in srgb,var(--acc) 40%,var(--line));line-height:1.55}
+.nudge.step .btn{width:auto;flex:0 0 auto}
 
 .field{display:flex;flex-direction:column;gap:6px}
 .field label{font-size:11.5px;font-weight:800;color:var(--ink2)}
@@ -358,6 +360,70 @@ input,select{font:inherit;color:inherit}
 .chart.in .pt{opacity:1}
 .chart .goal{stroke:var(--ink2);stroke-width:1.5;stroke-dasharray:3 4;opacity:.65}
 .chart .glbl{fill:var(--ink2);font-size:9px;font-weight:800}
+
+/* --- analiz kartları --- */
+.plateau{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;
+  background:color-mix(in srgb,var(--warn) 12%,var(--bg3));border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);
+  border-radius:15px;padding:13px;font-size:12.5px;font-weight:600;line-height:1.55}
+.plateau .e{font-size:22px;line-height:1}
+
+.bankbar{position:relative;height:13px;border-radius:99px;background:var(--bg3);overflow:hidden;margin-top:2px}
+.bankbar i{display:block;height:100%;border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1)}
+.bankbar .tick{position:absolute;top:-3px;width:2px;height:19px;background:var(--ink2);opacity:.6;border-radius:2px}
+
+.sug{display:flex;flex-direction:column;gap:10px}
+.sugbox{border-radius:16px;padding:13px;border:1.5px solid var(--line);background:var(--bg3)}
+.sugbox.bad{border-color:color-mix(in srgb,var(--warn) 45%,transparent);background:color-mix(in srgb,var(--warn) 9%,var(--bg3))}
+.sugbox.good{border-color:color-mix(in srgb,var(--good) 45%,transparent);background:color-mix(in srgb,var(--good) 9%,var(--bg3))}
+.sugbox .h{font-size:13px;font-weight:800}
+.sugbox .v{font-size:25px;font-weight:800;line-height:1.1;margin-top:3px}
+.sugbox .s{font-size:11px;font-weight:700;color:var(--ink2)}
+.sugbox p{margin:8px 0 0;font-size:12.5px;line-height:1.6;font-weight:600}
+
+.msplit{display:flex;flex-direction:column;gap:8px}
+.mrow{display:grid;grid-template-columns:105px 1fr 42px;gap:9px;align-items:center}
+.mrow .ml{font-size:12px;font-weight:800}
+.mrow .mb{height:11px;border-radius:99px;background:var(--bg3);overflow:hidden;display:block}
+.mrow .mb i{display:block;height:100%;background:var(--acc);border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1)}
+.mrow .mp{font-size:12.5px;font-weight:800;text-align:right;color:var(--ink2)}
+
+.bwgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.bw{border-radius:15px;padding:12px;background:var(--bg3);border:1px solid var(--line)}
+.bw.good{border-color:color-mix(in srgb,var(--good) 45%,transparent);background:color-mix(in srgb,var(--good) 9%,var(--bg3))}
+.bw.bad{border-color:color-mix(in srgb,var(--warn) 40%,transparent);background:color-mix(in srgb,var(--warn) 8%,var(--bg3))}
+.bw .h{font-size:11px;font-weight:800;color:var(--ink2);letter-spacing:.03em}
+.bw .dt{font-size:14px;font-weight:800;margin-top:4px}
+.bw .st{display:flex;flex-wrap:wrap;gap:4px 9px;margin-top:7px;font-size:11px;font-weight:700;color:var(--ink2)}
+
+.heatw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.heath,.heat{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;min-width:250px}
+.heath{margin-bottom:5px}
+.heath span{font-size:9.5px;font-weight:800;color:var(--ink2);text-align:center}
+.heat i{display:block;aspect-ratio:1;border-radius:6px;background:var(--bg3);border:1px solid var(--line)}
+.heat i[data-l="1"]{background:var(--acc);opacity:.34;border-color:transparent}
+.heat i[data-l="2"]{background:var(--acc);opacity:.56;border-color:transparent}
+.heat i[data-l="3"]{background:var(--acc);opacity:.74;border-color:transparent}
+.heat i[data-l="4"]{background:var(--acc);opacity:1;border-color:transparent}
+.heat i[data-l="f"]{background:transparent;border-style:dashed;opacity:.5}
+.heatleg{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:800;color:var(--ink2)}
+.heatleg i{width:13px;height:13px;border-radius:4px;background:var(--bg3);border:1px solid var(--line);display:block}
+.heatleg i[data-l="1"]{background:var(--acc);opacity:.34;border-color:transparent}
+.heatleg i[data-l="2"]{background:var(--acc);opacity:.56;border-color:transparent}
+.heatleg i[data-l="3"]{background:var(--acc);opacity:.74;border-color:transparent}
+.heatleg i[data-l="4"]{background:var(--acc);opacity:1;border-color:transparent}
+
+.mcard{display:flex;flex-direction:column;gap:9px}
+.mcr{background:var(--bg3);border:1px solid var(--line);border-radius:15px;padding:11px 12px}
+.mcr.win{border-color:var(--acc);background:var(--acc-soft)}
+.mcr .who{display:flex;align-items:center;gap:8px}
+.mcr .who .e{font-size:19px}
+.mcr .who .n{font-size:13.5px;font-weight:800}
+.mcr .crown{font-size:14px;margin-left:auto}
+.mstat{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px;font-size:11px;font-weight:700;color:var(--ink2)}
+.mstat b{font-size:13px;color:var(--ink)}
+.mbar{height:7px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:8px}
+.mbar i{display:block;height:100%;background:var(--acc);border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1)}
+
 
 .trends{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .trend{background:var(--bg3);border-radius:14px;padding:12px}
@@ -459,7 +525,105 @@ details[open]>summary::after{transform:rotate(180deg)}
 .gor{text-align:center;font-size:11px;font-weight:800;color:var(--ink2);letter-spacing:.1em;text-transform:uppercase;margin:4px 0}
 .copyrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin:-2px 0 2px 40px}
 .copyrow code{font-size:10.5px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;word-break:break-all;line-height:1.4}
-.repgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+/* ===== dün raporu — tam ekran ===== */
+#report{position:fixed;inset:0;z-index:97;background:var(--bg);display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .34s cubic-bezier(.22,1,.36,1),transform .34s cubic-bezier(.22,1,.36,1)}
+#report.on{opacity:1;pointer-events:auto;transform:none}
+.rp-top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:calc(14px + env(safe-area-inset-top,0px)) 18px 12px;
+  background:linear-gradient(180deg,var(--acc-soft),transparent);position:relative;z-index:2}
+.rp-date{font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--ink2)}
+.rp-x{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--bg2);
+  color:var(--ink2);font-size:14px;font-weight:800;display:grid;place-items:center;cursor:pointer;flex:0 0 auto}
+.rp-x:active{transform:scale(.92)}
+.rp-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 18px 18px;
+  display:flex;flex-direction:column;gap:16px}
+.rp-btns{padding:12px 18px calc(14px + env(safe-area-inset-bottom,0px));
+  background:var(--bg);border-top:1px solid var(--line);position:relative}
+.rp-btns::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:26px;pointer-events:none;
+  background:linear-gradient(180deg,transparent,var(--bg))}
+
+.rp-hero{text-align:center;padding:4px 0 2px;
+  animation:rpIn .5s cubic-bezier(.22,1,.36,1) both}
+.rp-ring{position:relative;width:128px;height:128px;margin:0 auto 14px}
+.rp-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.rp-ring .tr{fill:none;stroke:var(--track);stroke-width:11}
+.rp-ring .fg{fill:none;stroke-width:11;stroke-linecap:round;
+  transition:stroke-dashoffset 1.1s cubic-bezier(.22,1,.36,1)}
+.rp-emoji{position:absolute;inset:0;display:grid;place-items:center;font-size:50px;line-height:1;
+  animation:rpPop .6s cubic-bezier(.34,1.56,.64,1) .18s both}
+@keyframes rpPop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes rpIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.rp-title{font-family:"Bricolage Grotesque",sans-serif;font-size:29px;font-weight:800;
+  letter-spacing:-.035em;line-height:1.1;margin:0}
+.rp-sub{font-size:13.5px;font-weight:600;color:var(--ink2);margin:7px 0 0;line-height:1.5}
+.rp-chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:13px}
+.rp-chip{font-size:11.5px;font-weight:700;color:var(--ink2);background:var(--bg3);
+  border:1px solid var(--line);border-radius:99px;padding:5px 11px}
+.rp-chip b{color:var(--ink);font-size:13px;font-weight:800}
+
+.rp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rp-stat{background:var(--bg2);border:1.5px solid var(--line);border-radius:16px;
+  padding:12px 5px 11px;text-align:center;box-shadow:var(--shadow);
+  animation:rpIn .45s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(140ms + var(--d))}
+.rp-stat.ok{border-color:color-mix(in srgb,var(--good) 50%,transparent);
+  background:color-mix(in srgb,var(--good) 8%,var(--bg2))}
+.rp-stat.miss{border-style:dashed;border-color:var(--acc);background:var(--acc-soft);cursor:pointer;
+  animation:rpIn .45s cubic-bezier(.22,1,.36,1) both,rpPulse 2.4s ease-in-out 1.2s infinite}
+.rp-stat.miss:active{transform:scale(.95)}
+.rp-stat.miss .s{color:var(--acc);opacity:1;font-weight:800}
+@keyframes rpPulse{0%,100%{box-shadow:var(--shadow)}50%{box-shadow:0 0 0 4px var(--acc-soft)}}
+.rp-stat .e{display:block;font-size:17px;line-height:1}
+.rp-stat .v{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:21px;font-weight:800;
+  letter-spacing:-.03em;line-height:1.1;margin-top:5px}
+.rp-stat .l{display:block;font-size:9.5px;font-weight:800;color:var(--ink2);margin-top:4px;
+  letter-spacing:.01em;line-height:1.25}
+.rp-stat .s{display:block;font-size:9.5px;font-weight:700;color:var(--ink2);opacity:.75;margin-top:1px}
+
+.rp-sec{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 16px;box-shadow:var(--shadow);animation:rpIn .45s cubic-bezier(.22,1,.36,1) .3s both}
+.rp-sec.good{border-left:4px solid var(--good)}
+.rp-sec.tip{border-left:4px solid var(--acc)}
+.rp-sec h3{font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink2);margin:0 0 4px}
+.rp-item{display:grid;grid-template-columns:24px 1fr;gap:11px;align-items:start;
+  padding:11px 0;border-top:1px solid var(--line);
+  animation:rpIn .45s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(360ms + var(--d))}
+.rp-item .e{font-size:19px;line-height:1.35;text-align:center}
+.rp-item .tx{font-size:13px;font-weight:600;line-height:1.62}
+.rp-item .tx b{font-weight:800}
+
+.rp-goal{background:var(--acc-soft);border:1.5px dashed color-mix(in srgb,var(--acc) 55%,var(--line));
+  border-radius:var(--r);padding:15px 16px;text-align:center;font-size:14px;font-weight:700;
+  line-height:1.6;animation:rpIn .45s cubic-bezier(.22,1,.36,1) .42s both}
+.rp-goal b{font-weight:800}
+.rp-foot{font-size:12.5px;font-weight:600;color:var(--ink2);line-height:1.6;text-align:center;
+  margin:0;padding:0 4px;animation:rpIn .45s cubic-bezier(.22,1,.36,1) .5s both}
+.rp-empty{text-align:center;padding:40px 10px}
+.rp-empty .e{font-size:54px;display:block}
+.rp-empty .t{font-family:"Bricolage Grotesque",sans-serif;font-size:21px;font-weight:800;margin-top:12px}
+.rp-empty p{font-size:13px;font-weight:600;color:var(--ink2);line-height:1.6;margin-top:8px}
+@media (prefers-reduced-motion:reduce){
+  #report *{animation:none!important;transition:none!important}}
+
+.repbtn{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;width:100%;
+  text-align:left;background:var(--bg2);border:1px solid var(--line);border-left:4px solid var(--acc);
+  border-radius:var(--r);padding:13px 15px;box-shadow:var(--shadow);cursor:pointer;color:var(--ink)}
+.repbtn:active{transform:scale(.985)}
+.repbtn .e{font-size:23px}
+.repbtn .tx b{display:block;font-size:13.5px;font-weight:800}
+.repbtn .tx small{display:block;font-size:11.5px;font-weight:600;color:var(--ink2);margin-top:2px}
+.repbtn .ar{font-size:16px;color:var(--ink2)}
+
+.repgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rephead{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;
+  background:var(--acc-soft);border-radius:16px;padding:13px 14px}
+.rephead .e{font-size:32px;line-height:1}
+.rephead .t{font-family:"Bricolage Grotesque",sans-serif;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.rephead .s{font-size:11.5px;font-weight:700;color:var(--ink2);margin-top:2px}
+.repsec{border-top:1px solid var(--line);padding-top:10px}
+.reptoday{background:var(--bg3);border:1.5px dashed color-mix(in srgb,var(--acc) 50%,var(--line));
+  border-radius:14px;padding:12px 13px;font-size:13px;font-weight:700;line-height:1.55;text-align:center}
 .rep{background:var(--bg3);border-radius:13px;padding:11px 5px;text-align:center;border:1.5px solid transparent}
 .rep.ok{border-color:color-mix(in srgb,var(--good) 55%,transparent);background:color-mix(in srgb,var(--good) 11%,var(--bg3))}
 .rep .e{font-size:15px;display:block} .rep .v{display:block;font-size:15px;font-weight:800;margin-top:2px;line-height:1.1}
@@ -529,6 +693,14 @@ details[open]>summary::after{transform:rotate(180deg)}
     <button class="btn" id="trSkip">Geç ⏭</button>
   </div>
 </div>
+<div id="report" role="dialog" aria-label="Dünün raporu">
+  <div class="rp-top">
+    <span class="rp-date" id="rpDate">Dün</span>
+    <button class="rp-x" id="rpQuit" aria-label="Kapat">✕</button>
+  </div>
+  <div class="rp-body" id="rpBody"></div>
+  <div class="rp-btns"><button class="btn" id="rpOk">Bugüne başla →</button></div>
+</div>
 <input type="file" id="bkFile" accept="application/json,.json" hidden>
 <canvas id="wave"></canvas>
 <div id="waveTxt"><div class="big" id="waveBig">1/8</div><div class="sub" id="waveSub"></div></div>
@@ -550,6 +722,7 @@ const addDays=(s,n)=>{const d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);r
 const DAYN=['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'];
 const uid=()=>Math.random().toString(36).slice(2,9);
 const nf=n=>Number(n).toLocaleString('tr-TR');
+const dec=(n,d)=>String(Number(n).toFixed(d==null?1:d)).replace('.',',');
 const REDUCED=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 const CATS=[
@@ -562,54 +735,57 @@ const CATS=[
  {id:'protein',e:'🍗',n:'Protein',items:[
    {n:'Tavuk göğsü (150g)',e:'🍗',c:240,k:0,s:0,t:120},{n:'Kırmızı et (150g)',e:'🥩',c:330,k:0,s:0,t:110},
    {n:'Balık (150g)',e:'🐟',c:210,k:0,s:0,t:130},{n:'Yumurta (1 adet)',e:'🥚',c:78,k:1,s:0,t:65},
-   {n:'Mercimek çorbası',e:'🍲',c:160,k:22,s:2,t:640},{n:'Nohut yemeği',e:'🫘',c:230,k:33,s:3,t:520},
-   {n:'Kuru fasulye',e:'🫘',c:250,k:36,s:3,t:560},{n:'Köfte (4 adet)',e:'🍖',c:290,k:6,s:1,t:480},
+   {n:'Mercimek çorbası',e:'🍲',c:160,k:22,s:2,d:1,t:640},{n:'Nohut yemeği',e:'🫘',c:230,k:33,s:3,d:1,t:520},
+   {n:'Kuru fasulye',e:'🫘',c:250,k:36,s:3,d:1,t:560},{n:'Köfte (4 adet)',e:'🍖',c:290,k:6,s:1,d:1,t:480},
    {n:'Ton balığı (1 kutu)',e:'🐟',c:140,k:0,s:0,t:400,p:1},{n:'Protein tozu (1 ölçek)',e:'🥤',c:120,k:3,s:1,t:80,p:1}]},
  {id:'sebze',e:'🥗',n:'Sebze & Meyve',items:[
-   {n:'Mevsim salata',e:'🥗',c:45,k:8,s:4,t:20},{n:'Sebze yemeği (1 kase)',e:'🥘',c:130,k:18,s:5,t:390},
-   {n:'Elma',e:'🍎',c:80,k:21,s:16,t:2},{n:'Muz',e:'🍌',c:105,k:27,s:14,t:1},
-   {n:'Portakal',e:'🍊',c:70,k:17,s:12,t:0},{n:'Karpuz (1 dilim)',e:'🍉',c:85,k:21,s:17,t:3},
-   {n:'Üzüm (1 salkım)',e:'🍇',c:105,k:27,s:23,t:2},{n:'Domates / salatalık',e:'🥒',c:25,k:5,s:3,t:8},
-   {n:'Avokado (yarım)',e:'🥑',c:160,k:9,s:1,t:7},{n:'Çilek (1 kase)',e:'🍓',c:50,k:12,s:7,t:2}]},
+   {n:'Mevsim salata',e:'🥗',c:45,k:8,s:4,d:1,t:20},{n:'Sebze yemeği (1 kase)',e:'🥘',c:130,k:18,s:5,d:1,t:390},
+   {n:'Elma',e:'🍎',c:80,k:21,s:16,d:1,t:2},{n:'Muz',e:'🍌',c:105,k:27,s:14,d:1,t:1},
+   {n:'Portakal',e:'🍊',c:70,k:17,s:12,d:1,t:0},{n:'Karpuz (1 dilim)',e:'🍉',c:85,k:21,s:17,d:1,t:3},
+   {n:'Üzüm (1 salkım)',e:'🍇',c:105,k:27,s:23,d:1,t:2},{n:'Domates / salatalık',e:'🥒',c:25,k:5,s:3,d:1,t:8},
+   {n:'Avokado (yarım)',e:'🥑',c:160,k:9,s:1,d:1,t:7},{n:'Çilek (1 kase)',e:'🍓',c:50,k:12,s:7,d:1,t:2}]},
  {id:'sut',e:'🥛',n:'Süt & Peynir',items:[
-   {n:'Süt (1 bardak)',e:'🥛',c:125,k:12,s:12,t:110},{n:'Yoğurt (1 kase)',e:'🍶',c:110,k:9,s:9,t:90},
-   {n:'Ayran (1 bardak)',e:'🥤',c:60,k:5,s:5,t:410},{n:'Beyaz peynir (30g)',e:'🧀',c:80,k:1,s:0,t:520},
-   {n:'Kaşar peyniri (30g)',e:'🧀',c:110,k:1,s:0,t:450},{n:'Labne / krem peynir',e:'🧈',c:90,k:2,s:2,t:230},
-   {n:'Kefir (1 bardak)',e:'🥛',c:100,k:9,s:8,t:100},{n:'Süzme peynir (100g)',e:'🧀',c:98,k:3,s:3,t:360}]},
+   {n:'Süt (1 bardak)',e:'🥛',c:125,k:12,s:12,d:1,t:110},{n:'Yoğurt (1 kase)',e:'🍶',c:110,k:9,s:9,d:1,t:90},
+   {n:'Ayran (1 bardak)',e:'🥤',c:60,k:5,s:5,d:1,t:410},{n:'Beyaz peynir (30g)',e:'🧀',c:80,k:1,s:0,t:520},
+   {n:'Kaşar peyniri (30g)',e:'🧀',c:110,k:1,s:0,t:450},{n:'Labne / krem peynir',e:'🧈',c:90,k:2,s:2,d:1,t:230},
+   {n:'Kefir (1 bardak)',e:'🥛',c:100,k:9,s:8,d:1,t:100},{n:'Süzme peynir (100g)',e:'🧀',c:98,k:3,s:3,d:1,t:360}]},
  {id:'paket',e:'🍫',n:'Paketli & Cips',items:[
    {n:'Çikolata (30g)',e:'🍫',c:160,k:18,s:16,t:25,p:1},{n:'Cips (küçük paket)',e:'🥔',c:290,k:29,s:1,t:480,p:1},
    {n:'Bisküvi (5 adet)',e:'🍪',c:180,k:25,s:11,t:150,p:1},{n:'Kraker (1 paket)',e:'🧂',c:150,k:22,s:1,t:390,p:1},
    {n:'Gofret',e:'🍫',c:200,k:24,s:18,t:60,p:1},{n:'Mısır patlağı (tuzlu)',e:'🍿',c:150,k:19,s:1,t:280,p:1},
-   {n:'Enerji barı',e:'🍬',c:210,k:28,s:18,t:90,p:1},{n:'Kuru meyve paketi',e:'🍑',c:130,k:32,s:26,t:10,p:1}]},
+   {n:'Enerji barı',e:'🍬',c:210,k:28,s:18,t:90,p:1},{n:'Kuru meyve paketi',e:'🍑',c:130,k:32,s:26,d:1,t:10,p:1}]},
  {id:'tatli',e:'🍰',n:'Şeker & Tatlı',items:[
    {n:'Baklava (2 dilim)',e:'🍮',c:390,k:48,s:38,t:120},{n:'Sütlaç',e:'🍚',c:230,k:40,s:28,t:90},
    {n:'Kek (1 dilim)',e:'🍰',c:280,k:38,s:26,t:180},{n:'Dondurma (2 top)',e:'🍨',c:200,k:26,s:23,t:70},
    {n:'Künefe',e:'🧆',c:430,k:52,s:38,t:210},{n:'Çikolatalı kurabiye',e:'🍪',c:160,k:21,s:13,t:110},
    {n:'Şeker (1 küp)',e:'🍬',c:20,k:5,s:5,t:0},{n:'Bal / reçel (1 tatlı kaşığı)',e:'🍯',c:60,k:16,s:15,t:1}]},
  {id:'tuzlu',e:'🧂',n:'Tuzlu & Sos',items:[
-   {n:'Zeytin (8 adet)',e:'🫒',c:60,k:2,s:0,t:640},{n:'Turşu (1 kase)',e:'🥒',c:20,k:4,s:2,t:900},
+   {n:'Zeytin (8 adet)',e:'🫒',c:60,k:2,s:0,t:640},{n:'Turşu (1 kase)',e:'🥒',c:20,k:4,s:2,d:1,t:900},
    {n:'Mayonez (1 yemek kaşığı)',e:'🥄',c:95,k:1,s:0,t:85},{n:'Ketçap (1 yemek kaşığı)',e:'🍅',c:20,k:5,s:4,t:160},
-   {n:'Salça',e:'🥫',c:30,k:6,s:4,t:340},{n:'Sucuk (3 dilim)',e:'🌭',c:180,k:1,s:0,t:720},
+   {n:'Salça',e:'🥫',c:30,k:6,s:4,d:1,t:340},{n:'Sucuk (3 dilim)',e:'🌭',c:180,k:1,s:0,t:720},
    {n:'Salam / jambon (3 dilim)',e:'🥓',c:110,k:1,s:1,t:680,p:1},{n:'Soya sosu (1 kaşık)',e:'🍶',c:10,k:1,s:0,t:900}]},
  {id:'yag',e:'🫒',n:'Yağ & Kuruyemiş',items:[
    {n:'Zeytinyağı (1 yemek kaşığı)',e:'🫗',c:120,k:0,s:0,t:0},{n:'Tereyağı (1 tatlı kaşığı)',e:'🧈',c:75,k:0,s:0,t:60},
-   {n:'Fındık (bir avuç)',e:'🌰',c:180,k:5,s:1,t:1},{n:'Badem (bir avuç)',e:'🥜',c:165,k:6,s:1,t:1},
-   {n:'Ceviz (3 adet)',e:'🌰',c:130,k:3,s:1,t:1},{n:'Fıstık ezmesi (1 kaşık)',e:'🥜',c:95,k:3,s:2,t:75},
-   {n:'Ay çekirdeği (bir avuç)',e:'🌻',c:165,k:6,s:1,t:230},{n:'Kızartma yağı (tahmini)',e:'🍳',c:130,k:0,s:0,t:0}]},
+   {n:'Fındık (bir avuç)',e:'🌰',c:180,k:5,s:1,d:1,t:1},{n:'Badem (bir avuç)',e:'🥜',c:165,k:6,s:1,d:1,t:1},
+   {n:'Ceviz (3 adet)',e:'🌰',c:130,k:3,s:1,d:1,t:1},{n:'Fıstık ezmesi (1 kaşık)',e:'🥜',c:95,k:3,s:2,t:75},
+   {n:'Ay çekirdeği (bir avuç)',e:'🌻',c:165,k:6,s:1,d:1,t:230},{n:'Kızartma yağı (tahmini)',e:'🍳',c:130,k:0,s:0,t:0}]},
  {id:'icecek',e:'☕',n:'İçecek',items:[
    {n:'Çay (şekersiz)',e:'🍵',c:2,k:0,s:0,t:2},{n:'Türk kahvesi (şekersiz)',e:'☕',c:5,k:1,s:0,t:3},
-   {n:'Latte / sütlü kahve',e:'🥤',c:150,k:14,s:13,t:105},{n:'Kola (330 ml)',e:'🥤',c:139,k:35,s:35,t:15,p:1},
+   {n:'Latte / sütlü kahve',e:'🥤',c:150,k:14,s:13,d:1,t:105},{n:'Kola (330 ml)',e:'🥤',c:139,k:35,s:35,t:15,p:1},
    {n:'Meyve suyu (1 bardak)',e:'🧃',c:110,k:26,s:24,t:10,p:1},{n:'Enerji içeceği',e:'⚡',c:115,k:28,s:27,t:200,p:1},
    {n:'Limonata',e:'🍋',c:120,k:30,s:28,t:8},{n:'Bira (1 şişe)',e:'🍺',c:150,k:13,s:0,t:14},
-   {n:'Şalgam (1 bardak)',e:'🥤',c:25,k:5,s:2,t:780}]},
+   {n:'Şalgam (1 bardak)',e:'🥤',c:25,k:5,s:2,d:1,t:780}]},
  {id:'disari',e:'🍔',n:'Dışarıda',items:[
-   {n:'Döner (porsiyon)',e:'🥙',c:520,k:42,s:3,t:1100},{n:'Lahmacun (1 adet)',e:'🫓',c:280,k:38,s:3,t:640},
-   {n:'Pizza (2 dilim)',e:'🍕',c:540,k:62,s:6,t:1200},{n:'Hamburger menü',e:'🍔',c:850,k:92,s:24,t:1500},
-   {n:'Tost (kaşarlı)',e:'🥪',c:400,k:38,s:3,t:980},{n:'Patates kızartması',e:'🍟',c:340,k:43,s:1,t:420},
-   {n:'Pide (kıymalı)',e:'🫓',c:610,k:72,s:4,t:1250},{n:'Çiğ köfte (dürüm)',e:'🌯',c:330,k:58,s:4,t:820},
-   {n:'Menemen',e:'🍳',c:290,k:12,s:6,t:560},{n:'Mantı (1 porsiyon)',e:'🥟',c:480,k:58,s:4,t:720}]}
+   {n:'Döner (porsiyon)',e:'🥙',c:520,k:42,s:3,d:1,t:1100},{n:'Lahmacun (1 adet)',e:'🫓',c:280,k:38,s:3,d:1,t:640},
+   {n:'Pizza (2 dilim)',e:'🍕',c:540,k:62,s:6,d:1,t:1200},{n:'Hamburger menü',e:'🍔',c:850,k:92,s:24,t:1500},
+   {n:'Tost (kaşarlı)',e:'🥪',c:400,k:38,s:3,d:1,t:980},{n:'Patates kızartması',e:'🍟',c:340,k:43,s:1,t:420},
+   {n:'Pide (kıymalı)',e:'🫓',c:610,k:72,s:4,d:1,t:1250},{n:'Çiğ köfte (dürüm)',e:'🌯',c:330,k:58,s:4,d:1,t:820},
+   {n:'Menemen',e:'🍳',c:290,k:12,s:6,d:1,t:560},{n:'Mantı (1 porsiyon)',e:'🥟',c:480,k:58,s:4,d:1,t:720}]}
 ];
 const PORT=[{k:'az',l:'Az',m:.5},{k:'nr',l:'Normal',m:1},{k:'bol',l:'Bol',m:1.6}];
+/* "d" alanı eklenmeden önce kaydedilmiş öğeler için ada göre doğal-şeker tespiti */
+const NATSUG=(()=>{const st=new Set();CATS.forEach(c=>c.items.forEach(f=>{if(f.d)st.add(f.n)}));return st})();
+const isNat=i=>i.d!==undefined?!!i.d:NATSUG.has(i.n);
 function catItems(id){
   if(id==='ozel')return (S.me&&S.me.custom)||[];
   const c=CATS.find(x=>x.id===id);return c?c.items:[];
@@ -728,7 +904,7 @@ const BADGES=[
  {id:'seri7',e:'🔥',n:'Alev Aldı',d:'7 günlük seri yap'},
  {id:'seri30',e:'👑',n:'Bir Ay',d:'30 günlük seri yap'},
  {id:'su5',e:'💧',n:'Su Şampiyonu',d:'5 gün su hedefini tamamla'},
- {id:'seker',e:'🍬',n:'Şekersiz Gün',d:'Bir günü 15g altı şekerle kapat'},
+ {id:'seker',e:'🍬',n:'Şekersiz Gün',d:'Bir günü 10g altı işlenmiş şekerle kapat (meyve serbest)'},
  {id:'paket3',e:'🚫',n:'Paketsiz Üçlü',d:'3 gün hiç paketli gıda yeme'},
  {id:'perfect',e:'🎯',n:'Mükemmel Gün',d:'Bir günde tüm görevleri tamamla'},
  {id:'kilo1',e:'⚖️',n:'İlk Kilo',d:'Başlangıçtan 1 kg uzaklaş'},
@@ -888,9 +1064,15 @@ function targetComment(p){
   return{t:'ok',x:`Hedefinde VKİ'n ${tb.toFixed(1)} olur. Güzel bir başlangıç; sonraki durağı <b>${hi} kg</b> koyabilirsin 💪`};
 }
 function totals(d){
-  const t={c:0,k:0,s:0,t:0,p:0,n:0};
-  (d&&d.items||[]).forEach(i=>{t.c+=i.c;t.k+=i.k||0;t.s+=i.s||0;t.t+=i.t||0;t.p+=i.p?1:0;t.n++});
+  const t={c:0,k:0,s:0,sd:0,sa:0,t:0,p:0,n:0};
+  (d&&d.items||[]).forEach(i=>{t.c+=i.c;t.k+=i.k||0;t.s+=i.s||0;t.t+=i.t||0;t.p+=i.p?1:0;
+    if(isNat(i))t.sd+=i.s||0;else t.sa+=i.s||0;t.n++});
   Object.keys(t).forEach(k=>t[k]=Math.round(t[k]));return t}
+/* işlenmiş (eklenmiş) şeker günlük üst sınırı — DSÖ serbest şeker tavsiyesi */
+const SUGAR_MAX=p=>(p&&p.gender==='k')?25:35;
+/* meyve & süt şekeri: yasak değil ama sınırsız da değil.
+   ~3 porsiyon meyve + 2 porsiyon süt ürünü bu civara denk gelir. */
+const NAT_MAX=60;
 function mealTotals(d){const m={};MEALS.forEach(x=>m[x.k]=0);
   (d&&d.items||[]).forEach(i=>{m[i.meal||'ati']=(m[i.meal||'ati']||0)+i.c});return m}
 function missions(p,d){
@@ -1009,7 +1191,7 @@ function checkBadges(){
   add('b10k',hist.some(h=>(h.steps||0)>=10000));
   add('seri7',st>=7);add('seri30',st>=30);
   add('su5',hist.filter(h=>(h.water||0)>=goals(p).water).length>=5);
-  add('seker',hist.some(h=>{const t=totals(h);return t.n>=3&&t.s<15}));
+  add('seker',hist.some(h=>{const t=totals(h);return t.n>=3&&t.sa<10}));
   add('paket3',hist.filter(h=>{const t=totals(h);return t.n>=3&&t.p===0}).length>=3);
   add('perfect',hist.some(h=>missions(p,h).every(m=>m.ok)));
   add('kilo1',Math.abs((p.startWeight||p.weight)-p.weight)>=1);
@@ -1115,7 +1297,7 @@ function closeSheet(){$('#scrim').classList.remove('on');$('#sheet').classList.r
 $('#scrim').addEventListener('click',closeSheet);
 $('#sheetClose').addEventListener('click',closeSheet);
 $('#sheetBottom').addEventListener('click',closeSheet);
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if($('#report').classList.contains('on'))closeReport(true);else closeSheet()});
 function confirmSheet(title,desc,okText,onOk,danger){
   openSheet(`<h3>${title}</h3><p class="hint" style="margin:8px 0 18px;font-size:13px">${desc}</p>
     <div style="display:flex;gap:9px"><button class="btn ghost" id="cfNo">Vazgeç</button>
@@ -1184,7 +1366,9 @@ function renderHome(){
   const hh=new Date().getHours();
   const greet=hh<6?'İyi geceler':hh<11?'Günaydın':hh<18?'İyi günler':'İyi akşamlar';
   const lv=levelOf(p.totalXp||0);
-  const macs=[{e:'🍞',n:t.k+'g',l:'KARB',o:false},{e:'🍬',n:t.s+'g',l:'ŞEKER',o:t.s>50},
+  const smax=SUGAR_MAX(p);
+  const macs=[{e:'🍞',n:t.k+'g',l:'KARB',o:false},{e:'🍬',n:t.sa+'g',l:'İŞLENMİŞ ŞEKER',o:t.sa>smax,i:1},
+    {e:'🍓',n:t.sd+'g',l:'MEYVE ŞEKERİ',o:false,i:1},
     {e:'🧂',n:(t.t/1000).toFixed(1)+'g',l:'TUZ',o:t.t>5000},{e:'🍫',n:t.p,l:'PAKETLİ',o:t.p>1}];
   const others=S.profiles.filter(x=>x.id!==p.id);
   const isSun=new Date().getDay()===0;
@@ -1199,7 +1383,10 @@ function renderHome(){
 
   const pace=paceLine(),tip=dailyTip();
   return `
-  ${renderYesterday()}
+  ${repReady()?`<button class="repbtn" id="openRep">
+    <span class="e">📊</span>
+    <span class="tx"><b>Dünün raporu hazır</b><small>${S.me.seenReport===addDays(TODAY(),-1)?'Dokunup tekrar bak':'Henüz bakmadın — dokun'}</small></span>
+    <span class="ar">→</span></button>`:''}
 
   <div class="card stack hl">
     <div><p class="eyebrow">${esc(greet)}, ${esc(p.name)}</p>
@@ -1214,7 +1401,7 @@ function renderHome(){
         <div class="mini"><span class="ic">🎯</span><div><div class="lbl">Görevler</div><div class="bar"><i class="b3" style="width:${doneN/ms.length*100}%"></i></div></div><span class="v num">${doneN}/${ms.length}</span></div>
       </div></div>
     ${bd?`<p class="hint">* Egzersizle kazandığın <b>+${nf(bd)} kcal</b> hedefine eklendi 💪</p>`:''}
-    <div class="macros">${macs.map(m=>`<div class="macro${m.o?' over':''}"><div class="e">${m.e}</div><div class="n num">${m.n}</div><div class="l">${m.l}</div></div>`).join('')}</div>
+    <div class="macros">${macs.map(m=>`<${m.i?'button':'div'} class="macro${m.o?' over':''}"${m.i?' data-sugi="1"':''}><div class="e">${m.e}</div><div class="n num">${m.n}</div><div class="l">${m.l}</div></${m.i?'button':'div'}>`).join('')}</div>
     <div class="bal">
       <div class="balrow"><span>Aldığın <b class="num">${nf(t.c)}</b></span><span style="opacity:.55">⚔️</span><span>Yaktığın <b class="num">${nf(outK)}</b>${bd?' <small>('+nf(bd)+' egzersiz)</small>':''}</span></div>
       <div class="deficit-bar"><i style="width:${clamp(netPct,0,1)*100}%;background:${net>=needK?'var(--good)':net>0?'var(--acc2)':'var(--warn)'}"></i>
@@ -1226,6 +1413,8 @@ function renderHome(){
   </div>
 
   <div class="tipcard"><span class="e">${tip.e}</span><span class="t">${tip.t}</span></div>
+
+  ${bankCard()}
 
   ${favs.length?`<div class="card stack">
     <p class="eyebrow">⭐ Favorilerin — tek dokunuş</p>
@@ -1241,6 +1430,10 @@ function renderHome(){
   </div>`:''}
 
   ${showNudge?`<div class="nudge" id="nudge"><span style="font-size:22px">💧</span><span style="flex:1">${pick(MSG.water,'n')}</span><button class="btn sm" id="nudgeAdd">+1 bardak</button></div>`:''}
+
+  ${(!(d.steps||0)&&hh>=18)?`<div class="nudge step" id="stepNudge"><span style="font-size:22px">👟</span>
+    <span style="flex:1">Bugün hiç adım girilmemiş. <b>Google Health</b>’i aç, ana ekrandaki sayıyı buraya yaz — 10 saniye, bir görev daha tamam.</span>
+    <button class="btn sm" id="stepManual">Gir</button></div>`:''}
 
   ${isSun&&!d.weight?`<div class="card stack aq">
     <p class="eyebrow">⚖️ Bugün tartı günü</p>
@@ -1360,7 +1553,7 @@ function renderFood(){
       const list=items.filter(i=>(i.meal||'ati')===ml.k);if(!list.length)return '';
       return `<div><div class="mealhead"><span>${ml.e} ${ml.n.toUpperCase()}</span><span class="num">${mt[ml.k]} kcal</span></div>
       ${list.map(i=>`<div class="logrow" data-edit="${i.id}"><span style="font-size:17px">${i.e}</span>
-        <div><div class="n">${esc(i.n)}</div><div class="s">${esc(i.pl)} · ${i.k||0}g karb · ${i.s||0}g şeker</div></div>
+        <div><div class="n">${esc(i.n)}</div><div class="s">${esc(i.pl)} · ${i.k||0}g karb${i.s?' · '+i.s+'g '+(isNat(i)?'meyve şekeri 🍓':'işlenmiş şeker 🍬'):''}</div></div>
         <span class="c num">${i.c}</span><button class="del" data-del="${i.id}" aria-label="Sil">✕</button></div>`).join('')}</div>`}).join('')
       :'<p class="empty">Henüz bir şey eklemedin.<br>Öğünü ve kategoriyi seç, yemeğe dokun — o kadar 👇</p>'}
   </div>
@@ -1471,17 +1664,17 @@ function renderProg(){
     const rec=ds===TODAY()?S.day:hist.find(h=>h.date===ds);
     const tt=totals(rec),dow=new Date(ds+'T12:00:00').getDay();
     series.push({s:N<=7?DAYN[dow]:ds.slice(8),l:ds,kcal:tt.c,steps:(rec&&rec.steps)||0,
-      water:(rec&&rec.water)||0,sugar:tt.s,sleep:(rec&&rec.sleep)||0,xp:(rec&&rec.xp)||0})}
+      water:(rec&&rec.water)||0,sugar:tt.sa,sugarD:tt.sd,sleep:(rec&&rec.sleep)||0,xp:(rec&&rec.xp)||0})}
   const mm=S.chartM;
-  const key={kcal:'kcal','adım':'steps',su:'water',seker:'sugar',uyku:'sleep'}[mm];
-  const unit={kcal:'kcal','adım':'adım',su:'bardak',seker:'g şeker',uyku:'saat'}[mm];
-  const goalv={kcal:g.goal,'adım':gl.step,su:gl.water,seker:50,uyku:7.5}[mm];
+  const key={kcal:'kcal','adım':'steps',su:'water',seker:'sugar',meyve:'sugarD',uyku:'sleep'}[mm];
+  const unit={kcal:'kcal','adım':'adım',su:'bardak',seker:'g işlenmiş şeker',meyve:'g meyve şekeri',uyku:'saat'}[mm];
+  const goalv={kcal:g.goal,'adım':gl.step,su:gl.water,seker:SUGAR_MAX(p),meyve:0,uyku:7.5}[mm];
   const rows=series.map(r=>({s:r.s,l:r.l,v:r[key]}));
   const wk=(from,to)=>{const a={steps:0,kcal:0,water:0,sugar:0,pak:0,xp:0,n:0};
     for(let i=from;i<to;i++){const ds=addDays(TODAY(),-i);
       const rec=ds===TODAY()?S.day:hist.find(h=>h.date===ds);if(!rec)continue;
       const tt=totals(rec);a.steps+=rec.steps||0;a.kcal+=tt.c;a.water+=rec.water||0;
-      a.sugar+=tt.s;a.pak+=tt.p;a.xp+=rec.xp||0;if(tt.n)a.n++}
+      a.sugar+=tt.sa;a.pak+=tt.p;a.xp+=rec.xp||0;if(tt.n)a.n++}
     return a};
   const cur=wk(0,7),prev=wk(7,14);
   const pctD=(a,b)=>b>0?Math.round((a-b)/b*100):(a>0?100:0);
@@ -1518,12 +1711,13 @@ function renderProg(){
     ${eta?`<p class="motiv">${eta}</p>`:''}
     <button class="btn ghost sm" id="logWeight" style="align-self:flex-start">⚖️ Kilo kaydı ekle</button>
   </div>
+  ${trendCard()}
   <div class="card stack">
     <p class="eyebrow">📊 Bu hafta — geçen haftaya göre</p>
     <div class="trends">
       ${trend('TOPLAM ADIM',nf(cur.steps),pctD(cur.steps,prev.steps),true,'')}
       ${trend('GÜNLÜK ORT. KALORİ',nf(cur.n?Math.round(cur.kcal/cur.n):0),pctD(cur.n?cur.kcal/cur.n:0,prev.n?prev.kcal/prev.n:0),false,'')}
-      ${trend('TOPLAM ŞEKER',nf(cur.sugar),pctD(cur.sugar,prev.sugar),false,'g')}
+      ${trend('İŞLENMİŞ ŞEKER',nf(cur.sugar),pctD(cur.sugar,prev.sugar),false,'g')}
       ${trend('SU (BARDAK)',nf(cur.water),pctD(cur.water,prev.water),true,'')}</div>
     <p class="motiv">${weeklyMsg(cur,prev,pctD)}</p>
     <div>
@@ -1531,14 +1725,16 @@ function renderProg(){
       ${coachTips(cur,prev).map(t=>`<div class="mis" style="align-items:flex-start"><span style="font-size:19px;line-height:1.3">${t.e}</span><span class="tx" style="font-weight:600;line-height:1.5">${t.t}</span></div>`).join('')}
     </div>
   </div>
+  ${insightCard('🔍 Seni aşırıya götüren örüntü',overPatterns(),'Bunlar suçlama değil, harita. Örüntüyü görünce kırmak kolaylaşır.')}
+  ${insightCard('🔗 Verilerinde çıkan bağlantılar',correlations())}
   <div class="card stack">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
       <p class="eyebrow">Trend</p>
       <div class="seg" id="rangeseg" style="width:auto;flex:0 0 auto">
         <button data-r="7" class="${N===7?'on':''}">7 gün</button><button data-r="30" class="${N===30?'on':''}">30 gün</button></div></div>
-    <div class="seg" id="chartseg" style="flex-wrap:wrap">${[['kcal','🔥 Kalori'],['adım','👟 Adım'],['su','💧 Su'],['seker','🍬 Şeker'],['uyku','😴 Uyku']].map(([k,l])=>`<button data-m="${k}" class="${mm===k?'on':''}">${l}</button>`).join('')}</div>
+    <div class="seg" id="chartseg" style="flex-wrap:wrap">${[['kcal','🔥 Kalori'],['adım','👟 Adım'],['su','💧 Su'],['seker','🍬 İşlenmiş şeker'],['meyve','🍓 Meyve şekeri'],['uyku','😴 Uyku']].map(([k,l])=>`<button data-m="${k}" class="${mm===k?'on':''}">${l}</button>`).join('')}</div>
     ${barChart(rows,unit,goalv)}
-    <p class="hint">Kesikli çizgi günlük hedefin.</p>
+    <p class="hint">${mm==='seker'?`Kesikli çizgi günlük işlenmiş şeker sınırın (${SUGAR_MAX(p)} g). Meyve ve sütün kendi şekeri buraya girmiyor — onlar lif, su ve kalsiyumla birlikte gelir, kan şekerini aynı şekilde yükseltmez.`:mm==='meyve'?'Meyve ve süt şekerini kısmana gerek yok; burası sadece bilgi için. Meyve suyu bu grafikte değil, işlenmiş şekerde sayılır — lifi alındığı için vücut onu şekerli içecek gibi işler.':'Kesikli çizgi günlük hedefin.'}</p>
   </div>
   <div class="card stack"><p class="eyebrow">⚖️ Kilo eğrisi</p>${lineChart(wrows,'kg',p.target)}</div>
   <div class="card stack">
@@ -1558,6 +1754,10 @@ function renderProg(){
     ${g.aggressive?`<p class="hint" style="color:var(--warn)"><b>Küçük bir not:</b> Bu tempo haftada 1 kg'ın üzerinde. Süreyi biraz uzatmak hem daha kolay hem kalıcı olur; ciddi bir hedefte bir diyetisyene danışmak en sağlıklısı 💛</p>`:''}
     ${g.floored?`<p class="hint" style="color:var(--warn)">Hedefin çok düşük kalori gerektirdiği için güvenli alt sınıra sabitlendi.</p>`:''}
   </div>
+  ${mealCard()}
+  ${bwCard()}
+  ${heatCard()}
+  ${duelCard()}
   <div class="card stack">
     <p class="eyebrow">🏅 Rozetler — ${got.length}/${BADGES.length}</p>
     <div class="bgrid">${BADGES.map(b=>`<button class="bg${got.indexOf(b.id)>=0?' got':''}" data-badge="${b.id}"><span class="e">${b.e}</span><span class="n">${esc(b.n)}</span></button>`).join('')}</div>
@@ -1572,7 +1772,7 @@ function coachTips(cur,prev){
   const exDays=src.filter(h=>(h.ex||[]).length).length;
   if(cur.n>=2&&cur.water/days<gl.water*0.8)tips.push({e:'💧',t:'Su ortalaman günde '+Math.round(cur.water/days)+' bardak; hedef '+gl.water+'. Sabah kalkınca ve her öğünden önce birer bardak — üçü tek başına aradaki farkı kapatır.'});
   if(cur.steps/7<gl.step*0.7)tips.push({e:'👟',t:'Adım ortalaman '+nf(Math.round(cur.steps/7))+'. Akşam yemeğinden sonra 15 dakikalık yürüyüş yaklaşık 1.800 adım demek ve kan şekerini de dengeliyor.'});
-  if(cur.n>=2&&cur.sugar/days>50)tips.push({e:'🍬',t:'Günlük şekerin ortalama '+Math.round(cur.sugar/days)+' g. En büyük kaynak genelde içecekler: kolayı ve meyve suyunu sadece hafta sonuna al.'});
+  if(cur.n>=2&&cur.sugar/days>SUGAR_MAX(p))tips.push({e:'🍬',t:'Günlük işlenmiş şekerin ortalama '+Math.round(cur.sugar/days)+' g (sınır '+SUGAR_MAX(p)+' g). Meyveden gelen kısmı saymıyorum — bu tamamen tatlı, paketli ve şekerli içecek. En büyük kaynak genelde içecekler: kolayı ve meyve suyunu sadece hafta sonuna al.'});
   if(cur.n>=2&&cur.pak/days>1)tips.push({e:'🍫',t:'Günde ortalama '+(cur.pak/days).toFixed(1)+' paketli gıda. Evde göz önünde durmasın; yerine bir avuç kuruyemiş ve meyve.'});
   if(exDays<3)tips.push({e:'🏋️',t:exDays===0?'Bu hafta antrenman yok. 6 dakikalık "Uyanış" programı ile başla — sayılması için uzun olması gerekmiyor.':'Bu hafta '+exDays+' gün antrenman yaptın; haftada 3 güne çıkmak en büyük farkı yaratan eşik.'});
   if(sleepDays.length>=3&&avgSleep<7)tips.push({e:'😴',t:'Ortalama uykun '+avgSleep.toFixed(1)+' saat. 7 saatin altında iştah hormonları bozuluyor; yarım saat erken yatmak diyetten daha çok iş yapar.'});
@@ -1584,7 +1784,7 @@ function coachTips(cur,prev){
 function weeklyMsg(cur,prev,pctD){
   const w=[];
   if(cur.steps>prev.steps&&prev.steps>0)w.push(`geçen haftaya göre <b>%${pctD(cur.steps,prev.steps)} daha çok adım</b> attın`);
-  if(cur.sugar<prev.sugar&&prev.sugar>0)w.push(`<b>%${Math.abs(pctD(cur.sugar,prev.sugar))} daha az şeker</b> aldın`);
+  if(cur.sugar<prev.sugar&&prev.sugar>0)w.push(`<b>%${Math.abs(pctD(cur.sugar,prev.sugar))} daha az işlenmiş şeker</b> aldın`);
   if(cur.water>prev.water&&prev.water>0)w.push(`<b>daha çok su</b> içtin`);
   if(cur.pak<prev.pak&&prev.pak>0)w.push(`<b>daha az paketli gıda</b> tükettin`);
   if(w.length)return'Bu hafta '+w.slice(0,2).join(' ve ')+'. Bu gerçekten kıymetli, tebrikler 🎉';
@@ -1775,11 +1975,292 @@ function sheetXp(){
       <p class="hint">Haftalık XP her Pazartesi sıfırdan sayılır; yarış pisti onu gösterir 🏁</p>
     </div>`);
 }
+/* ===== analiz motoru ===== */
+function histAll(){
+  const m={};S.hist.forEach(h=>{if(h)m[h.date]=h});if(S.day)m[S.day.date]=S.day;
+  return Object.values(m).sort((a,b)=>a.date<b.date?-1:1);
+}
+function logged(h){return totals(h).n>0}
+/* --- 7 günlük hareketli ortalama + plato --- */
+function weightTrend(){
+  const w=histAll().filter(h=>h.weight>0).map(h=>({d:h.date,v:h.weight}));
+  if(w.length<2)return null;
+  const ma=w.map((x,i)=>{
+    const from=addDays(x.d,-6);
+    const win=w.filter(y=>y.d>=from&&y.d<=x.d);
+    return {d:x.d,v:win.reduce((a,y)=>a+y.v,0)/win.length};
+  });
+  const last=ma[ma.length-1],first=ma[0];
+  const days=Math.max(1,(new Date(last.d)-new Date(first.d))/864e5);
+  const perWeek=(last.v-first.v)/days*7;
+  // plato: son 10 günün ortalaması 10 gün öncesiyle ±0.25 kg içinde
+  let plateau=false,plateauDays=0;
+  const recent=ma.filter(x=>x.d>=addDays(TODAY(),-14));
+  if(recent.length>=4){
+    const a=recent[0].v,b=recent[recent.length-1].v;
+    const span=(new Date(recent[recent.length-1].d)-new Date(recent[0].d))/864e5;
+    if(span>=9&&Math.abs(b-a)<0.3){plateau=true;plateauDays=Math.round(span)}
+  }
+  return {raw:w,ma,perWeek,plateau,plateauDays,now:last.v};
+}
+function plateauMsg(t){
+  const p=S.me,g=calc(p);
+  return `<b>${t.plateauDays} gündür kilon sabit.</b> Bu tamamen normal — vücut yeni ağırlığa alışırken tartı durur, sonra birden düşer. Panikleyip yemeyi kesme; iki seçeneğin var:
+  <br>• Günlük hedefi <b>${nf(Math.max((p.gender==='k'?1200:1500),g.goal-120))} kcal</b>'ye çek (100-120 kcal azalt)
+  <br>• Haftaya <b>bir antrenman daha</b> ekle — Hareket sekmesinde 10 dakikalık program yeter
+  <br>İkisini aynı anda yapma; birini seç, 10 gün bekle.`;
+}
+/* --- aşırıya götüren örüntü --- */
+function overPatterns(){
+  const H=histAll().filter(h=>logged(h)&&h.date<TODAY());
+  if(H.length<7)return null;
+  const g=calc(S.me);
+  const over=H.filter(h=>{const ex=(h.ex||[]).reduce((a,x)=>a+x.kcal,0);return totals(h).c>g.goal+ex});
+  if(over.length<3)return null;
+  const out=[];
+  // dışarıda yeme
+  const dis=over.filter(h=>(h.items||[]).some(i=>i.cat==='disari')).length;
+  if(dis>=Math.ceil(over.length*0.6))out.push({e:'🍔',t:`Hedefi aştığın <b>${over.length} günün ${dis}'inde</b> dışarıda yemek var. Dışarıda yiyeceğin günü önceden bilip gündüzü hafif tutmak en kolay çözüm.`});
+  // paketli
+  const pak=over.filter(h=>totals(h).p>=2).length;
+  if(pak>=Math.ceil(over.length*0.5))out.push({e:'🍫',t:`Aşım günlerinin <b>${pak}'inde 2+ paketli gıda</b> var. Evde göz önünde durmaması tek başına farkı kapatıyor.`});
+  // gün bazlı
+  const byDow={};over.forEach(h=>{const d=new Date(h.date+'T12:00:00').getDay();byDow[d]=(byDow[d]||0)+1});
+  const allDow={};H.forEach(h=>{const d=new Date(h.date+'T12:00:00').getDay();allDow[d]=(allDow[d]||0)+1});
+  Object.keys(byDow).forEach(d=>{
+    if(byDow[d]>=2&&allDow[d]>=2&&byDow[d]/allDow[d]>=0.66)
+      out.push({e:'📅',t:`<b>${DAYN[d]}</b> günleri neredeyse hep aşıyorsun (${byDow[d]}/${allDow[d]}). O günü baştan "serbest gün" ilan edip gerisini sıkı tutmak daha iyi çalışır.`});
+  });
+  // geç saat
+  const late=over.filter(h=>(h.items||[]).some(i=>i.ts&&new Date(i.ts).getHours()>=21)).length;
+  if(late>=Math.ceil(over.length*0.6))out.push({e:'🌙',t:`Aşım günlerinin <b>${late}'inde 21:00'den sonra</b> kayıt var. Akşam geç atıştırma en sinsi kalori kaynağı — akşam yemeğine protein eklemek bunu kesiyor.`});
+  // hafta sonu
+  const wk=H.filter(h=>[0,6].indexOf(new Date(h.date+'T12:00:00').getDay())>=0);
+  const wd=H.filter(h=>[0,6].indexOf(new Date(h.date+'T12:00:00').getDay())<0);
+  if(wk.length>=2&&wd.length>=3){
+    const aw=wk.reduce((a,h)=>a+totals(h).c,0)/wk.length,ad=wd.reduce((a,h)=>a+totals(h).c,0)/wd.length;
+    if(aw-ad>250)out.push({e:'🎉',t:`Hafta sonu ortalama <b>${nf(Math.round(aw-ad))} kcal fazla</b> alıyorsun. Bu haftada ~${Math.round((aw-ad)*2/7700*1000)/1000} kg fren demek. Kalori bankası tam bunun için.`});
+  }
+  return out.length?out.slice(0,3):null;
+}
+/* --- bağlantı bulguları --- */
+function correlations(){
+  const H=histAll().filter(h=>logged(h)&&h.date<TODAY());
+  if(H.length<8)return null;
+  const out=[],gl=goals(S.me);
+  const avg=(a,f)=>a.length?a.reduce((x,h)=>x+f(h),0)/a.length:0;
+  const sl=H.filter(h=>h.sleep>0);
+  if(sl.length>=6){
+    const lo=sl.filter(h=>h.sleep<7),hi=sl.filter(h=>h.sleep>=7);
+    if(lo.length>=2&&hi.length>=2){
+      const d=avg(lo,h=>totals(h).c)-avg(hi,h=>totals(h).c);
+      if(Math.abs(d)>150)out.push({e:'😴',t:d>0?`7 saatten az uyuduğun günlerde ortalama <b>${nf(Math.round(d))} kcal fazla</b> alıyorsun. Uyku, iştah hormonlarını doğrudan etkiliyor — en ucuz diyet aracı.`:`İlginç: az uyuduğun günlerde daha az yemişsin. Yine de uzun vadede uyku toparlanmanın temeli.`});
+    }
+  }
+  const wl=H.filter(h=>(h.water||0)>=gl.water),wn=H.filter(h=>(h.water||0)<gl.water*0.6);
+  if(wl.length>=3&&wn.length>=3){
+    const a=avg(wl,h=>totals(h).p),b=avg(wn,h=>totals(h).p);
+    if(b-a>0.4)out.push({e:'💧',t:`Su hedefini tutturduğun günlerde paketli gıda <b>belirgin şekilde az</b> (ort. ${dec(a)} / ${dec(b)}). Susuzluk sık sık açlık gibi hissettiriyor.`});
+  }
+  const ex=H.filter(h=>(h.ex||[]).length),nex=H.filter(h=>!(h.ex||[]).length);
+  if(ex.length>=3&&nex.length>=3){
+    const a=avg(ex,h=>h.steps||0),b=avg(nex,h=>h.steps||0);
+    if(a-b>900)out.push({e:'💪',t:`Antrenman yaptığın günlerde ayrıca <b>${nf(Math.round(a-b))} adım fazla</b> atıyorsun. Hareket hareketi çağırıyor.`});
+  }
+  return out.length?out.slice(0,3):null;
+}
+/* --- öğün dağılımı --- */
+function mealSplit(){
+  const H=histAll().filter(h=>logged(h)).slice(-21);
+  if(H.length<5)return null;
+  const sum={},tot={c:0};
+  MEALS.forEach(m=>sum[m.k]=0);
+  H.forEach(h=>(h.items||[]).forEach(i=>{sum[i.meal||'ati']=(sum[i.meal||'ati']||0)+i.c;tot.c+=i.c}));
+  if(!tot.c)return null;
+  const rows=MEALS.map(m=>({...m,pct:Math.round(sum[m.k]/tot.c*100)}));
+  const aks=rows.find(r=>r.k==='aks').pct,kah=rows.find(r=>r.k==='kah').pct;
+  let note='Dağılımın dengeli görünüyor 👍';
+  if(aks>=45)note=`Kalorinin <b>%${aks}'si akşam öğününde</b>. Akşamı ağırlaştıran şey genelde gün içinde az yemek — kahvaltıyı büyütmek akşam iştahını kendiliğinden düşürür.`;
+  else if(kah<=12)note=`Kahvaltı toplamın sadece <b>%${kah}</b>'si. Sabah protein almak gün boyu atıştırmayı azaltıyor.`;
+  return {rows,note};
+}
+/* --- en iyi / en kötü gün --- */
+function bestWorst(){
+  const H=histAll().filter(h=>logged(h)&&h.date<TODAY()).slice(-30);
+  if(H.length<5)return null;
+  const score=h=>missions(S.me,h).filter(m=>m.ok).length*20+Math.min((h.steps||0)/200,40);
+  const s=[...H].sort((a,b)=>score(b)-score(a));
+  const fmt=h=>{const t=totals(h);return{date:h.date,
+    lbl:new Date(h.date+'T12:00:00').toLocaleDateString('tr-TR',{day:'numeric',month:'long'}),
+    mis:missions(S.me,h).filter(m=>m.ok).length,steps:h.steps||0,kcal:t.c,water:h.water||0}};
+  return {best:fmt(s[0]),worst:fmt(s[s.length-1])};
+}
+/* --- aylık ısı haritası --- */
+function heatData(){
+  const H={};histAll().forEach(h=>H[h.date]=h);
+  const out=[],today=new Date();
+  const start=new Date(today);start.setDate(start.getDate()-34);
+  // pazartesi'ye hizala
+  start.setDate(start.getDate()-((start.getDay()+6)%7));
+  const end=new Date(today);end.setDate(end.getDate()+(6-((today.getDay()+6)%7)));
+  for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1)){
+    const ds=iso(d),h=H[ds];
+    let lvl=0;
+    if(h){const m=missions(S.me,h).filter(x=>x.ok).length;
+      lvl=m>=5?4:m>=3?3:m>=1?2:(logged(h)||h.steps||h.water?1:0)}
+    out.push({d:ds,lvl,fut:ds>TODAY()});
+  }
+  return out;
+}
+/* --- haftalık kalori bankası --- */
+function bank(){
+  const g=calc(S.me),k=weekKey(),H={};
+  histAll().forEach(h=>H[h.date]=h);
+  let used=0,budgetDays=0,logged7=0,loggedKcal=0;
+  for(let i=0;i<7;i++){
+    const ds=addDays(k,i);
+    if(ds>TODAY())break;
+    budgetDays++;
+    const h=H[ds];
+    if(h&&totals(h).n){logged7++;
+      const ex=(h.ex||[]).reduce((a,x)=>a+x.kcal,0);
+      loggedKcal+=totals(h).c-ex;used+=totals(h).c-ex}
+    else used+=g.goal; // kayıt yoksa hedefte varsayılır
+  }
+  const budget=g.goal*budgetDays;
+  const left=Math.round(budget-used);
+  const daysLeft=7-budgetDays;
+  return {budget:Math.round(budget),used:Math.round(used),left,daysLeft,logged7,goal:g.goal,
+    avgLogged:logged7?Math.round(loggedKcal/logged7):0,weekly:Math.round(g.goal*7)};
+}
+function bankMsg(b){
+  if(b.logged7===0)return'Hafta yeni başladı. Kayıt girdikçe kredin burada birikecek.';
+  if(b.logged7>=3&&b.avgLogged<b.goal-600)return`Kayıtlı günlerde ortalama <b>${nf(b.avgLogged)} kcal</b> alıyorsun — hedefinin epey altında. Bu bir kredi değil, bir uyarı: çok az yemek metabolizmayı yavaşlatır, kas kaybettirir ve bir noktada geri tepen bir açlığa dönüşür. Ya kayıtların eksik ya da bugün düzgün bir öğün yemelisin 💛`;
+  if(b.left>400)return`<b>${nf(b.left)} kcal kredin</b> var. ${b.daysLeft>0?'Hafta sonu ya da özel bir öğün için rahatça kullanabilirsin 🎉':'Haftayı hedefinin altında kapattın — bu doğrudan kilo demek 🎯'}`;
+  if(b.left>=0)return`<b>${nf(b.left)} kcal</b> kaldı${b.daysLeft>0?' · kalan '+b.daysLeft+' gün için dikkatli git':''}. Dengedesin.`;
+  if(b.daysLeft>0)return`Haftalık bütçeni <b>${nf(Math.abs(b.left))} kcal</b> aştın. Kalan ${b.daysLeft} günde günde ~${nf(Math.round(Math.abs(b.left)/b.daysLeft))} kcal kısarak telafi edebilirsin — ya da bırak, gelecek hafta devam.`;
+  return`Haftayı <b>${nf(Math.abs(b.left))} kcal</b> fazlayla kapattın. Bir hafta trendi bozmaz; yeni hafta temiz sayfa 💛`;
+}
+/* --- aylık ikili karnesi --- */
+function monthCard(){
+  const others=S.profiles.filter(x=>x.id!==S.me.id);
+  if(!others.length)return null;
+  const from=TODAY().slice(0,8)+'01';
+  const calc1=(pid,hist,day)=>{
+    const m={};(hist||[]).forEach(h=>{if(h&&h.date>=from)m[h.date]=h});
+    if(day&&day.date>=from)m[day.date]=day;
+    const arr=Object.values(m),pr=S.profiles.find(x=>x.id===pid)||{};
+    return {name:pr.name,emoji:pr.emoji,
+      days:arr.filter(h=>missions(pr,h).filter(x=>x.ok).length>=3).length,
+      steps:arr.reduce((a,h)=>a+(h.steps||0),0),
+      xp:arr.reduce((a,h)=>a+(h.xp||0),0),
+      kg:(()=>{const w=arr.filter(h=>h.weight>0).sort((a,b)=>a.date<b.date?-1:1);
+        return w.length>=2?Math.round((w[0].weight-w[w.length-1].weight)*10)/10:0})()};
+  };
+  const rows=[calc1(S.me.id,S.hist,S.day),...others.map(o=>calc1(o.id,S.othersHist[o.id],S.others[o.id]))];
+  const win=[...rows].sort((a,b)=>b.xp-a.xp)[0];
+  return {rows,win,month:new Date().toLocaleDateString('tr-TR',{month:'long'})};
+}
+
+/* ===== analiz kartları ===== */
+function trendCard(){
+  const t=weightTrend();
+  if(!t)return'';
+  const pw=t.perWeek,dir=pw<-0.05?'düşüş':pw>0.05?'artış':'sabit';
+  const good=(S.me.target||S.me.weight)<S.me.weight?pw<0:pw>0;
+  const col=dir==='sabit'?'var(--ink2)':(good?'var(--good)':'var(--warn)');
+  const rows=t.ma.map(x=>({s:x.d.slice(8)+'.'+x.d.slice(5,7),l:x.d,v:Math.round(x.v*10)/10}));
+  return `<div class="card stack">
+    <p class="eyebrow">📉 Gerçek trend — 7 günlük ortalama</p>
+    <div style="display:flex;align-items:baseline;gap:9px;flex-wrap:wrap">
+      <span class="disp num" style="font-size:28px;color:${col}">${pw>0?'+':''}${dec(pw,2)} kg</span>
+      <span class="hint">haftalık ${dir} · şu anki ortalama ${dec(t.now,1)} kg</span></div>
+    ${lineChart(rows,'kg',S.me.target)}
+    <p class="hint">Günlük tartı su tutmayla 1-2 kg oynar. Bu çizgi o gürültüyü siler — asıl gidişat budur.</p>
+    ${t.plateau?`<div class="plateau"><span class="e">🧱</span><div>${plateauMsg(t)}</div></div>`:''}
+  </div>`;
+}
+function insightCard(title,list,foot){
+  if(!list||!list.length)return'';
+  return `<div class="card stack">
+    <p class="eyebrow">${title}</p>
+    ${list.map(o=>`<div class="mis" style="align-items:flex-start"><span style="font-size:19px;line-height:1.3">${o.e}</span><span class="tx" style="font-weight:600;line-height:1.5">${o.t}</span></div>`).join('')}
+    ${foot?`<p class="hint">${foot}</p>`:''}
+  </div>`;
+}
+function mealCard(){
+  const m=mealSplit();
+  if(!m)return'';
+  const mx=Math.max(...m.rows.map(r=>r.pct),1);
+  return `<div class="card stack">
+    <p class="eyebrow">🍽️ Öğün dağılımı — son 3 hafta</p>
+    <div class="msplit">${m.rows.map(r=>`<div class="mrow">
+      <span class="ml">${r.e} ${esc(r.n)}</span>
+      <span class="mb"><i style="width:${r.pct/mx*100}%"></i></span>
+      <span class="mp num">%${r.pct}</span></div>`).join('')}</div>
+    <p class="motiv">${m.note}</p>
+  </div>`;
+}
+function bwCard(){
+  const b=bestWorst();
+  if(!b)return'';
+  const box=(o,kind)=>`<div class="bw ${kind}">
+    <div class="h">${kind==='good'?'🌟 En iyi günün':'😅 En zor günün'}</div>
+    <div class="dt">${esc(o.lbl)}</div>
+    <div class="st"><span>🎯 ${o.mis} görev</span><span>👟 ${nf(o.steps)}</span><span>🔥 ${nf(o.kcal)}</span><span>💧 ${o.water}</span></div></div>`;
+  return `<div class="card stack">
+    <p class="eyebrow">📊 Son 30 günün uçları</p>
+    <div class="bwgrid">${box(b.best,'good')}${box(b.worst,'bad')}</div>
+    <p class="hint">En iyi günü hatırla: o gün ne farklıydı? Tekrarlanabilir olan tek şey odur.</p>
+  </div>`;
+}
+function heatCard(){
+  const h=heatData();
+  const lbl=['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
+  const active=h.filter(x=>!x.fut&&x.lvl>0).length;
+  return `<div class="card stack">
+    <p class="eyebrow">🗓️ Son 5 hafta — aktiflik haritası</p>
+    <div class="heatw">
+      <div class="heath">${lbl.map(l=>`<span>${l}</span>`).join('')}</div>
+      <div class="heat">${h.map(x=>`<i data-l="${x.fut?'f':x.lvl}" title="${x.d}"></i>`).join('')}</div>
+    </div>
+    <div class="heatleg"><span>az</span><i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i><span>çok</span></div>
+    <p class="hint">${active} günde iz bıraktın. Koyu kareler 3+ görev tamamladığın günler — boşlukları kapatmak hedefin.</p>
+  </div>`;
+}
+function bankCard(){
+  const b=bank();
+  const pct=clamp(b.used/Math.max(b.weekly,1),0,1.25);
+  const col=b.left>=0?'var(--good)':'var(--warn)';
+  return `<div class="card stack">
+    <p class="eyebrow">🏦 Haftalık kalori bankası</p>
+    <div style="display:flex;align-items:baseline;gap:9px;flex-wrap:wrap">
+      <span class="disp num" style="font-size:28px;color:${col}">${b.left>=0?'+':'−'}${nf(Math.abs(b.left))}</span>
+      <span class="hint">kcal · haftalık bütçe ${nf(b.weekly)}</span></div>
+    <div class="bankbar"><i style="width:${pct/1.25*100}%;background:${col}"></i><span class="tick" style="left:${1/1.25*100}%"></span></div>
+    <p class="motiv">${bankMsg(b)}</p>
+    <p class="hint">Diyet günlük değil haftalık çalışır. Bir gün fazla yemek, diğer günlerden ödünç almaktır — bütçe tutarsa sonuç değişmez.</p>
+  </div>`;
+}
+function duelCard(){
+  const m=monthCard();
+  if(!m)return'';
+  const mx=Math.max(...m.rows.map(r=>r.xp),1);
+  return `<div class="card stack">
+    <p class="eyebrow">⚔️ ${esc(m.month)} karnesi</p>
+    <div class="mcard">${m.rows.map(r=>`<div class="mcr${r.name===m.win.name?' win':''}">
+      <div class="who"><span class="e">${r.emoji||'🙂'}</span><span class="n">${esc(r.name||'')}</span>${r.name===m.win.name&&m.rows.length>1?'<span class="crown">👑</span>':''}</div>
+      <div class="mstat"><span><b class="num">${r.days}</b> iyi gün</span><span><b class="num">${nf(r.steps)}</b> adım</span><span><b class="num">${nf(r.xp)}</b> XP</span><span><b class="num">${r.kg>0?'−'+dec(r.kg):(r.kg<0?'+'+dec(Math.abs(r.kg)):'0')}</b> kg</span></div>
+      <div class="mbar"><i style="width:${r.xp/mx*100}%"></i></div></div>`).join('')}</div>
+    <p class="hint">${m.rows.some(r=>!r.xp&&!r.steps)?'Sıfır görünen kişi bu ay henüz kayıt girmemiş ya da telefonu senkron olmamış olabilir. ':''}Ay sonunda sıfırlanır. “İyi gün” = en az 3 görev tamamlanmış gün.</p>
+  </div>`;
+}
+
 /* ===== gün özeti, ipucu, saat kıyası, kilometre taşları ===== */
 function dayStats(d){
   if(!d)return null;
   const t=totals(d),ex=(d.ex||[]).reduce((a,x)=>a+x.kcal,0);
-  return {kcal:t.c,sugar:t.s,salt:t.t,pak:t.p,karb:t.k,n:t.n,
+  return {kcal:t.c,sugar:t.s,sugarA:t.sa,sugarD:t.sd,salt:t.t,pak:t.p,karb:t.k,n:t.n,
     steps:d.steps||0,water:d.water||0,sleep:d.sleep||0,ex,weight:d.weight||null,
     xp:d.xp||0,items:(d.items||[]).length};
 }
@@ -1787,30 +2268,140 @@ function yesterdayDoc(){
   const y=addDays(TODAY(),-1);
   return S.hist.find(h=>h&&h.date===y)||null;
 }
-/* dün raporu — sabah bir kez */
-function renderYesterday(){
-  const p=S.me,y=yesterdayDoc();
-  if(!y)return'';
+/* ===== dün raporu — tam ekran karşılama ===== */
+function repHead(st,done,total){
+  if(!st.n&&!st.steps)return{e:'🌱',t:'Sessiz bir gündü',s:'Kayıt yok — bugün temiz bir sayfa'};
+  if(done>=total)return{e:'🏆',t:'Kusursuz bir gün',s:'Bütün görevler tamam'};
+  if(done>=4)return{e:'💪',t:'Sağlam bir gündü',s:'Çoğu şeyi yerine koydun'};
+  if(done===3)return{e:'✅',t:'Günü tamamladın',s:'Seri devam ediyor'};
+  if(done===2)return{e:'🙂',t:'Fena değildi',s:'Bir görev daha olsaydı gün sayılırdı'};
+  if(done===1)return{e:'🌤️',t:'Zor bir gündü',s:'Olur böyle — önemli olan bugün'};
+  return{e:'🌱',t:'Yeni bir gün, temiz sayfa',s:'Dünü kapat, bugüne bak'};
+}
+function repWins(y,st,p){
+  const gl=goals(p),g=calc(p),eg=g.goal+st.ex,out=[];
+  const pr=S.hist.find(h=>h&&h.date===addDays(y.date,-1));
+  const ps=pr?dayStats(pr):null;
+  if(st.steps>=gl.step)out.push({e:'👟',t:`<b>${nf(st.steps)} adım</b> — hedefini ${st.steps>gl.step*1.1?'%'+Math.round(st.steps/gl.step*100-100)+' aştın':'tamamladın'}. Bu yaklaşık ${nf(Math.round(st.steps*0.04))} kcal.`});
+  else if(ps&&st.steps>=ps.steps+1000)out.push({e:'📈',t:`Adımın önceki güne göre <b>${nf(st.steps-ps.steps)} arttı</b>. Yön doğru, devamı gelir.`});
+  if(st.water>=gl.water)out.push({e:'💧',t:`Su hedefini tamamladın (<b>${st.water}/${gl.water}</b>). Kulağa küçük geliyor ama iştahı en çok bu susturuyor.`});
+  if(st.n>=3&&st.sugarA<=10)out.push({e:'🍬',t:`İşlenmiş şeker sadece <b>${st.sugarA} g</b>. Meyveden gelen ${st.sugarD} g'ı ayrı sayıyorum — asıl iş bu.`});
+  if(st.ex>0)out.push({e:'🔥',t:`Antrenmanla <b>${nf(st.ex)} kcal</b> yaktın ve hedefine o kadar pay ekledin.`});
+  if(st.n>=3&&st.kcal<=eg&&st.kcal>0)out.push({e:'🎯',t:`Kalori hedefinin <b>${nf(eg-st.kcal)} kcal altında</b> kapattın. Haftalık bankana yazıldı.`});
+  if(st.sleep>=7)out.push({e:'😴',t:`<b>${dec(st.sleep)} saat</b> uyudun. Uyku, ertesi günün iştahını sessizce ayarlayan şey.`});
+  if(st.n>=3&&st.pak===0)out.push({e:'🚫',t:'Gün boyu <b>hiç paketli gıda yok</b>. Bu, çoğu insanın en zorlandığı kısım.'});
+  if(st.n>0&&out.length<2)out.push({e:'✍️',t:`<b>${st.n} kayıt</b> girdin. Yazmak tek başına farkındalık yaratıyor — en zoru bu alışkanlık.`});
+  if(st.weight)out.push({e:'⚖️',t:`Tartıldın (<b>${dec(st.weight)} kg</b>). Ölçtüğün şeyi yönetebilirsin.`});
+  return out.slice(0,3);
+}
+function repAdvice(y,st,p){
+  const gl=goals(p),g=calc(p),eg=g.goal+st.ex,smax=SUGAR_MAX(p),out=[];
+  const items=y.items||[];
+  const tatli=items.filter(i=>i.cat==='tatli'||(!isNat(i)&&(i.s||0)>=12));
+  const gec=items.filter(i=>i.ts&&new Date(i.ts).getHours()>=21);
+  const dis=items.filter(i=>i.cat==='disari');
+  // adım hiç girilmemişse her şeyden önce bu
+  if(!st.steps)out.push({e:'👟',t:`<b>Dün hiç adım girilmemiş.</b> Adım, günün en büyük kalori kalemi — o olmadan tablo eksik kalıyor ve görevlerin bir tanesi boşa gidiyor.
+    <br><br><b>Google Health</b>'i aç → ana ekrandaki adım sayısına bak → aşağıdaki düğmeye dokunup dünün sayısını yaz. 10 saniye.`,act:{lbl:'👟 Dünün adımını gir',k:'ystep'}});
+  else if(st.steps<1200)out.push({e:'🤔',t:`Dün sadece <b>${nf(st.steps)} adım</b> görünüyor — bu genelde telefonun cepte olmadığı ya da verinin eksik geldiği anlamına gelir. <b>Google Health</b>'ten kontrol edip düzeltmek ister misin?`,act:{lbl:'👟 Adımı düzelt',k:'ystep'}});
+  if(!st.n)out.push({e:'✍️',t:'Dün hiç yemek kaydı yok. Bugün mükemmel olmaya çalışma — sadece yediklerini yaz. Ölçmediğin şeyi değiştiremiyorsun, ölçmek de 10 saniye sürüyor.'});
+  if(tatli.length){
+    const en=tatli.sort((a,b)=>(b.s||0)-(a.s||0))[0];
+    out.push({e:'🍰',t:`Dün <b>${esc(en.n.replace(/\s*\(.*\)/,''))}</b> vardı — güzel, hak etmiştin. Bugün canın çekerse önce bir bardak su içip 10 dakika bekle; istek çoğu zaman o arada geçiyor. Geçmezse yarısını ye, o da kazanç.`});
+  }
+  if(gec.length&&!tatli.length)out.push({e:'🌙',t:`Dün <b>21:00'den sonra</b> ${gec.length} kayıt var. Geç atıştırma genelde akşam yemeğinin doyurmamasından olur — bugün akşam tabağına bir avuç fazla protein koy, gece isteği kendiliğinden düşer.`});
+  if(st.sugarA>smax)out.push({e:'🍬',t:`İşlenmiş şeker <b>${st.sugarA} g</b> (sınır ${smax}). En hızlı kazanç içecekte: bugün şekerli içecek yerine soda ya da sade çay — tek başına ${Math.min(st.sugarA,35)} g'ı götürür.`});
+  if(st.sugarD>NAT_MAX)out.push({e:'🍓',t:`Meyve şekeri <b>${st.sugarD} g</b> — rahat aralığın (${NAT_MAX} g) üstünde. Meyve kötü değil ama bu seviye genelde meyve suyu ya da kuru meyveden gelir; ikisi de kalorisi yoğun. Bütün meyveye dönmek yeter.`});
+  if(st.water<gl.water*0.7)out.push({e:'💧',t:`Su <b>${st.water}/${gl.water}</b> kaldı. Bugün için tek kural: kalkar kalkmaz 1 bardak, her öğünden önce 1 bardak. Akşama kadar hedef kendiliğinden dolar.`});
+  if(st.steps&&st.steps<gl.step*0.7&&st.steps>=1200)out.push({e:'🚶',t:`Adım <b>${nf(st.steps)}</b> ile hedefin altında kaldı. Bugün akşam yemeğinden sonra 15 dakika yürü — bu yaklaşık 1.800 adım ve kan şekerini de dengeliyor.`});
+  if(st.kcal>eg&&st.n>0)out.push({e:'⚖️',t:`Hedefi <b>${nf(st.kcal-eg)} kcal</b> aştın. Telafi için aç kalma — bugün hedefinde kal, fark haftalık bankanda zaten dengeleniyor.`});
+  if(dis.length>=1&&st.kcal>eg)out.push({e:'🍔',t:'Dışarıda yemek vardı. Bir dahakine gündüzü hafif tutup akşamı serbest bırakmak aynı günü sorunsuz geçirtiyor — kısıtlama değil, sıralama meselesi.'});
+  if(st.sleep&&st.sleep<6)out.push({e:'😴',t:`<b>${dec(st.sleep)} saat</b> uyku az. Az uyunan günlerde iştah hormonları bozuluyor; bugün 30 dakika erken yatmak yarınki diyetin yarısını hallediyor.`});
+  if(st.pak>=2)out.push({e:'🍫',t:`<b>${st.pak} paketli gıda</b> girmiş. Bunu irade ile değil, ortamla çöz: evde göz önünde durmasın, market listesine girmesin.`});
+  if(!out.length)out.push({e:'🔁',t:'Dünde düzeltilecek bir şey görmüyorum. O zaman bugünün hedefi basit: dünü aynen tekrarla. Tekrarlanabilir olan tek şey sonuç veriyor.'});
+  return out.slice(0,3);
+}
+function repToday(st,p){
+  const gl=goals(p),sr=streakInfo(p);
+  if(!st.steps)return'Bugünün tek hedefi: <b>akşam adımını girmek</b>. Google Health’ten bak, buraya yaz 👟';
+  if(!st.n&&!st.steps)return'Bugünün tek hedefi: <b>3 görev</b>. Su, adım ve bir kayıt yeter, seri baştan başlar 🌱';
+  if(st.water<gl.water*0.7)return`Bugünün tek hedefi: <b>${gl.water} bardak su</b>. Diğerleri onun arkasından geliyor 💧`;
+  if(st.steps<gl.step*0.7)return`Bugünün tek hedefi: <b>${nf(gl.step)} adım</b>. Akşam 15 dakikalık yürüyüş çoğu zaman farkı kapatıyor 👟`;
+  if(sr>=2)return`Bugünün tek hedefi: <b>seriyi ${sr+1} güne çıkarmak</b> 🔥 3 görev yeterli.`;
+  return'Bugünün tek hedefi: <b>3 görev</b>. Fazlası bonus 🎯';
+}
+/* rapor verisi hazır mı */
+function repReady(){
+  const y=yesterdayDoc();if(!y)return null;
   const st=dayStats(y);
-  if(!st||(!st.n&&!st.steps&&!st.water))return'';
-  if(p.seenReport===y.date)return'';
-  const g=calc(p),gl=goals(p),eg=g.goal+st.ex;
+  if(!st||(!st.n&&!st.steps&&!st.water))return null;
+  return {y,st};
+}
+function repHTML(){
+  const p=S.me,r=repReady();
+  if(!r)return `<div class="rp-empty"><span class="e">🌱</span>
+    <div class="t">Dün için rapor yok</div>
+    <p>Dün hiç kayıt girilmemiş. Bugün bir şeyler yaz — yarın sabah burada seni ayrıntılı bir rapor karşılasın.</p></div>`;
+  const {y,st}=r;
+  const g=calc(p),gl=goals(p),eg=g.goal+st.ex,smax=SUGAR_MAX(p);
   const ms=missions(p,y),done=ms.filter(m=>m.ok).length;
+  const hd=repHead(st,done,ms.length);
+  const pct=done/ms.length;
+  const ringCol=pct>=1?'var(--good)':pct>=.6?'var(--acc)':'var(--acc2)';
   const rows=[
     {e:'🔥',l:'Kalori',v:nf(st.kcal),s:'/ '+nf(eg),ok:st.n>0&&st.kcal<=eg},
-    {e:'👟',l:'Adım',v:nf(st.steps),s:'/ '+nf(gl.step),ok:st.steps>=gl.step},
+    {e:'👟',l:'Adım',v:st.steps?nf(st.steps):'—',s:st.steps?'/ '+nf(gl.step):'girilmedi · dokun',ok:st.steps>=gl.step,miss:!st.steps},
     {e:'💧',l:'Su',v:st.water,s:'/ '+gl.water,ok:st.water>=gl.water},
-    {e:'🎯',l:'Görev',v:done,s:'/ '+ms.length,ok:done>=3}
+    {e:'🍬',l:'İşlenmiş şeker',v:st.sugarA,s:'/ '+smax+' g',ok:st.sugarA<=smax},
+    {e:'🍓',l:'Meyve şekeri',v:st.sugarD,s:'/ '+NAT_MAX+' g',ok:st.sugarD<=NAT_MAX},
+    {e:'😴',l:'Uyku',v:st.sleep?dec(st.sleep):'—',s:'/ 7 sa',ok:st.sleep>=7}
   ];
-  return `<div class="card stack hl" id="repCard">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <p class="eyebrow">📊 Dünün raporu — ${new Date(y.date+'T12:00:00').toLocaleDateString('tr-TR',{day:'numeric',month:'long'})}</p>
-      <button class="del" id="repClose" aria-label="Kapat">✕</button></div>
-    <div class="repgrid">${rows.map(r=>`<div class="rep${r.ok?' ok':''}">
-      <span class="e">${r.e}</span><span class="v num">${r.v}</span><span class="s">${r.l} ${r.s}</span></div>`).join('')}</div>
-    <p class="motiv">${reportLine(st,done,ms.length,eg,gl)}</p>
-    <button class="btn" id="repOk">Anladım, bugüne bakalım</button>
-  </div>`;
+  const wins=repWins(y,st,p),adv=repAdvice(y,st,p);
+  const blk=(o,i)=>`<div class="rp-item" style="--d:${i*60}ms"><span class="e">${o.e}</span>
+    <div class="tx">${o.t}${o.act?`<div style="margin-top:12px"><button class="btn sm" data-rpact="${o.act.k}">${o.act.lbl}</button></div>`:''}</div></div>`;
+  return `
+  <div class="rp-hero">
+    <div class="rp-ring">${ringSVG(pct,ringCol)}<span class="rp-emoji">${hd.e}</span></div>
+    <h2 class="rp-title">${hd.t}</h2>
+    <p class="rp-sub">${hd.s}</p>
+    <div class="rp-chips">
+      <span class="rp-chip"><b>${done}/${ms.length}</b> görev</span>
+      ${st.xp?`<span class="rp-chip">⚡ <b>+${st.xp}</b> XP</span>`:''}
+      ${st.n?`<span class="rp-chip">✍️ <b>${st.n}</b> kayıt</span>`:''}
+    </div>
+  </div>
+  <div class="rp-grid">${rows.map((r,i)=>`<${r.miss?'button':'div'} class="rp-stat${r.ok?' ok':''}${r.miss?' miss':''}"${r.miss?' data-rpact="ystep"':''} style="--d:${i*45}ms">
+    <span class="e">${r.e}</span><span class="v num">${r.v}</span><span class="l">${r.l}</span><span class="s">${r.s}</span></${r.miss?'button':'div'}>`).join('')}</div>
+  ${wins.length?`<section class="rp-sec good">
+    <h3>✅ İyi yaptıkların</h3>${wins.map(blk).join('')}</section>`:''}
+  <section class="rp-sec tip">
+    <h3>🎯 Bugün için öneri</h3>${adv.map(blk).join('')}</section>
+  <div class="rp-goal">${repToday(st,p)}</div>
+  <p class="rp-foot">${reportLine(st,done,ms.length,eg,gl)}</p>`;
+}
+function openReport(){
+  const y=yesterdayDoc();
+  $('#rpDate').textContent=y?new Date(y.date+'T12:00:00').toLocaleDateString('tr-TR',{weekday:'long',day:'numeric',month:'long'}):'Dün';
+  $('#rpBody').innerHTML=repHTML();
+  $('#rpBody').scrollTop=0;
+  const rp=$('#report');rp.classList.add('on');
+  document.body.style.overflow='hidden';
+  // halkayı sıfırdan doldur
+  const fg=$('.rp-ring .fg',rp);
+  if(fg&&!REDUCED()){const to=fg.style.strokeDashoffset,da=fg.style.strokeDasharray;
+    fg.style.strokeDashoffset=da;requestAnimationFrame(()=>requestAnimationFrame(()=>{fg.style.strokeDashoffset=to}))}
+}
+function closeReport(seen,skipMiles){
+  if(seen&&S.me){S.me.seenReport=addDays(TODAY(),-1);saveProfile()}
+  $('#report').classList.remove('on');
+  document.body.style.overflow='';
+  if(!skipMiles)setTimeout(checkMiles,420);
+}
+function maybeReport(){
+  const p=S.me;if(!p)return false;
+  if(p.seenReport===addDays(TODAY(),-1))return false;
+  if(!repReady())return false;
+  openReport();return true;
 }
 function reportLine(st,done,total,eg,gl){
   const p=S.me,sr=streakInfo(p);
@@ -1831,8 +2422,8 @@ function dailyTip(){
   const last=n=>H.slice(-n);
   const avg=(a,f)=>a.length?a.reduce((x,h)=>x+f(h),0)/a.length:0;
   if(H.length>=3){
-    const s3=last(3).map(h=>totals(h).s);
-    if(s3.length===3&&s3[2]<s3[1]&&s3[1]<s3[0])tips.push({e:'🍬',t:'Son 3 gündür şekerin düşüyor ('+s3[0]+'g → '+s3[2]+'g). En zor kısmı geçtin, böyle devam.'});
+    const s3=last(3).map(h=>totals(h).sa);
+    if(s3.length===3&&s3[2]<s3[1]&&s3[1]<s3[0])tips.push({e:'🍬',t:'Son 3 gündür işlenmiş şekerin düşüyor ('+s3[0]+'g → '+s3[2]+'g). En zor kısmı geçtin, böyle devam.'});
     const w3=last(3).map(h=>h.water||0);
     if(w3.every(w=>w>=gl.water))tips.push({e:'💧',t:'3 gündür su hedefini tutturuyorsun. Bu artık bir alışkanlık, farkında mısın?'});
   }
@@ -2086,9 +2677,9 @@ document.addEventListener('click',e=>{
   const tb=T.closest('.tb');if(tb){S.tab=tb.dataset.tab;animate=true;if(S.tab==='prog')loadHist();render();return}
   if(T.closest('#xpBtn')||T.closest('#missInfo')){sheetXp();return}
   if(T.closest('#streakBtn')){sheetStreak();return}
-  if(T.closest('#repOk')||T.closest('#repClose')){S.me.seenReport=addDays(TODAY(),-1);saveProfile();
-    const c=$('#repCard');if(c){c.style.transition='opacity .3s,transform .3s';c.style.opacity='0';c.style.transform='translateY(-8px)';
-      setTimeout(()=>render(),320)}else render();return}
+  if(T.closest('#openRep')){openReport();return}
+  if(T.closest('#rpOk')||T.closest('#rpQuit')){closeReport(true);render();return}
+  const ra=T.closest('[data-rpact]');if(ra){closeReport(true,true);setTimeout(()=>{render();askYesterdaySteps()},280);return}
   if(T.closest('#goMove')){S.tab='move';animate=true;render();scrollTo({top:0,behavior:'smooth'});return}
   const gs=T.closest('#grpseg button');if(gs){S.grp=gs.dataset.g;S.exOpen=null;render();return}
   const xi=T.closest('[data-exinfo]');if(xi){S.exOpen=(S.exOpen===xi.dataset.exinfo)?null:xi.dataset.exinfo;render();return}
@@ -2125,6 +2716,7 @@ document.addEventListener('click',e=>{
   const fs=T.closest('[data-fs]');if(fs){const [c,i]=fs.dataset.fs.split(':');addFood(+i,c);return}
   const f=T.closest('.food');if(f){addFood(+f.dataset.f);return}
   if(T.closest('#customAdd')){customSheet();return}
+  if(T.closest('[data-sugi]')){sugarSheet();return}
   if(T.closest('#toastUndo')){undoAdd();return}
   const dl=T.closest('[data-del]');if(dl){S.day.items=(S.day.items||[]).filter(i=>i.id!==dl.dataset.del);touch();toast('🗑️ Silindi');return}
   const ed=T.closest('[data-edit]');if(ed){editItem(ed.dataset.edit);return}
@@ -2208,6 +2800,25 @@ function askSleep(){
       S.day.sleep=Math.round(n*2)/2;animate=true;touch();toast('😴 Kaydedildi');
     });
 }
+function sugarSheet(){
+  const t=totals(S.day),p=S.me,smax=SUGAR_MAX(p);
+  const src={};(S.day.items||[]).forEach(i=>{if(i.s&&!isNat(i))src[i.n]=(src[i.n]||0)+i.s});
+  const top=Object.entries(src).sort((a,b)=>b[1]-a[1]).slice(0,4);
+  openSheet(`<h3>🍬 İki tür şeker</h3>
+    <p class="hint" style="margin:8px 0 16px;font-size:13px">Hepsi kimyasal olarak şeker, ama vücuda geliş şekli farklı. Bu yüzden ayrı sayıyorum.</p>
+    <div class="sug">
+      <div class="sugbox bad"><div class="h">🍬 İşlenmiş şeker</div>
+        <div class="v num">${t.sa} g</div><div class="s">bugün · sınır ${smax} g</div>
+        <p>Tatlı, çikolata, bisküvi, kola, meyve suyu, ilave şekerli her şey. Lif ya da başka besin olmadan geldiği için kan şekerini hızla yükseltir, kısa sürede yeniden acıktırır. <b>Kısman gereken şeker bu.</b></p></div>
+      <div class="sugbox good"><div class="h">🍓 Meyve & süt şekeri</div>
+        <div class="v num">${t.sd} g</div><div class="s">bugün · rahat aralık ${NAT_MAX} g</div>
+        <p>Elmanın, muzun, sütün, yoğurdun kendi şekeri. Yanında lif, su, vitamin ve kalsiyumla geldiği için yavaş emilir ve doyurur. <b>Meyveden korkma — ama sınırsız da değil:</b> ${NAT_MAX} g kabaca 3 porsiyon meyve + 2 porsiyon süt ürünü demek. Üstüne çıkıyorsan genelde devreye meyve suyu ya da kuru meyve girmiştir; ikisi de kalorisi yoğun ve kalorileri günlük hedefine zaten yazılıyor.</p></div>
+    </div>
+    <p class="hint" style="margin-top:14px">Tek istisna <b>meyve suyu</b>: lifi alındığı için vücut onu şekerli içecek gibi işler, o yüzden işlenmiş tarafta sayılıyor. Aynısı kuru meyve için geçerli değil — lifi yerinde durur, ama kalorisi yoğundur.</p>
+    ${top.length?`<div style="margin-top:14px"><p class="eyebrow" style="margin-bottom:6px">Bugün işlenmiş şekerin nereden geldi</p>
+      ${top.map(([n,v])=>`<div class="mis"><span class="tx">${esc(n)}</span><span class="xp">${v} g</span></div>`).join('')}</div>`:''}
+    <p class="hint" style="margin-top:14px">${t.sa>smax?`Bugün sınırı <b>${t.sa-smax} g</b> aştın. En kolay kazanç şekerli içecekte: suyla ya da sade çayla değiştirmek tek başına farkı kapatıyor.`:t.sa===0?'Bugün hiç işlenmiş şeker yok — bu tek başına rozetlik bir gün 🏅':`Sınırın altındasın, <b>${smax-t.sa} g</b> payın var. İstersen akşam küçük bir tatlıya yer var.`}</p>`,true);
+}
 function customSheet(){
   openSheet(`<h3>✏️ Kendi yemeğin</h3>
     <p class="hint" style="margin:8px 0 14px;font-size:13px">Ambalajın arkasındaki değerleri ya da tahminini yaz. Sadece ad ve kalori zorunlu; kaydedince "⭐ Benim yemeklerim"e girer.</p>
@@ -2218,15 +2829,19 @@ function customSheet(){
     <div class="row2" style="margin-top:10px">
       <div class="field"><label for="cf_k">Karbonhidrat (g)</label><input class="inp num" id="cf_k" type="number" inputmode="numeric" placeholder="0"></div>
       <div class="field"><label for="cf_s">Şeker (g)</label><input class="inp num" id="cf_s" type="number" inputmode="numeric" placeholder="0"></div></div>
+    <div class="field" style="margin-top:10px"><label>Şeker nereden geliyor?</label>
+      <div class="seg"><button data-cd="0" class="on">🍬 İşlenmiş / eklenmiş</button><button data-cd="1">🍓 Meyve ya da süt</button></div>
+      <p class="hint" style="margin-top:6px;font-size:11.5px">Meyve, kuru meyve, süt ve yoğurdun kendi şekeri “meyve şekeri”dir. Ambalajda “ilave şeker” yazıyorsa ya da tatlı/içecekse işlenmiş say.</p></div>
     <div class="row2" style="margin-top:10px">
       <div class="field"><label for="cf_t">Tuz (mg)</label><input class="inp num" id="cf_t" type="number" inputmode="numeric" placeholder="0"></div>
       <div class="field"><label>Paketli mi?</label><div class="seg"><button data-cp="0" class="on">Ev yemeği</button><button data-cp="1">Paketli</button></div></div></div>
     <button class="btn" id="cf_ok" style="margin-top:16px">Kaydet ve ekle</button>`,true);
   let pk=0;$$('#sheetBody [data-cp]').forEach(b=>b.onclick=()=>{pk=+b.dataset.cp;$$('#sheetBody [data-cp]').forEach(x=>x.classList.toggle('on',x===b))});
+  let dg=0;$$('#sheetBody [data-cd]').forEach(b=>b.onclick=()=>{dg=+b.dataset.cd;$$('#sheetBody [data-cd]').forEach(x=>x.classList.toggle('on',x===b))});
   $('#cf_ok').onclick=()=>{
     const n=($('#cf_n').value||'').trim(),c=Math.round(+$('#cf_c').value||0);
     if(!n||!(c>0))return toast('Ad ve kalori gerekli 🙂');
-    const f={n,e:($('#cf_e').value||'').trim()||'🍽️',c,k:Math.round(+$('#cf_k').value||0),s:Math.round(+$('#cf_s').value||0),t:Math.round(+$('#cf_t').value||0),p:pk};
+    const f={n,e:($('#cf_e').value||'').trim()||'🍽️',c,k:Math.round(+$('#cf_k').value||0),s:Math.round(+$('#cf_s').value||0),d:dg,t:Math.round(+$('#cf_t').value||0),p:pk};
     S.me.custom=S.me.custom||[];S.me.custom.unshift(f);saveProfile();
     closeSheet();S.q='';S.cat='ozel';setTimeout(()=>addFood(0),120)};
 }
@@ -2237,7 +2852,7 @@ function addFood(i,catId){
   const id=uid();
   S.day.items.push({id,n:f.n,e:f.e,pl:po.l,m:po.m,cat:cat.id,meal:S.meal,
     c:Math.round(f.c*po.m),k:Math.round((f.k||0)*po.m),s:Math.round((f.s||0)*po.m),
-    t:Math.round((f.t||0)*po.m),p:f.p?1:0,ts:Date.now()});
+    t:Math.round((f.t||0)*po.m),p:f.p?1:0,d:f.d?1:0,ts:Date.now()});
   buzz(10);touch();toast(f.e+' eklendi · +'+Math.round(f.c*po.m)+' kcal',[id]);
 }
 function askWeight(){
@@ -2253,9 +2868,25 @@ function askWeight(){
       if(d>0){party();chime('win')}
     });
 }
+/* dünün adımını sonradan gir */
+function askYesterdaySteps(){
+  const y=yesterdayDoc();
+  const lbl=y?new Date(y.date+'T12:00:00').toLocaleDateString('tr-TR',{weekday:'long',day:'numeric',month:'long'}):'Dün';
+  numberSheet('👟 '+lbl+' — adım',
+    '<b>Google Health</b>’i aç → ana ekranda o güne ait adım sayısını gör → buraya yaz. Geçmiş günler için: Google Health’te adım kartına dokunup takvimden o günü seçebilirsin.',
+    (y&&y.steps)||0,100,[['+500',500],['+1.000',1000],['+3.000',3000],['+5.000',5000]],'adım',n=>{
+      if(!(n>=0&&n<200000))return toast('Geçerli bir sayı gir 🙂');
+      if(!y)return toast('Dün için kayıt bulunamadı');
+      y.steps=Math.round(n);y.xp=dayXp(S.me,y);
+      Store.save('days/'+S.me.id+'__'+y.date,y);
+      const all=LS.get('days')||{};all[S.me.id+'__'+y.date]=y;LS.set('days',all);
+      toast('👟 '+lbl+' için '+nf(Math.round(n))+' adım kaydedildi ✅');chime('ping');
+      render();
+    });
+}
 function askSteps(){
   numberSheet('👟 Adım girişi',
-    'Sağlık / Google Fit uygulamasındaki günlük adım sayını buraya yaz. Hedefin: '+nf(goals().step)+' adım.',
+    '<b>Google Health</b> uygulamasındaki günlük adım sayını buraya yaz. Hedefin: '+nf(goals().step)+' adım.',
     S.day.steps||0,100,[['+500',500],['+1.000',1000],['+3.000',3000],['+5.000',5000]],'adım',n=>{
       if(!(n>=0&&n<200000))return toast('Geçerli bir sayı gir 🙂');
       S.day.steps=Math.round(n);animate=true;touch();toast('👟 '+nf(Math.round(n))+' adım — süper!');
@@ -2406,7 +3037,8 @@ async function boot2(){
     S.day.steps=Math.max(S.day.steps||0,inj.steps);window.__inj=null;
     saveDay();toast('👟 '+nf(inj.steps)+' adım senkronlandı')}
   prevDone={};missions().forEach(m=>{prevDone[m.id]=m.ok});prevKcal=-1;
-  animate=true;render();loadHist();
+  animate=true;render();
+  loadHist().then(()=>{setTimeout(()=>{if(S.tab==='home')render();if(!maybeReport())checkMiles()},400)});
   loadChallenge().then(()=>{if(S.tab==='home')render()});
   if(DB){try{DB.doc('challenge/current').onSnapshot(sn=>{
     const v=sn.exists?sn.data():null;
@@ -2421,7 +3053,7 @@ async function boot2(){
     if(found)S.me=Object.assign(mine,found);
     if(S.tab==='home'||S.tab==='set')render()});
   setInterval(()=>{if(S.day&&S.day.date!==TODAY())location.reload();else if(S.tab==='home')render()},60*1000);
-  applyFreeze();checkReached();checkMiles();
+  applyFreeze();checkReached();
   if(window.__git){const g=window.__git;window.__git=null;setTimeout(()=>{
     if(g==='adim')askSteps();
     else if(g==='su'){const gl=goals();setWater(Math.min((S.day.water||0)+1,gl.water))}
@@ -2532,6 +3164,11 @@ function stepsGuide(which){
   }
   openSheet(`<h3>👟 Adımlar kendiliğinden gelsin</h3>
     <div class="seg" style="margin:12px 0 14px"><button data-splat="ios" class="${plat==='ios'?'on':''}">📱 iPhone</button><button data-splat="android" class="${plat==='android'?'on':''}">🤖 Android</button></div>${body}
+    <div class="gwarn" style="margin-top:16px">🏅 <b>İkiniz de Google Health kullanıyorsunuz — bunu değerlendirin.</b>
+      <br><br>• Google Health'te birbirinizi <b>arkadaş olarak ekleyin</b>. Haftalık adım tablosu, Denge'deki XP düellonuzun yanında ikinci bir yarış olur: biri adımı, diğeri bütün alışkanlıkları ölçer.
+      <br>• Aynı uygulamayı kullanmanın asıl faydası: <b>iki telefon da adımı aynı şekilde sayıyor.</b> Eskiden iPhone ile Android farklı algoritmayla sayıyordu ve düello adil değildi; artık öyle değil.
+      <br>• iPhone'da Google Health zaten <b>Sağlık (Apple Health)</b> verisini okuyor — yukarıdaki Kısayol da aynı kaynaktan çekiyor, yani ikisi çakışmaz.
+      <br>• Denge'ye adım girerken Google Health'teki sayıyı yazın; tek kaynak olsun, iki uygulama arasında 200-300 adımlık farkla uğraşmayın.</div>
 `,false);
 }
 function stepsLastTxt(){

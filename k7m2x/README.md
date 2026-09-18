@@ -39,11 +39,12 @@ Uygulama **`https://subclean.app/k7m2x/`** adresinde yaşayacak (rastgele bir kl
 - **iPhone:** Safari'de aç → alttaki **Paylaş** → **Ana Ekrana Ekle** (uygulama içinde adım adım gösteriyor). Apple başka yol vermiyor.
 
 **Bildirimler**
-Ayarlar → 🔔 → **Takvimime ekle**. İnen dosyaya dokun → takvime eklenir → öğlen 12:00 motivasyon, Pazar tartı günü, su saatleri gerçek bildirim olarak gelir.
+Uygulama bildirim göndermiyor; kurulacak, takvime eklenecek hiçbir şey yok. Uygulamayı günün ilk kez açtığında **dünün raporu tam ekran karşılıyor**; sonra istediğin zaman ana ekrandaki "📊 Dünün raporu" düğmesinden tekrar açabilirsin.
 
 **Adımlar kendiliğinden gelsin**
-Uygulama → Ayarlar → **👟 Adımlar kendiliğinden gelsin → Nasıl yapılır**. iPhone'da 3 dakikalık Kısayol otomasyonu (kopyala düğmeleriyle, telefon kilitliyken de çalışır); Android'de günde bir kez elle giriş — Android'in bunun için bir sistem otomasyonu yok.
-> Bunun çalışması için Firebase'de **firestore.rules** dosyasının GÜNCEL halinin yayınlanmış olması gerekir (adım 1.5). Daha önce yayınladıysan bu yeni dosyayla bir kez daha yayınla.
+Uygulama → Ayarlar → **👟 Adımlar kendiliğinden gelsin → Nasıl yapılır**.
+- **iPhone:** 3 eylemlik Kısayol otomasyonu (Sağlık Örneklerini Bul → İstatistikleri Hesapla → URL'yi Aç). Tek yapıştırma, başlık/gövde ayarı yok. Her akşam 22:00'de uygulama bir an açılıp adımı yazar. Uygulamanın hiç açılmasını istemeyenler için aynı ekranda "uzman" yöntem de var (o, Firestore kurallarının güncel olmasını gerektirir).
+- **Android:** Sistem otomasyonu yok; **Google Health** widget'ına bakıp **Hareket → ✏️ Adım gir** (10 sn) ya da yürüyüşte canlı sayaç. Adım girilmemişse uygulama akşam 18:00'den sonra ana ekranda, ertesi sabah da raporda hatırlatıyor.
 
 ---
 
