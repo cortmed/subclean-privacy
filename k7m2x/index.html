@@ -761,6 +761,7 @@ const dec=(n,d)=>String(Number(n).toFixed(d==null?1:d)).replace('.',',');
 /* işaretli ve Türkçe biçimli: +1,2 / −0,63 */
 const sgn=(n,d)=>(n>0?'+':n<0?'\u2212':'')+dec(Math.abs(n),d);
 const REDUCED=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
+const APP_VERSION='v12';
 
 const CATS=[
  {id:'karb',e:'🍞',n:'Karbonhidrat',items:[
@@ -1917,6 +1918,15 @@ function renderSet(){
           <button class="btn danger sm" data-delprof="${x.id}">Kaldır</button></div>`).join('')}
         <p class="hint">Kaldırınca o kişinin tüm kayıtları da silinir. Bu işlem geri alınamaz.</p>
       </div></details>
+  </div>
+
+  <div class="card stack">
+    <p class="eyebrow">🔄 Sürüm</p>
+    <div style="display:flex;align-items:baseline;gap:9px;flex-wrap:wrap">
+      <span class="disp num" style="font-size:24px">Denge ${APP_VERSION}</span>
+      <span class="hint" id="swState">kontrol ediliyor…</span></div>
+    <p class="hint">Yeni sürüm yüklediysen ve değişiklikleri görmüyorsan telefon eski kopyayı önbellekten açıyordur. Aşağıdaki düğme önbelleği temizleyip sunucudaki güncel sürümü indirir — <b>verilerin silinmez</b>, hepsi bulutta ve cihazda ayrı duruyor.</p>
+    <button class="btn ghost sm" id="forceUp" style="align-self:flex-start">🔄 Güncellemeyi zorla</button>
   </div>`;
 }
 
@@ -1963,6 +1973,7 @@ function render(){
   ['home','food','move','prog','set'].forEach(k=>$('#t-'+k).hidden=(k!==S.tab));
   $$('.tb').forEach(b=>b.classList.toggle('on',b.dataset.tab===S.tab));
   $('#tabbar').classList.toggle('wgtab',weighPending());
+  if(S.tab==='set')swStateTxt();
   requestAnimationFrame(()=>{
     $$('.bar i',el).forEach(i=>{const w=i.style.width;i.style.width='0';requestAnimationFrame(()=>i.style.width=w)});
     $$('.deficit-bar i',el).forEach(i=>{const w=i.style.width;i.style.width='0';requestAnimationFrame(()=>i.style.width=w)});
@@ -2787,6 +2798,9 @@ document.addEventListener('click',e=>{
   if(T.closest('#streakBtn')){sheetStreak();return}
   if(T.closest('#openRep')){openReport();return}
   if(T.closest('#wgOpen')){openWeigh();return}
+  if(T.closest('#forceUp')){confirmSheet('🔄 Güncellemeyi zorla',
+    'Önbellek temizlenip sunucudaki güncel sürüm indirilecek ve uygulama bir kez yenilenecek. Profillerin, kayıtların ve ev kodun <b>silinmez</b>.',
+    'Temizle ve yenile',forceUpdate);return}
   if(T.closest('#wgGo')){closeWeigh(false);setTimeout(()=>{render();askWeight()},280);return}
   if(T.closest('#wgLater')||T.closest('#wgQuit')){closeWeigh(true);render();toast('⚖️ Tamam — tartıldığında ana ekrandaki yanıp sönen karta dokun');return}
   if(T.closest('#rpOk')||T.closest('#rpQuit')){closeReport(true);render();return}
@@ -3312,6 +3326,55 @@ async function stepsSync(manual){
     const el=$('#stepsLast');if(el)el.innerHTML=stepsLastTxt();
   }catch(e){if(manual)toast('Bağlanılamadı')}
 }
+/* ===== sürüm / güncelleme ===== */
+let swReg=null;
+function setupSW(){
+  if(!('serviceWorker' in navigator))return;
+  try{
+    navigator.serviceWorker.register('sw.js').then(r=>{
+      swReg=r;
+      // yeni sürüm gelirse devreye girdiği anda bir kez yenile
+      r.addEventListener('updatefound',()=>{
+        const w=r.installing;if(!w)return;
+        w.addEventListener('statechange',()=>{
+          if(w.state==='activated'&&navigator.serviceWorker.controller&&!sessionStorage.getItem('dngReloaded')){
+            sessionStorage.setItem('dngReloaded','1');
+            location.reload();
+          }
+        });
+      });
+      // her açılışta ve öne gelişte sunucuyu yokla
+      const check=()=>{try{r.update()}catch(e){}};
+      setTimeout(check,1500);
+      document.addEventListener('visibilitychange',()=>{if(!document.hidden)check()});
+    }).catch(()=>{});
+  }catch(e){}
+}
+async function forceUpdate(){
+  toast('🔄 Önbellek temizleniyor…');
+  try{
+    if('serviceWorker' in navigator){
+      const rs=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(rs.map(r=>r.unregister().catch(()=>{})));
+    }
+  }catch(e){}
+  try{
+    if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}
+  }catch(e){}
+  try{sessionStorage.removeItem('dngReloaded')}catch(e){}
+  setTimeout(()=>{location.replace(location.pathname+'?g='+Date.now())},500);
+}
+async function swStateTxt(){
+  const el=$('#swState');if(!el)return;
+  if(!('serviceWorker' in navigator)){el.textContent='çevrimdışı önbellek yok';return}
+  try{
+    const r=await navigator.serviceWorker.getRegistration();
+    if(!r){el.textContent='önbellek kapalı';return}
+    try{await r.update()}catch(e){}
+    el.innerHTML=r.waiting?'<b style="color:var(--warn)">yeni sürüm hazır — yenile</b>'
+      :(navigator.onLine?'<b style="color:var(--good)">güncel</b>':'çevrimdışı');
+  }catch(e){el.textContent='—'}
+}
 async function boot(){
   applyTheme(LS.get('theme')||'');
   const up=parseUrlParams();
@@ -3319,7 +3382,7 @@ async function boot(){
   const joined=up.joined;
   await initFirebase();
   if(joined)setTimeout(()=>toast('👫 Eve katıldın! Şimdi profilini kur'),800);
-  if('serviceWorker' in navigator){try{navigator.serviceWorker.register('sw.js')}catch(e){}}
+  setupSW();
   let list=null;
   if(DB){try{const s=await DB.collection('profiles').get();list=s.docs.map(d=>d.data()).filter(x=>x&&x.id)}catch(e){}}
   if(!list||!list.length)list=LS.get('profiles')||[];
