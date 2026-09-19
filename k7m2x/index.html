@@ -444,7 +444,8 @@ input,select{font:inherit;color:inherit}
   width:min(492px,calc(100% - 32px));display:grid;grid-template-columns:repeat(5,1fr);gap:1px;z-index:30;
   background:color-mix(in srgb,var(--bg2) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border:1px solid var(--line);border-radius:20px;padding:6px;box-shadow:var(--shadow)}
-.tb{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 1px 7px;border-radius:13px;font-size:9.5px;font-weight:800;color:var(--ink2);transition:.22s;letter-spacing:-.01em}
+.tb{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 1px 7px;border-radius:13px;font-size:9.5px;font-weight:800;color:var(--ink2);transition:.22s;letter-spacing:-.01em}
+.tabbar.wgtab .tb[data-tab="home"]::after{content:"\2696\FE0F";position:absolute;top:2px;right:calc(50% - 21px);font-size:11px;line-height:1;animation:wgBlink 1.3s ease-in-out infinite}
 .tb .e{font-size:20px;line-height:1;transition:transform .3s cubic-bezier(.34,1.56,.64,1);filter:grayscale(.55) opacity(.75)}
 .tb.on .e{filter:none}
 .tb.on{background:var(--acc-soft);color:var(--acc)} .tb.on .e{transform:translateY(-2px) scale(1.14)}
@@ -526,9 +527,9 @@ details[open]>summary::after{transform:rotate(180deg)}
 .copyrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin:-2px 0 2px 40px}
 .copyrow code{font-size:10.5px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;word-break:break-all;line-height:1.4}
 /* ===== dün raporu — tam ekran ===== */
-#report{position:fixed;inset:0;z-index:97;background:var(--bg);display:flex;flex-direction:column;
+#report,#weigh{position:fixed;inset:0;z-index:97;background:var(--bg);display:flex;flex-direction:column;
   opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .34s cubic-bezier(.22,1,.36,1),transform .34s cubic-bezier(.22,1,.36,1)}
-#report.on{opacity:1;pointer-events:auto;transform:none}
+#report.on,#weigh.on{opacity:1;pointer-events:auto;transform:none}
 .rp-top{display:flex;align-items:center;justify-content:space-between;gap:10px;
   padding:calc(14px + env(safe-area-inset-top,0px)) 18px 12px;
   background:linear-gradient(180deg,var(--acc-soft),transparent);position:relative;z-index:2}
@@ -603,8 +604,31 @@ details[open]>summary::after{transform:rotate(180deg)}
 .rp-empty .e{font-size:54px;display:block}
 .rp-empty .t{font-family:"Bricolage Grotesque",sans-serif;font-size:21px;font-weight:800;margin-top:12px}
 .rp-empty p{font-size:13px;font-weight:600;color:var(--ink2);line-height:1.6;margin-top:8px}
+/* tartı ekranı */
+.wg-scale{width:128px;height:128px;margin:0 auto 14px;border-radius:50%;
+  background:radial-gradient(circle at 50% 38%,var(--acc-soft),var(--bg3));
+  display:grid;place-items:center;border:1.5px solid var(--line);
+  animation:rpIn .5s cubic-bezier(.22,1,.36,1) both}
+.wg-emoji{font-size:58px;line-height:1;display:block;transform-origin:50% 78%;
+  animation:wgTilt 3.4s ease-in-out .5s infinite}
+@keyframes wgTilt{0%,72%,100%{transform:rotate(0)}78%{transform:rotate(-7deg)}
+  84%{transform:rotate(6deg)}90%{transform:rotate(-3deg)}95%{transform:rotate(1deg)}}
+.wg-note{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;
+  background:var(--bg3);border:1px solid var(--line);border-radius:var(--r);padding:13px 15px;
+  font-size:12.5px;font-weight:600;line-height:1.6;
+  animation:rpIn .45s cubic-bezier(.22,1,.36,1) .24s both}
+.wg-note.good{background:color-mix(in srgb,var(--good) 9%,var(--bg3));
+  border-color:color-mix(in srgb,var(--good) 40%,transparent)}
+.wg-note .e{font-size:20px;line-height:1.3}
+
+/* "sonra ekleyeceğim" denince tartı yeri yanıp söner */
+@keyframes wgGlow{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--acc) 50%,transparent)}
+  55%{box-shadow:0 0 0 9px transparent}}
+@keyframes wgBlink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(1.13)}}
+.wgpulse{animation:wgGlow 1.9s ease-out infinite;border-color:var(--acc)!important}
+.wgpulse .wgdot{animation:wgBlink 1.3s ease-in-out infinite;display:inline-block}
 @media (prefers-reduced-motion:reduce){
-  #report *{animation:none!important;transition:none!important}}
+  #report *,#weigh *,.wgpulse,.wgpulse .wgdot{animation:none!important;transition:none!important}}
 
 .repbtn{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;width:100%;
   text-align:left;background:var(--bg2);border:1px solid var(--line);border-left:4px solid var(--acc);
@@ -701,6 +725,17 @@ details[open]>summary::after{transform:rotate(180deg)}
   <div class="rp-body" id="rpBody"></div>
   <div class="rp-btns"><button class="btn" id="rpOk">Bugüne başla →</button></div>
 </div>
+<div id="weigh" role="dialog" aria-label="Tartı günü">
+  <div class="rp-top">
+    <span class="rp-date">⚖️ Pazar · tartı günü</span>
+    <button class="rp-x" id="wgQuit" aria-label="Kapat">✕</button>
+  </div>
+  <div class="rp-body" id="wgBody"></div>
+  <div class="rp-btns">
+    <button class="btn" id="wgGo">⚖️ Tartıldım, kilomu gireyim</button>
+    <button class="btn ghost" id="wgLater" style="margin-top:8px">Sonra ekleyeceğim</button>
+  </div>
+</div>
 <input type="file" id="bkFile" accept="application/json,.json" hidden>
 <canvas id="wave"></canvas>
 <div id="waveTxt"><div class="big" id="waveBig">1/8</div><div class="sub" id="waveSub"></div></div>
@@ -723,6 +758,8 @@ const DAYN=['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'];
 const uid=()=>Math.random().toString(36).slice(2,9);
 const nf=n=>Number(n).toLocaleString('tr-TR');
 const dec=(n,d)=>String(Number(n).toFixed(d==null?1:d)).replace('.',',');
+/* işaretli ve Türkçe biçimli: +1,2 / −0,63 */
+const sgn=(n,d)=>(n>0?'+':n<0?'\u2212':'')+dec(Math.abs(n),d);
 const REDUCED=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 const CATS=[
@@ -1297,7 +1334,10 @@ function closeSheet(){$('#scrim').classList.remove('on');$('#sheet').classList.r
 $('#scrim').addEventListener('click',closeSheet);
 $('#sheetClose').addEventListener('click',closeSheet);
 $('#sheetBottom').addEventListener('click',closeSheet);
-document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if($('#report').classList.contains('on'))closeReport(true);else closeSheet()});
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;
+  if($('#weigh').classList.contains('on'))closeWeigh(true),render();
+  else if($('#report').classList.contains('on'))closeReport(true);
+  else closeSheet()});
 function confirmSheet(title,desc,okText,onOk,danger){
   openSheet(`<h3>${title}</h3><p class="hint" style="margin:8px 0 18px;font-size:13px">${desc}</p>
     <div style="display:flex;gap:9px"><button class="btn ghost" id="cfNo">Vazgeç</button>
@@ -1435,10 +1475,12 @@ function renderHome(){
     <span style="flex:1">Bugün hiç adım girilmemiş. <b>Google Health</b>’i aç, ana ekrandaki sayıyı buraya yaz — 10 saniye, bir görev daha tamam.</span>
     <button class="btn sm" id="stepManual">Gir</button></div>`:''}
 
-  ${isSun&&!d.weight?`<div class="card stack aq">
-    <p class="eyebrow">⚖️ Bugün tartı günü</p>
-    <p class="motiv">Pazar sabahı ölçüm zamanı! Sayı ne çıkarsa çıksın, sen bu hafta emek verdin 💛</p>
-    <button class="btn" id="logWeight2">Bu haftaki kilomu gir</button></div>`:''}
+  ${isSun&&!d.weight?`<div class="card stack aq${weighPending()?' wgpulse':''}">
+    <p class="eyebrow"><span class="wgdot">⚖️</span> Bugün tartı günü</p>
+    <p class="motiv">${weighPending()?'Tartıldıktan sonra buraya dönmeyi unutma — bu düğme sen girene kadar burada bekliyor ⚖️':'Pazar sabahı ölçüm zamanı! Sayı ne çıkarsa çıksın, sen bu hafta emek verdin 💛'}</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" id="logWeight2" style="flex:1">Bu haftaki kilomu gir</button>
+      ${weighPending()?'<button class="btn ghost" id="wgOpen" style="width:auto">Nasıl?</button>':''}</div></div>`:''}
 
   <div class="card stack">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -1709,7 +1751,7 @@ function renderProg(){
     <div style="display:flex;justify-content:space-between" class="hint">
       <span>%${Math.round(prog*100)} tamamlandı${done>0?' · '+done.toFixed(1)+' kg verdin 🎉':''}</span><span>${daysLeft} gün kaldı</span></div>
     ${eta?`<p class="motiv">${eta}</p>`:''}
-    <button class="btn ghost sm" id="logWeight" style="align-self:flex-start">⚖️ Kilo kaydı ekle</button>
+    <button class="btn ghost sm${weighPending()?' wgpulse':''}" id="logWeight" style="align-self:flex-start"><span class="wgdot">⚖️</span> Kilo kaydı ekle</button>
   </div>
   ${trendCard()}
   <div class="card stack">
@@ -1920,6 +1962,7 @@ function render(){
   el.innerHTML=map[S.tab]();
   ['home','food','move','prog','set'].forEach(k=>$('#t-'+k).hidden=(k!==S.tab));
   $$('.tb').forEach(b=>b.classList.toggle('on',b.dataset.tab===S.tab));
+  $('#tabbar').classList.toggle('wgtab',weighPending());
   requestAnimationFrame(()=>{
     $$('.bar i',el).forEach(i=>{const w=i.style.width;i.style.width='0';requestAnimationFrame(()=>i.style.width=w)});
     $$('.deficit-bar i',el).forEach(i=>{const w=i.style.width;i.style.width='0';requestAnimationFrame(()=>i.style.width=w)});
@@ -2173,7 +2216,7 @@ function trendCard(){
   return `<div class="card stack">
     <p class="eyebrow">📉 Gerçek trend — 7 günlük ortalama</p>
     <div style="display:flex;align-items:baseline;gap:9px;flex-wrap:wrap">
-      <span class="disp num" style="font-size:28px;color:${col}">${pw>0?'+':''}${dec(pw,2)} kg</span>
+      <span class="disp num" style="font-size:28px;color:${col}">${sgn(pw,2)} kg</span>
       <span class="hint">haftalık ${dir} · şu anki ortalama ${dec(t.now,1)} kg</span></div>
     ${lineChart(rows,'kg',S.me.target)}
     <p class="hint">Günlük tartı su tutmayla 1-2 kg oynar. Bu çizgi o gürültüyü siler — asıl gidişat budur.</p>
@@ -2268,6 +2311,70 @@ function yesterdayDoc(){
   const y=addDays(TODAY(),-1);
   return S.hist.find(h=>h&&h.date===y)||null;
 }
+/* ===== pazar tartı günü — tam ekran ===== */
+function lastWeighIn(){
+  const all=[...S.hist,S.day].filter(h=>h&&h.weight>0).sort((a,b)=>a.date<b.date?-1:1);
+  return all.length?all[all.length-1]:null;
+}
+function weighHTML(){
+  const p=S.me,g=calc(p),last=lastWeighIn();
+  const prev=last&&last.date!==TODAY()?last:null;
+  const gap=prev?Math.round((new Date(TODAY())-new Date(prev.date))/864e5):0;
+  const target=p.target||p.weight, rem=Math.round((p.weight-target)*10)/10;
+  const chips=[];
+  if(prev)chips.push(`<span class="rp-chip">Son ölçüm <b>${dec(prev.weight)} kg</b></span>`);
+  if(gap)chips.push(`<span class="rp-chip"><b>${gap}</b> gün önce</span>`);
+  chips.push(`<span class="rp-chip">Hedef <b>${dec(target)} kg</b></span>`);
+  if(Math.abs(rem)>=0.1)chips.push(`<span class="rp-chip">Kalan <b>${dec(Math.abs(rem))} kg</b></span>`);
+  const t=weightTrend();
+  let trendLine='';
+  if(t&&Math.abs(t.perWeek)>=0.05){
+    const iyi=(target<p.weight)?t.perWeek<0:t.perWeek>0;
+    trendLine=`<div class="wg-note ${iyi?'good':''}"><span class="e">${iyi?'📉':'📈'}</span>
+      <div>Son haftalardaki gerçek eğilimin <b>haftada ${sgn(t.perWeek,2)} kg</b>.
+      ${iyi?'Bugünkü sayı bunun altında ya da üstünde çıkabilir — önemli olan çizgi, tek nokta değil.':'Bugünkü ölçüm bu çizgiyi düzeltmen için ilk adım. Panik yok.'}</div></div>`;
+  }
+  return `
+  <div class="rp-hero">
+    <div class="wg-scale"><span class="wg-emoji">⚖️</span></div>
+    <h2 class="rp-title">Tartı günü</h2>
+    <p class="rp-sub">Pazar geldi — haftanın tek ölçümü</p>
+    <div class="rp-chips">${chips.join('')}</div>
+  </div>
+  ${trendLine}
+  <section class="rp-sec tip">
+    <h3>📋 Doğru ölçüm için</h3>
+    <div class="rp-item" style="--d:0ms"><span class="e">🌅</span><div class="tx"><b>Sabah, kalkar kalkmaz.</b> Gün içinde yenen her şey tartıyı 1-2 kg oynatır; sabah en sakin an.</div></div>
+    <div class="rp-item" style="--d:60ms"><span class="e">🚽</span><div class="tx"><b>Tuvaletten sonra, kahvaltıdan önce.</b> Aç karnına.</div></div>
+    <div class="rp-item" style="--d:120ms"><span class="e">👕</span><div class="tx"><b>Her hafta aynı kıyafetle</b> (ya da çıplak) ve <b>aynı tartıda</b>. Farklı tartılar 1 kg'a kadar sapabilir.</div></div>
+    <div class="rp-item" style="--d:180ms"><span class="e">🧂</span><div class="tx">Dün tuzlu yediysen ya da geç yattıysan sayı yukarı çıkabilir — bu <b>su</b>, yağ değil. İki güne geçer.</div></div>
+  </section>
+  <div class="rp-goal">Sayı ne çıkarsa çıksın: sen bu hafta emek verdin. Tartı bir bilgi, bir not defteri — bir karne değil 💛</div>`;
+}
+function openWeigh(){
+  $('#wgBody').innerHTML=weighHTML();
+  $('#wgBody').scrollTop=0;
+  $('#weigh').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeWeigh(later){
+  if(later&&S.me){S.me.weighLater=TODAY();saveProfile()}
+  $('#weigh').classList.remove('on');
+  document.body.style.overflow='';
+}
+function isWeighDay(){return new Date().getDay()===0}
+function weighPending(){
+  const p=S.me;
+  return !!(p&&isWeighDay()&&!(S.day&&S.day.weight)&&p.weighLater===TODAY());
+}
+function maybeWeigh(){
+  const p=S.me;if(!p)return false;
+  if(!isWeighDay())return false;
+  if(S.day&&S.day.weight)return false;
+  if(p.weighLater===TODAY())return false;
+  openWeigh();return true;
+}
+
 /* ===== dün raporu — tam ekran karşılama ===== */
 function repHead(st,done,total){
   if(!st.n&&!st.steps)return{e:'🌱',t:'Sessiz bir gündü',s:'Kayıt yok — bugün temiz bir sayfa'};
@@ -2395,7 +2502,8 @@ function closeReport(seen,skipMiles){
   if(seen&&S.me){S.me.seenReport=addDays(TODAY(),-1);saveProfile()}
   $('#report').classList.remove('on');
   document.body.style.overflow='';
-  if(!skipMiles)setTimeout(checkMiles,420);
+  if(skipMiles)return;
+  setTimeout(()=>{if(!maybeWeigh())checkMiles()},420);
 }
 function maybeReport(){
   const p=S.me;if(!p)return false;
@@ -2678,6 +2786,9 @@ document.addEventListener('click',e=>{
   if(T.closest('#xpBtn')||T.closest('#missInfo')){sheetXp();return}
   if(T.closest('#streakBtn')){sheetStreak();return}
   if(T.closest('#openRep')){openReport();return}
+  if(T.closest('#wgOpen')){openWeigh();return}
+  if(T.closest('#wgGo')){closeWeigh(false);setTimeout(()=>{render();askWeight()},280);return}
+  if(T.closest('#wgLater')||T.closest('#wgQuit')){closeWeigh(true);render();toast('⚖️ Tamam — tartıldığında ana ekrandaki yanıp sönen karta dokun');return}
   if(T.closest('#rpOk')||T.closest('#rpQuit')){closeReport(true);render();return}
   const ra=T.closest('[data-rpact]');if(ra){closeReport(true,true);setTimeout(()=>{render();askYesterdaySteps()},280);return}
   if(T.closest('#goMove')){S.tab='move';animate=true;render();scrollTo({top:0,behavior:'smooth'});return}
@@ -2862,7 +2973,7 @@ function askWeight(){
     cur,0.1,[['−0,5',-0.5],['−0,1',-0.1],['+0,1',0.1],['+0,5',0.5]],'kg',n=>{
       if(!(n>20&&n<300))return toast('Geçerli bir kilo gir 🙂');
       const before=S.me.weight;
-      S.day.weight=n;S.me.weight=n;saveProfile();animate=true;touch();
+      S.day.weight=n;S.me.weight=n;S.me.weighLater=null;saveProfile();animate=true;touch();
       const d=Math.round((before-n)*10)/10;
       toast(d>0?('⚖️ '+n+' kg — '+d.toFixed(1)+' kg aşağı, harika! 🎉'):d<0?('⚖️ '+n+' kg kaydedildi. Dalgalanma çok normal 💛'):('⚖️ '+n+' kg kaydedildi'));
       if(d>0){party();chime('win')}
@@ -3038,7 +3149,7 @@ async function boot2(){
     saveDay();toast('👟 '+nf(inj.steps)+' adım senkronlandı')}
   prevDone={};missions().forEach(m=>{prevDone[m.id]=m.ok});prevKcal=-1;
   animate=true;render();
-  loadHist().then(()=>{setTimeout(()=>{if(S.tab==='home')render();if(!maybeReport())checkMiles()},400)});
+  loadHist().then(()=>{setTimeout(()=>{if(S.tab==='home')render();if(!maybeReport()&&!maybeWeigh())checkMiles()},400)});
   loadChallenge().then(()=>{if(S.tab==='home')render()});
   if(DB){try{DB.doc('challenge/current').onSnapshot(sn=>{
     const v=sn.exists?sn.data():null;

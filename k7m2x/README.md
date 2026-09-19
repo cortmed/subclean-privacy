@@ -38,6 +38,9 @@ Uygulama **`https://subclean.app/k7m2x/`** adresinde yaşayacak (rastgele bir kl
 - **Android:** Uygulama içinde **"📲 Uygulamayı yükle"** düğmesi çıkar → tek dokunuş.
 - **iPhone:** Safari'de aç → alttaki **Paylaş** → **Ana Ekrana Ekle** (uygulama içinde adım adım gösteriyor). Apple başka yol vermiyor.
 
+**Pazar = tartı günü**
+Pazar günü uygulamayı açtığında tam ekran bir "⚖️ Tartı günü" ekranı karşılıyor: son ölçüm, hedefe kalan, haftalık gerçek eğilim ve doğru ölçüm kuralları. İki seçenek var — *Tartıldım, kilomu gireyim* ya da *Sonra ekleyeceğim*. "Sonra" dersen ana ekrandaki tartı kartı, İlerleme'deki kilo düğmesi ve alt menüdeki Bugün sekmesi sen kiloyu girene kadar yanıp söner.
+
 **Bildirimler**
 Uygulama bildirim göndermiyor; kurulacak, takvime eklenecek hiçbir şey yok. Uygulamayı günün ilk kez açtığında **dünün raporu tam ekran karşılıyor**; sonra istediğin zaman ana ekrandaki "📊 Dünün raporu" düğmesinden tekrar açabilirsin.
 
