@@ -1,8 +1,8 @@
 {
-  "id": "tatil-masraflari",
-  "name": "Tatil Masrafları",
-  "short_name": "Tatil",
-  "description": "Ahmed & Buket tatil masraf takibi",
+  "id": "expense-ab",
+  "name": "Expense",
+  "short_name": "Expense",
+  "description": "Ahmed & Buket ortak masraf defteri",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

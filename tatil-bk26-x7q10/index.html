@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<title>Tatil Masrafları</title>
+<title>Expense</title>
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="theme-color" content="#0f766e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Tatil">
+<meta name="apple-mobile-web-app-title" content="Expense">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
@@ -97,7 +97,7 @@ input:focus,textarea:focus{border-color:var(--teal);}
   border-radius:12px; font-size:13px; cursor:pointer; color:var(--muted);}
 .catgrid button.sel{background:var(--teal-light); border-color:var(--teal); color:var(--teal-dark); font-weight:600;}
 .catgrid button span{display:block; font-size:20px; margin-bottom:2px;}
-.themegrid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px;}
+.themegrid{display:grid; grid-template-columns:repeat(5,1fr); gap:6px;}
 .themegrid button{padding:10px 4px; border:1.5px solid var(--line); background:var(--bg);
   border-radius:12px; font-size:11px; cursor:pointer; color:var(--muted);}
 .themegrid button.sel{background:var(--teal-light); border-color:var(--teal); color:var(--teal-dark); font-weight:600;}
@@ -291,6 +291,160 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
 .rwbody>*:nth-child(4){animation-delay:.21s}
 .rwbody>*:nth-child(5){animation-delay:.28s}
 .rwbody>*:nth-child(6){animation-delay:.35s}
+:root{ --gold:#e9c46a; }
+html[data-theme=nisan]{ --teal:#b4547a; --teal-dark:#8f3b5e; --teal-light:#fbe4ec; --bg:#fbf5f3;
+  --gold:#f2cf7e; --p1c:#2f7f8c; --p2c:#c2547d; }
+html[data-theme=nisan] header{background:linear-gradient(135deg,#b4547a 0%,#d98aa5 100%); border-bottom:3px solid var(--gold);}
+html[data-theme=nisan] .card h2{color:#a4577a;}
+html[data-theme=nisan] .fab{background:linear-gradient(135deg,#b4547a,#cf7b98); box-shadow:0 6px 18px rgba(180,84,122,.4);}
+.seg2{display:grid; grid-template-columns:1fr 1fr;}
+
+.hero{position:relative; overflow:hidden; background:var(--teal); color:#fff; border-radius:22px;
+  padding:18px 16px 16px; margin-bottom:14px; text-align:center; animation:fadeup .45s ease both;}
+html[data-theme=nisan] .hero{background:linear-gradient(140deg,#a9476f 0%,#d98aa5 100%);
+  box-shadow:0 8px 24px rgba(180,84,122,.25);}
+.hero>*{position:relative; z-index:1;}
+.hero .hk{font-size:12px; letter-spacing:1.5px; opacity:.92; text-transform:uppercase;}
+.hero .ht{font-size:21px; font-weight:800; margin:4px 0 10px;}
+.hero .hsub{font-size:14px; opacity:.92;}
+.hero .hbig{font-size:46px; line-height:1.1; margin:6px 0 2px;}
+.cdn{display:flex; gap:8px; justify-content:center; margin-top:10px;}
+.cdn div{background:rgba(255,255,255,.18); border-radius:14px; width:68px; padding:10px 0;}
+.cdn b{display:block; font-size:27px; font-weight:800; font-variant-numeric:tabular-nums;}
+.cdn span{font-size:11px; opacity:.88;}
+.cdn b.tickp{animation:tickp .35s ease;}
+@keyframes tickp{0%{transform:translateY(-5px); opacity:.35;} 100%{transform:none; opacity:1;}}
+.hdate{font-size:12px; opacity:.92; margin-top:10px;}
+.hsmall{font-size:12px; background:rgba(255,255,255,.18); border-radius:12px; padding:6px 11px; display:inline-block; margin-top:10px;}
+.fh{position:absolute; bottom:-24px; font-size:15px; opacity:0; animation:fh 7s linear infinite; pointer-events:none; z-index:0;}
+@keyframes fh{0%{transform:translateY(0) scale(.8); opacity:0;} 15%{opacity:.5;} 100%{transform:translateY(-260px) scale(1.2); opacity:0;}}
+.ring{display:inline-block; animation:ringglow 2.4s ease-in-out infinite;}
+@keyframes ringglow{0%,100%{transform:rotate(-8deg) scale(1);} 50%{transform:rotate(8deg) scale(1.12);}}
+.ms{display:flex; align-items:flex-start; margin:16px 4px 2px;}
+.msn{display:flex; flex-direction:column; align-items:center; width:84px; flex-shrink:0;}
+.msn i{width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-style:normal; font-size:16px; border:2px solid rgba(255,255,255,.75); font-weight:800;}
+.msn.done i{background:var(--gold); border-color:var(--gold); color:#5a3a00;}
+.msn.next i{background:#fff; animation:mspulse 1.6s ease-in-out infinite;}
+.msn.none i{opacity:.5; border-style:dashed;}
+.msn b{font-size:11px; margin-top:5px; font-weight:700;}
+.msn span{font-size:10px; opacity:.85;}
+.mseg{flex:1; height:4px; background:rgba(255,255,255,.3); border-radius:2px; margin-top:16px; overflow:hidden;}
+.mseg div{height:100%; background:var(--gold); transition:width .8s ease;}
+@keyframes mspulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.65);} 50%{box-shadow:0 0 0 9px rgba(255,255,255,0);}}
+.hprog{margin-top:12px; text-align:left;}
+.hprog .pb{height:8px; background:rgba(255,255,255,.25); border-radius:4px; overflow:hidden;}
+.hprog .pb div{height:100%; background:var(--gold); border-radius:4px; animation:grow 1.2s cubic-bezier(.2,.8,.2,1) both;}
+.hprog .pl{display:flex; justify-content:space-between; font-size:11px; opacity:.92; margin-top:4px;}
+.hbtns2{display:flex; gap:8px; justify-content:center; margin-top:12px; flex-wrap:wrap; align-items:center;}
+.hbtns2 button{background:rgba(255,255,255,.22); color:#fff; border:none; border-radius:12px; padding:9px 13px;
+  font-size:13px; font-weight:700; cursor:pointer;}
+.hbtns2 .lock{font-size:12px; opacity:.85;}
+
+.uprow{display:flex; align-items:center; gap:8px; padding:8px 0; border-top:1px solid var(--line); font-size:13px;}
+.uprow .ud{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.uprow .ut{font-weight:600; white-space:nowrap;}
+.uprow.soon .ut{color:var(--due);} .uprow.late .ut{color:var(--red);}
+.uphead{font-size:12px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.4px; margin:14px 0 2px;}
+
+.plsum{display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:4px;}
+.plrow{display:flex; align-items:center; gap:10px; padding:11px 6px; border-top:1px solid var(--line); cursor:pointer; border-radius:10px;}
+.plrow.pop{animation:pop .35s ease both;}
+.plrow .dtag{font-weight:700;}
+.plrow.soon .dtag{color:var(--due);}
+.plrow.late .dtag{color:var(--red);}
+.plrow.late{background:rgba(220,38,38,.06);}
+.kchip{font-size:10px; font-weight:700; background:var(--duebg); color:var(--duetx); border-radius:8px; padding:2px 6px; vertical-align:middle;}
+.paybtn{background:var(--okbg); color:var(--oktx); border:none; border-radius:10px; padding:9px 10px;
+  font-size:12px; font-weight:700; cursor:pointer; white-space:nowrap;}
+.addline{width:100%; margin-top:10px; padding:11px; border:1.5px dashed var(--teal); background:transparent;
+  color:var(--teal); border-radius:12px; font-weight:700; font-size:14px; cursor:pointer;}
+html[data-theme=gece] .addline{color:var(--teal-dark);}
+.danger{color:var(--red) !important;}
+.payinfo{background:var(--bg); border-radius:14px; padding:14px; text-align:center; font-size:14px;}
+.payinfo b{display:block; font-size:26px; margin-top:4px;}
+.paywho{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.paywho button{padding:18px 8px; border-radius:14px; border:1.5px solid var(--line); background:var(--bg);
+  color:var(--ink); font-size:15px; font-weight:700; cursor:pointer;}
+.paywho button:active{background:var(--okbg); border-color:var(--ok);}
+
+.cbrow{padding:9px 0; border-top:1px solid var(--line);}
+.cbrow:first-child{border-top:none;}
+.cbtop{display:flex; justify-content:space-between; gap:8px; font-size:14px;}
+.cbtop b{font-size:13px; white-space:nowrap;}
+.cbof{color:var(--muted); font-weight:500;}
+.cbar2{display:flex; height:10px; background:var(--line); border-radius:6px; overflow:hidden; margin:6px 0 4px;}
+.cbar2 .sp{background:var(--teal);}
+.cbar2 .sp.over{background:var(--red);}
+.cbar2 .pl{background:repeating-linear-gradient(45deg,var(--teal) 0 4px,transparent 4px 8px); opacity:.5;}
+.cbsub{font-size:11px; color:var(--muted);}
+.grow{animation:grow 1s cubic-bezier(.2,.8,.2,1) both;}
+@keyframes grow{from{width:0;}}
+.cbin{display:flex; align-items:center; gap:10px; margin-top:8px;}
+.cbin span{flex:1; font-size:14px;}
+.cbin input{width:150px !important; padding:10px 12px !important;}
+
+.tdprog{display:flex; align-items:center; gap:10px; margin-bottom:6px;}
+.tdprog .pb{flex:1; height:8px; background:var(--line); border-radius:4px; overflow:hidden;}
+.tdprog .pb div{height:100%; background:var(--ok); border-radius:4px; transition:width .5s ease;}
+.tdprog b{font-size:13px; white-space:nowrap;}
+.td{display:flex; align-items:center; gap:10px; padding:9px 0; border-top:1px solid var(--line);}
+.tchk{width:27px; height:27px; border-radius:50%; border:2px solid var(--line); background:transparent;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;
+  color:transparent; font-weight:800; font-size:14px; transition:all .25s;}
+.td.done .tchk{background:var(--ok); border-color:var(--ok); color:#fff;}
+.td.justdone .tchk{animation:chkpop .5s cubic-bezier(.2,1.5,.4,1);}
+@keyframes chkpop{0%{transform:scale(.4);} 60%{transform:scale(1.3);} 100%{transform:scale(1);}}
+.td .tt{flex:1; font-size:14px; transition:color .3s;}
+.td.done .tt{color:var(--muted); text-decoration:line-through;}
+.tdadd{display:flex; gap:8px; margin-top:10px;}
+.tdadd input{flex:1; min-width:0;}
+.tdadd button{padding:0 16px; border:none; border-radius:12px; background:var(--teal); color:#fff; font-weight:700; cursor:pointer;}
+.tdsug{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+.tdsug button{border:1.5px dashed var(--line); background:transparent; color:var(--muted); border-radius:14px;
+  padding:6px 10px; font-size:12px; cursor:pointer;}
+
+.evrow{margin-top:14px;}
+.evh{font-size:14px; font-weight:700; margin-bottom:6px;}
+
+.toast{position:fixed; left:50%; bottom:calc(92px + env(safe-area-inset-bottom)); transform:translateX(-50%) translateY(20px);
+  background:var(--ink); color:var(--card); padding:11px 16px; border-radius:14px; font-size:14px; font-weight:600;
+  opacity:0; pointer-events:none; transition:all .3s; z-index:450; max-width:90vw; text-align:center;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.cele{position:fixed; inset:0; z-index:500; display:none; align-items:center; justify-content:center;
+  background:rgba(40,12,26,.55); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);}
+.cele.open{display:flex; animation:fadein .3s ease both;}
+.celebox{background:var(--card); color:var(--ink); border-radius:28px; padding:28px 24px 24px; text-align:center;
+  width:min(86vw,340px); animation:popin .5s cubic-bezier(.2,1.4,.4,1) both;}
+.rings{position:relative; height:112px; margin-bottom:4px;}
+.rg{position:absolute; top:12px; left:50%; width:88px; height:88px; border-radius:50%; border:10px solid #e2b04a;
+  box-sizing:border-box; box-shadow:inset 0 0 0 2px rgba(255,255,255,.55), 0 4px 10px rgba(160,110,20,.25);}
+.rg.l{margin-left:-72px; animation:ringL 1s cubic-bezier(.3,1.3,.5,1) .15s both;}
+.rg.r{margin-left:-16px; border-color:#dba5b8; animation:ringR 1s cubic-bezier(.3,1.3,.5,1) .15s both;}
+.spark{position:absolute; left:50%; top:40px; margin-left:-12px; font-size:24px; animation:sparkin .6s ease 1s both;}
+@keyframes ringL{from{transform:translateX(-130px) rotate(-50deg); opacity:0;} to{transform:none; opacity:1;}}
+@keyframes ringR{from{transform:translateX(130px) rotate(50deg); opacity:0;} to{transform:none; opacity:1;}}
+@keyframes sparkin{0%{transform:scale(0) rotate(-90deg); opacity:0;} 70%{transform:scale(1.4);} 100%{transform:scale(1); opacity:1;}}
+.cetitle{font-size:27px; font-weight:800; animation:popin .5s ease .9s both;}
+.cesub{font-size:14px; color:var(--muted); margin-top:6px; animation:fadeup .5s ease 1.05s both;}
+.cenames{font-size:15px; font-weight:700; margin-top:14px; color:var(--teal); animation:fadeup .5s ease 1.2s both;}
+html[data-theme=gece] .cenames{color:var(--teal-dark);}
+@keyframes popin{from{transform:scale(.6); opacity:0;} to{transform:none; opacity:1;}}
+@keyframes fadein{from{opacity:0;} to{opacity:1;}}
+
+.tl{text-align:left; margin-top:14px;}
+.tl>div{display:flex; gap:10px; padding:8px 0 10px 14px; border-left:2px solid rgba(255,255,255,.5); position:relative; font-size:14px;}
+.tl>div::before{content:""; position:absolute; left:-7px; top:13px; width:12px; height:12px; border-radius:50%; background:#fff;}
+.tl small{display:block; font-size:12px; opacity:.85; margin-top:2px;}
+.bseg button{font-size:14px; padding:11px 4px;}
+.bseg button small{font-weight:600; opacity:.8; margin-left:2px;}
+.bsub{font-size:12px; color:var(--muted); margin:10px 0 8px;}
+.bhead{font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin:12px 0 0; padding-top:8px; border-top:1px dashed var(--line);}
+.bitem .tt{cursor:pointer;}
+.bitem.done .tt{color:var(--muted); text-decoration:line-through; text-decoration-thickness:1.5px; opacity:1;}
+.bst{font-size:11px; font-weight:700; border-radius:10px; padding:3px 8px; white-space:nowrap; background:var(--duebg); color:var(--duetx);}
+.bitem.done .bst{background:var(--okbg); color:var(--oktx);}
 </style>
 </head>
 <body>
@@ -298,12 +452,12 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
 <header>
   <div class="wrap">
     <div>
-      <h1 id="tripName">🌴 Tatil</h1>
+      <h1 id="tripName">📒 Expense</h1>
       <div class="sub"><span id="syncPill" class="pill off">yerel mod</span></div>
     </div>
     <div class="hbtns">
       <button class="iconbtn" onclick="rwStart()" aria-label="Rewind">✨</button>
-      <button class="iconbtn" onclick="openSheet('trips')" aria-label="Tatillerim">🧳</button>
+      <button class="iconbtn" onclick="openSheet('trips')" aria-label="Defterlerim">📒</button>
       <button class="iconbtn" onclick="openSheet('settings')" aria-label="Ayarlar">⚙️</button>
     </div>
   </div>
@@ -315,6 +469,13 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
     <div class="ib" id="installTxt"></div>
     <button class="go" id="installGo" style="display:none" onclick="doInstall()">📲 Yükle</button>
     <button class="x" onclick="dismissInstall()" aria-label="Kapat">✕</button>
+  </div>
+
+  <div id="evHero"></div>
+
+  <div class="card" id="prepCard" style="display:none">
+    <h2 id="prepTitle">📊 Nişana kadar</h2>
+    <div id="prepBox"></div>
   </div>
 
   <div class="card" id="totalCard">
@@ -341,6 +502,33 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
     </div>
   </div>
 
+  <div class="card" id="planCard" style="display:none">
+    <h2>💳 Ödeme planı</h2>
+    <div id="planBox"></div>
+    <button class="addline" onclick="openPlan()">＋ Ödeme planı ekle</button>
+  </div>
+
+  <div class="card" id="todoCard" style="display:none">
+    <h2>✅ Hazırlık listesi</h2>
+    <div id="todoBox"></div>
+    <div class="tdadd">
+      <input type="text" id="todoIn" placeholder="Yeni görev ekle..." onkeydown="if(event.key==='Enter')addTodo()">
+      <button onclick="addTodo()">Ekle</button>
+    </div>
+    <div class="tdsug" id="todoSug"></div>
+  </div>
+
+  <div class="card" id="bohcaCard" style="display:none">
+    <h2>🎁 Bohça · alınacaklar</h2>
+    <div class="seg bseg" id="bohcaTabs"></div>
+    <div id="bohcaBox"></div>
+    <div class="tdadd">
+      <input type="text" id="bohcaIn" placeholder="Yeni ekle..." onkeydown="if(event.key==='Enter')addBohca()">
+      <button onclick="addBohca()">Ekle</button>
+    </div>
+    <button class="ghost" id="bohcaStd" onclick="addBohcaStd()">📋 Standart listeyi ekle</button>
+  </div>
+
   <div class="card">
     <h2>📅 Günlük harcama</h2>
     <div id="dailyBox"><div class="hint">Masraf girince günlük grafik burada.</div></div>
@@ -354,13 +542,14 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
   <div class="card">
     <h2>📈 Genel özet</h2>
     <div id="sumBox"><div class="hint">Masraf girince özet burada.</div></div>
-    <button class="ghost" onclick="openKarne()">🏅 Tatil karnesini aç</button>
+    <button class="ghost" onclick="openKarne()">🏅 Karneyi aç</button>
     <button class="ghost" onclick="rwStart()">✨ Rewind'i başlat</button>
   </div>
 
   <div class="card">
     <h2>Kategoriler</h2>
     <div id="catBox"><div class="hint">Masraf girince burada dağılım görünür.</div></div>
+    <button class="ghost" onclick="openCatBudget()">🎯 Kategori bütçesi belirle</button>
   </div>
 
   <div class="card" id="anCard" style="display:none">
@@ -404,17 +593,19 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
 </div>
 
 <div class="sheet" id="sheet-trips">
-  <h3>🧳 Tatillerim</h3>
+  <h3>📒 Defterlerim</h3>
   <div id="tripList"></div>
   <button class="ghost" onclick="rwAll()">✨ Tüm zamanlar rewind'i</button>
   <div id="newTripForm" style="display:none">
-    <label>Yeni tatil adı</label>
-    <input type="text" id="tName" placeholder="Örn: Bodrum 2026">
+    <label>Ne için?</label>
+    <div class="seg seg2" id="tType"></div>
+    <label>Defter adı</label>
+    <input type="text" id="tName" placeholder="Örn: Söz & Nişan / Evimiz">
     <label>Bütçe (TL, boş = bütçesiz)</label>
     <input type="number" id="tBudget" inputmode="numeric" placeholder="Örn: 30000">
-    <button class="primary" onclick="newTrip()">Tatili oluştur 🎉</button>
+    <button class="primary" onclick="newTrip()">Defteri oluştur 🎉</button>
   </div>
-  <button class="primary" id="newTripBtn" onclick="showNewTrip()">＋ Yeni tatil ekle</button>
+  <button class="primary" id="newTripBtn" onclick="showNewTrip()">＋ Yeni defter ekle</button>
   <button class="ghost" onclick="closeSheets()">Kapat</button>
 </div>
 
@@ -425,12 +616,15 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
 
 <div class="sheet" id="sheet-settings">
   <h3>Ayarlar</h3>
-  <label>Bu tatilin adı</label>
+  <label>Defter türü</label>
+  <div class="seg seg2" id="sType"></div>
+  <label>Defterin adı</label>
   <input type="text" id="sTrip" placeholder="Örn: Bodrum 2026">
   <label>Bütçe (TL, boş = bütçesiz)</label>
   <input type="number" id="sBudget" inputmode="numeric" placeholder="Örn: 30000">
   <label>Tema</label>
   <div class="themegrid" id="themeGrid"></div>
+  <button class="ghost" onclick="openEvents()">🗓️ Önemli tarihler (nişan, nikah)</button>
   <label>Senkronizasyon (gelişmiş — normalde dokunma)</label>
   <textarea id="sFb" rows="4" placeholder="Uygulama kendi bağlantısıyla gelir, burası boş kalabilir. Sadece başka bir Firebase projesine geçmek istersen yeni config'i buraya yapıştır."></textarea>
   <div class="setupbox" style="margin-top:6px">Senkron zaten açık ✓ — internet yokken girilenler bağlanınca otomatik gönderilir. Bu kutu yalnızca farklı bir veritabanına geçmek için.</div>
@@ -440,6 +634,73 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
   <input type="file" id="fRestore" accept="application/json,.json" style="display:none" onchange="restoreBackup(this.files[0]); this.value='';">
   <button class="ghost" onclick="closeSheets()">Kapat</button>
 </div>
+
+<div class="sheet" id="sheet-events">
+  <h3>🗓️ Önemli tarihler</h3>
+  <div id="evForm"></div>
+  <button class="primary" onclick="saveEvents()">Kaydet</button>
+  <button class="ghost" onclick="closeSheets()">Kapat</button>
+</div>
+
+<div class="sheet" id="sheet-plan">
+  <h3 id="planTitle">💳 Ödeme planı ekle</h3>
+  <label>Ne için?</label>
+  <input type="text" id="pDesc" placeholder="Örn: Mekan / Yüzükler / Koltuk takımı">
+  <label>Kategori</label>
+  <div class="catgrid" id="pCat"></div>
+  <div id="pNewOnly">
+    <label>Toplam tutar (TL)</label>
+    <input type="number" id="pTotal" inputmode="decimal" placeholder="Örn: 180000" oninput="planCalc()">
+    <label>Kapora: şimdi ödenen (isteğe bağlı)</label>
+    <input type="number" id="pDep" inputmode="decimal" placeholder="Örn: 50000" oninput="planCalc()">
+    <div id="pDepWho" style="display:none">
+      <label>Kaporayı kim ödedi?</label>
+      <div class="seg" id="pPayer"></div>
+    </div>
+  </div>
+  <div id="pEditOnly" style="display:none">
+    <label>Kalan tutar (TL)</label>
+    <input type="number" id="pAmt" inputmode="decimal">
+  </div>
+  <label>Kalan ödemenin tarihi (vade)</label>
+  <input type="date" id="pDue">
+  <div class="hint" id="pCalc" style="margin-top:10px; line-height:1.6"></div>
+  <button class="primary" onclick="savePlan()">Kaydet</button>
+  <button class="ghost danger" id="pDel" style="display:none" onclick="delPlan()">Planı sil</button>
+  <button class="ghost" onclick="closeSheets()">Vazgeç</button>
+</div>
+
+<div class="sheet" id="sheet-pay">
+  <h3>✅ Ödeme yapıldı</h3>
+  <div class="payinfo" id="payInfo"></div>
+  <label>Kim ödedi?</label>
+  <div class="paywho">
+    <button onclick="confirmPay('p2')"><span class="pdot p2"></span>Buket ödedi</button>
+    <button onclick="confirmPay('p1')"><span class="pdot p1"></span>Ahmed ödedi</button>
+  </div>
+  <div class="hint" style="margin-top:10px">Masraflara eklenir, yine %50-%50 bölünür.</div>
+  <button class="ghost" onclick="closeSheets()">Vazgeç</button>
+</div>
+
+<div class="sheet" id="sheet-catbud">
+  <h3>🎯 Kategori bütçeleri</h3>
+  <div class="hint">Boş bıraktığınız kategoride bütçe takibi yapılmaz.</div>
+  <div id="cbForm"></div>
+  <div class="hint" id="cbSum" style="margin-top:10px"></div>
+  <button class="primary" onclick="saveCatBudget()">Kaydet</button>
+  <button class="ghost" onclick="closeSheets()">Vazgeç</button>
+</div>
+
+<div class="cele" id="cele" onclick="closeCele()">
+  <div class="celebox">
+    <div class="rings"><span class="rg l"></span><span class="rg r"></span><span class="spark">✨</span></div>
+    <div class="cetitle">Tamamlandı ✅</div>
+    <div class="cesub" id="ceSub">Ödeştiniz, kimsenin kimseye borcu kalmadı</div>
+    <div class="cenames" id="ceNames">Buket ❤️ Ahmed</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <div class="rw" id="rw">
   <div class="rwbars" id="rwBars"></div>
@@ -454,14 +715,54 @@ html[data-theme=gece] .qchip b{color:var(--teal-dark);}
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
 var CATS = [
-  {id:"yemek", name:"Yemek", emoji:"🍽️"},
-  {id:"ulasim", name:"Ulaşım", emoji:"🚕"},
-  {id:"konak", name:"Konaklama", emoji:"🏨"},
-  {id:"eglence", name:"Eğlence", emoji:"🎉"},
-  {id:"market", name:"Market", emoji:"🛒"},
-  {id:"diger", name:"Diğer", emoji:"📦"}
+  {id:"yemek",    name:"Yemek",      emoji:"🍽️"},
+  {id:"ulasim",   name:"Ulaşım",     emoji:"🚕"},
+  {id:"konak",    name:"Konaklama",  emoji:"🏨"},
+  {id:"eglence",  name:"Eğlence",    emoji:"🎉"},
+  {id:"market",   name:"Market",     emoji:"🛒"},
+  {id:"mekan",    name:"Mekan",      emoji:"🏛️"},
+  {id:"ikram",    name:"İkram",      emoji:"🥂"},
+  {id:"kiyafet",  name:"Kıyafet",    emoji:"👗"},
+  {id:"taki",     name:"Takı",       emoji:"💍"},
+  {id:"foto",     name:"Fotoğraf",   emoji:"📸"},
+  {id:"muzik",    name:"Müzik",      emoji:"🎵"},
+  {id:"davetiye", name:"Davetiye",   emoji:"💌"},
+  {id:"fatura",   name:"Fatura",     emoji:"🧾"},
+  {id:"ev",       name:"Ev",         emoji:"🏠"},
+  {id:"saglik",   name:"Sağlık",     emoji:"💊"},
+  {id:"cikolata", name:"Çikolata & tepsi", emoji:"🍫"},
+  {id:"cicek",    name:"Çiçek & süs", emoji:"💐"},
+  {id:"mobilya",  name:"Mobilya",    emoji:"🛋️"},
+  {id:"beyazesya",name:"Beyaz eşya", emoji:"🧺"},
+  {id:"elektronik",name:"Elektronik",emoji:"📺"},
+  {id:"mutfak",   name:"Mutfak",     emoji:"🍳"},
+  {id:"tekstil",  name:"Tekstil",    emoji:"🛏️"},
+  {id:"dekor",    name:"Dekorasyon", emoji:"🪴"},
+  {id:"tadilat",  name:"Tadilat",    emoji:"🔨"},
+  {id:"diger",    name:"Diğer",      emoji:"📦"}
 ];
+var TYPES = [
+  { id:"tatil", emoji:"🏖️", name:"Tatil",
+    cats:["yemek","ulasim","konak","eglence","market","diger"] },
+  { id:"dugun", emoji:"💍", name:"Nişan & Nikah",
+    cats:["taki","kiyafet","mekan","ikram","cikolata","cicek","foto","muzik","davetiye","diger"] },
+  { id:"evkur", emoji:"🏠", name:"Ev kurulumu",
+    cats:["mobilya","beyazesya","elektronik","mutfak","tekstil","dekor","tadilat","diger"] },
+  { id:"genel", emoji:"📒", name:"Genel",
+    cats:["yemek","market","ulasim","fatura","ev","saglik","eglence","diger"] }
+];
+function typeInfo(id){
+  for(var i = 0; i < TYPES.length; i++){ if(TYPES[i].id === id) return TYPES[i]; }
+  return TYPES[0];
+}
+function tripType(trip){ return (trip && trip.meta && trip.meta.type) || "tatil"; }
+function catsFor(typeId){
+  var ids = typeInfo(typeId).cats, out = [];
+  ids.forEach(function(id){ out.push(catById(id)); });
+  return out;
+}
 var THEMES = [
+  {id:"nisan", name:"Nişan", emoji:"💍"},
   {id:"deniz", name:"Deniz", emoji:"🌊"},
   {id:"gunbatimi", name:"Gün batımı", emoji:"🌅"},
   {id:"lavanta", name:"Lavanta", emoji:"💜"},
@@ -483,7 +784,7 @@ var state = {
   data: { activeTrip: null, trips: {} },
   db: null,
   connected: false,
-  selPayer: "p1",
+  selPayer: lsGet("lastPayer", "p2"),
   selCat: "yemek",
   queue: [],
   ensured: false,
@@ -601,7 +902,7 @@ function migrateOld(){
   if(oldExp && Object.keys(oldExp).length && !Object.keys(state.data.trips).length){
     var id = "t" + Date.now();
     state.data.trips[id] = {
-      meta: { name: (oldMeta && oldMeta.trip) || "Tatilim", budget: (oldMeta && oldMeta.budget) || 0, created: Date.now() },
+      meta: { name: (oldMeta && oldMeta.trip) || "Defterim", budget: (oldMeta && oldMeta.budget) || 0, created: Date.now(), type: "tatil" },
       expenses: oldExp
     };
     state.data.activeTrip = id;
@@ -615,7 +916,7 @@ function ensureTrip(){
     if(state.ensured) return;
     state.ensured = true;
     var id = "t" + Date.now();
-    op("trips/" + id + "/meta", { name: "Tatilim 🏖️", budget: 0, created: Date.now() });
+    op("trips/" + id + "/meta", { name: "İlk defterim", budget: 0, created: Date.now(), type: "tatil" });
     op("activeTrip", id);
     return;
   }
@@ -629,7 +930,7 @@ function ensureTrip(){
 }
 
 function currentTrip(){
-  return state.data.trips[state.data.activeTrip] || { meta:{name:"Tatil", budget:0}, expenses:{} };
+  return state.data.trips[state.data.activeTrip] || { meta:{name:"Defter", budget:0, type:"tatil"}, expenses:{} };
 }
 
 function initSync(){
@@ -715,12 +1016,16 @@ function openSheet(which){
     document.getElementById("sheet-add").classList.add("open");
     setTimeout(function(){ document.getElementById("fAmt").focus(); }, 300);
   } else if(which === "trips"){
+    state.newType = "tatil";
     document.getElementById("newTripForm").style.display = "none";
     document.getElementById("newTripBtn").style.display = "block";
     buildTripList();
     document.getElementById("sheet-trips").classList.add("open");
   } else {
     var t = currentTrip();
+    state.editType = tripType(t);
+    var refreshEditType = function(id){ state.editType = id; buildTypeSeg("sType", id, refreshEditType); };
+    refreshEditType(state.editType);
     document.getElementById("sTrip").value = t.meta.name || "";
     document.getElementById("sBudget").value = t.meta.budget || "";
     document.getElementById("sFb").value = lsGet("fbConfig", "") || "";
@@ -730,6 +1035,10 @@ function openSheet(which){
 }
 function closeSheets(){
   state.editId = null;
+  state.planEdit = null;
+  ["sheet-events","sheet-plan","sheet-pay","sheet-catbud"].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.classList.remove("open");
+  });
   document.getElementById("sheetBg").classList.remove("open");
   document.getElementById("sheet-add").classList.remove("open");
   document.getElementById("sheet-trips").classList.remove("open");
@@ -740,18 +1049,22 @@ function closeSheets(){
 function buildPayerSeg(){
   var el = document.getElementById("fPayer");
   el.innerHTML = "";
-  [["p1", P1],["p2", P2]].forEach(function(p){
+  [["p2", P2],["p1", P1]].forEach(function(p){
     var b = document.createElement("button");
     b.textContent = p[1];
     b.className = (state.selPayer === p[0]) ? "sel" : "";
-    b.onclick = function(){ state.selPayer = p[0]; buildPayerSeg(); };
+    b.onclick = function(){ state.selPayer = p[0]; lsSet("lastPayer", p[0]); buildPayerSeg(); };
     el.appendChild(b);
   });
 }
 function buildCatGrid(){
   var el = document.getElementById("fCat");
   el.innerHTML = "";
-  CATS.forEach(function(c){
+  var set = catsFor(tripType(currentTrip()));
+  var ok = false;
+  set.forEach(function(c){ if(c.id === state.selCat) ok = true; });
+  if(!ok) state.selCat = set[0].id;
+  set.forEach(function(c){
     var b = document.createElement("button");
     b.innerHTML = "<span>" + c.emoji + "</span>" + c.name;
     b.className = (state.selCat === c.id) ? "sel" : "";
@@ -759,6 +1072,19 @@ function buildCatGrid(){
     el.appendChild(b);
   });
 }
+function buildTypeSeg(elId, sel, cb){
+  var el = document.getElementById(elId);
+  el.innerHTML = "";
+  TYPES.forEach(function(t){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.innerHTML = t.emoji + " " + t.name;
+    b.className = (sel === t.id) ? "sel" : "";
+    b.onclick = function(){ cb(t.id); };
+    el.appendChild(b);
+  });
+}
+
 function buildThemeGrid(){
   var el = document.getElementById("themeGrid");
   el.innerHTML = "";
@@ -783,7 +1109,7 @@ function buildTripList(){
   ids.sort(function(a,b){
     return (state.data.trips[b].meta.created || 0) - (state.data.trips[a].meta.created || 0);
   });
-  if(!ids.length){ el.innerHTML = '<div class="hint">Henüz tatil yok.</div>'; return; }
+  if(!ids.length){ el.innerHTML = '<div class="hint">Henüz defter yok.</div>'; return; }
   var html = "";
   ids.forEach(function(id){
     var t = state.data.trips[id];
@@ -801,8 +1127,8 @@ function buildTripList(){
     }
     var active = (id === state.data.activeTrip);
     html += '<div class="triprow' + (active ? ' active' : '') + '" onclick="switchTrip(\'' + id + '\')">' +
-      '<div class="te">' + (active ? '🏖️' : '🧳') + '</div>' +
-      '<div class="ti2"><div class="tn">' + escapeHtml(t.meta.name || "Tatil") + (active ? ' · aktif' : '') + '</div>' +
+      '<div class="te">' + typeInfo(tripType(t)).emoji + '</div>' +
+      '<div class="ti2"><div class="tn">' + escapeHtml(t.meta.name || "Defter") + (active ? ' · aktif' : '') + '</div>' +
       '<div class="tm">' + cnt + ' masraf' + (range ? ' · ' + range : '') + '</div></div>' +
       '<div class="tt">' + fmt(total) + '</div>' +
       (ids.length > 1 ? '<button class="del" onclick="event.stopPropagation(); delTrip(\'' + id + '\')">✕</button>' : '') +
@@ -813,8 +1139,8 @@ function buildTripList(){
 function delTrip(id){
   var t = state.data.trips[id];
   if(!t) return;
-  if(Object.keys(state.data.trips).length <= 1){ alert("Son tatil silinemez."); return; }
-  if(!confirm('"' + (t.meta.name || "Tatil") + '" ve tüm masrafları silinsin mi?')) return;
+  if(Object.keys(state.data.trips).length <= 1){ alert("Son defter silinemez."); return; }
+  if(!confirm('"' + (t.meta.name || "Defter") + '" ve tüm masrafları silinsin mi?')) return;
   if(!confirm("Emin misin? Bu geri alınamaz! (Önce Ayarlar'dan yedek indirebilirsin)")) return;
   op("trips/" + id, null);
   if(state.data.activeTrip === id){
@@ -830,7 +1156,7 @@ function downloadBackup(){
   var blob = new Blob([JSON.stringify(state.data, null, 2)], { type: "application/json" });
   var a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "tatil-yedek-" + dayKey(Date.now()) + ".json";
+  a.download = "expense-yedek-" + dayKey(Date.now()) + ".json";
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -839,17 +1165,20 @@ function downloadBackup(){
 function showNewTrip(){
   document.getElementById("newTripBtn").style.display = "none";
   document.getElementById("newTripForm").style.display = "block";
+  var refreshNewType = function(id){ state.newType = id; buildTypeSeg("tType", id, refreshNewType); };
+  refreshNewType(state.newType || "tatil");
   document.getElementById("tName").value = "";
   document.getElementById("tBudget").value = "";
   setTimeout(function(){ document.getElementById("tName").focus(); }, 100);
 }
 function newTrip(){
   var name = document.getElementById("tName").value.trim();
-  if(!name){ alert("Tatil adı girin."); return; }
+  if(!name){ alert("Defter adı girin."); return; }
   var budget = parseFloat(document.getElementById("tBudget").value) || 0;
   var id = "t" + Date.now();
   state.calMonth = null;
-  op("trips/" + id + "/meta", { name: name, budget: budget, created: Date.now() });
+  state.selCat = null;
+  op("trips/" + id + "/meta", { name: name, budget: budget, created: Date.now(), type: state.newType || "tatil" });
   op("activeTrip", id);
   closeSheets();
 }
@@ -879,19 +1208,19 @@ function restoreBackup(file){
     var d = null;
     try { d = JSON.parse(r.result); } catch(e){ d = null; }
     if(!d || typeof d !== "object" || !d.trips || typeof d.trips !== "object"){
-      alert("Bu geçerli bir tatil yedeği değil 😕\nAyarlar'dan indirdiğiniz .json dosyasını seçin.");
+      alert("Bu geçerli bir Expense yedeği değil 😕\nAyarlar'dan indirdiğiniz .json dosyasını seçin.");
       return;
     }
     var tn = 0, en = 0, names = [];
     for(var t in d.trips){
       var tr = d.trips[t]; if(!tr || !tr.meta) continue;
-      tn++; names.push(tr.meta.name || "Tatil");
+      tn++; names.push(tr.meta.name || "Defter");
       en += Object.keys(tr.expenses || {}).length;
     }
-    if(!tn){ alert("Yedekte hiç tatil bulunamadı 😕"); return; }
+    if(!tn){ alert("Yedekte hiç defter bulunamadı 😕"); return; }
     var cur = 0;
     for(var c in (state.data.trips || {})) cur += Object.keys(state.data.trips[c].expenses || {}).length;
-    if(!confirm("Yedek içeriği:\n" + tn + " tatil, " + en + " masraf\n(" + names.slice(0,4).join(", ") +
+    if(!confirm("Yedek içeriği:\n" + tn + " defter, " + en + " masraf\n(" + names.slice(0,4).join(", ") +
       (names.length > 4 ? "..." : "") + ")\n\nŞu anki " + cur + " masraf bununla DEĞİŞTİRİLECEK.\nDevam edilsin mi?")) return;
     if(!confirm("Son onay: mevcut veriler silinip yedek yüklenecek.\nGeri alınamaz — istersen önce mevcut veriyi yedekle.")) return;
     state.calMonth = null;
@@ -900,13 +1229,27 @@ function restoreBackup(file){
     render();
     closeSheets();
     confetti();
-    alert("✅ Yedek yüklendi: " + tn + " tatil, " + en + " masraf");
+    alert("✅ Yedek yüklendi: " + tn + " defter, " + en + " masraf");
   };
   r.onerror = function(){ alert("Dosya okunamadı 😕"); };
   r.readAsText(file);
 }
 
 var AN_THEMES = [
+  { id:"taki",     emoji:"💍", name:"Takı & nişan",   re:/NİŞAN|NISAN|ALYANS|YÜZÜK|YUZUK|\bTAKI\b|TAKILAR|KUYUM|ALTIN|BİLEZİK|BILEZIK/ },
+  { id:"kiyafet",  emoji:"👗", name:"Kıyafet",        re:/GELİNLİK|GELINLIK|DAMATLIK|ABİYE|ABIYE|KIYAFET|TAKIM ELBİSE|SMOKİN|AYAKKABI|TERZİ|TERZI/ },
+  { id:"foto",     emoji:"📸", name:"Fotoğraf & video", re:/FOTOĞRAF|FOTOGRAF|VİDEO|VIDEO|ÇEKİM|CEKIM|ALBÜM|ALBUM|DRONE|KLİP/ },
+  { id:"muzik",    emoji:"🎵", name:"Müzik",          re:/ORKESTRA|\bDJ\b|MÜZİK|MUZIK|CANLI MÜZ|SES SİSTEM/ },
+  { id:"davetiye", emoji:"💌", name:"Davetiye",       re:/DAVETİYE|DAVETIYE|NİKAH ŞEKERİ|NIKAH SEKERI|SÖZ TEPSİ/ },
+  { id:"mekan",    emoji:"🏛️", name:"Mekan & organizasyon", re:/MEKAN|SALON|DÜĞÜN|DUGUN|NİKAH|NIKAH|KINA|ORGANİZASYON|ORGANIZASYON|SÜSLEME|SUSLEME|MASA SANDALYE|ÇİÇEK|CICEK/ },
+  { id:"tepsi",    emoji:"🍫", name:"Çikolata & tepsi", re:/ÇİKOLATA|CIKOLATA|TEPSİ|TEPSI|LOKUM|BOHÇA|BOHCA/ },
+  { id:"mobilya",  emoji:"🛋️", name:"Mobilya",        re:/KOLTUK|MOBİLYA|MOBILYA|YEMEK MASASI|SANDALYE|GARDROP|DOLAP|YATAK|BAZA|KANEPE|SEHPA|KOMODİN|KİTAPLIK/ },
+  { id:"beyaz",    emoji:"🧺", name:"Beyaz eşya",     re:/BUZDOLAB|ÇAMAŞIR MAK|CAMASIR MAK|BULAŞIK MAK|BULASIK MAK|KURUTMA|BEYAZ EŞYA|BEYAZ ESYA|FIRIN|DAVLUMBAZ|ANKASTRE/ },
+  { id:"elektronik", emoji:"📺", name:"Elektronik",   re:/TELEVİZYON|TELEVIZYON|\bTV\b|SÜPÜRGE|SUPURGE|MODEM|HOPARLÖR|KLİMA|KLIMA/ },
+  { id:"mutfak",   emoji:"🍳", name:"Mutfak",         re:/TENCERE|TAVA|ÇATAL|BIÇAK|TABAK|BARDAK|FİNCAN|YEMEK TAKIMI|ÇAY TAKIMI|KAHVE MAKİNE|KAHVE MAKINE|BLENDER|KETTLE/ },
+  { id:"tekstil",  emoji:"🛏️", name:"Tekstil",        re:/PERDE|HALI\b|NEVRESİM|NEVRESIM|YORGAN|YASTIK|HAVLU|ÇEYİZ|CEYIZ|BATTANİYE|BATTANIYE/ },
+  { id:"dekor",    emoji:"🪴", name:"Dekorasyon",     re:/AYNA|TABLO|VAZO|ABAJUR|AVİZE|AVIZE|LAMBA|DEKOR|SAKSI/ },
+  { id:"tadilat",  emoji:"🔨", name:"Tadilat",        re:/BOYA|USTA|TADİLAT|TADILAT|FAYANS|PARKE|TESİSAT|TESISAT|ELEKTRİKÇİ/ },
   { id:"konak",  emoji:"🏨", name:"Konaklama",       re:/OTEL|HOTEL|PANSİYON|PANSIYON|AIRBNB|APART|RESORT|KONAKLAMA|GECELİK|VİLLA|BUNGALOV/ },
   { id:"ulasim", emoji:"🚕", name:"Ulaşım",          re:/TAKSİ|TAKSI|TAXI|UBER|DOLMUŞ|OTOBÜS|OTOBUS|FERİBOT|FERIBOT|VAPUR|BENZİN|BENZIN|MAZOT|OTOPARK|HGS|OGS|UÇAK|UCAK|TRANSFER|ARAÇ KİRA|RENT/ },
   { id:"market", emoji:"🛒", name:"Market",          re:/MARKET|MİGROS|MIGROS|\bBİM\b|\bBIM\b|A101|ŞOK\b|CARREFOUR|BAKKAL|MANAV/ },
@@ -917,7 +1260,7 @@ var AN_THEMES = [
   { id:"gece",   emoji:"🍹", name:"Gece & bar",      re:/\bBAR\b|\bPUB\b|BİRA|BIRA|KOKTEYL|RAKI|ŞARAP|SARAP|CLUB|KULÜP|MEYHANE|GECE KULÜ/ },
   { id:"deniz",  emoji:"🏖️", name:"Deniz & plaj",    re:/PLAJ|BEACH|ŞEZLONG|SEZLONG|TEKNE|DALIŞ|SNORKEL|SAHİL|DENİZ/ },
   { id:"gezi",   emoji:"🎟️", name:"Gezi & bilet",    re:/BİLET|BILET|MÜZE|MUZE|ÖREN|TUR\b|TURU|GİRİŞ|GIRIS|BALON|TELEFERİK|ANTİK|REHBER/ },
-  { id:"hediye", emoji:"🎁", name:"Hediye & alışveriş", re:/HEDİYE|HEDIYE|MAGNET|SOUVENIR|HATIRA|ALIŞVERİŞ|ALISVERIS|KIYAFET|MAĞAZA|TAKI|ÇANTA/ },
+  { id:"hediye", emoji:"🎁", name:"Hediye & alışveriş", re:/HEDİYE|HEDIYE|MAGNET|SOUVENIR|HATIRA|ALIŞVERİŞ|ALISVERIS|KIYAFET|MAĞAZA|\bTAKI\b|ÇANTA/ },
   { id:"saglik", emoji:"💊", name:"Sağlık",          re:/ECZANE|İLAÇ|ILAC|DOKTOR|HASTANE|AĞRI KESİCİ|GÜNEŞ KREMİ/ }
 ];
 var AN_STOP = { "ve":1,"ile":1,"için":1,"bir":1,"bu":1,"şu":1,"da":1,"de":1,"mi":1,"çok":1,"az":1,
@@ -1105,8 +1448,8 @@ function renderSplit(total, paid1, paid2, s12, s21, debt){
     '<div class="steps">' +
       '<div><span>Toplam harcama</span><b>' + fmt(total) + '</b></div>' +
       '<div><span>Kişi başı pay (÷2)</span><b>' + fmt(share) + '</b></div>' +
-      '<div><span><span class="pdot p1"></span>' + P1 + ' ödedi</span><b class="v1">' + fmt(paid1) + '</b></div>' +
       '<div><span><span class="pdot p2"></span>' + P2 + ' ödedi</span><b class="v2">' + fmt(paid2) + '</b></div>' +
+      '<div><span><span class="pdot p1"></span>' + P1 + ' ödedi</span><b class="v1">' + fmt(paid1) + '</b></div>' +
       '<div><span>Aradaki fark</span><b>' + fmt(diff) + '</b></div>' +
       '<div><span>Farkın yarısı' + (diff >= 0.01 ? ' (' + dirTxt + ')' : '') + '</span><b>' + fmt(half) + '</b></div>' +
       (Math.abs(net) > 0.001 ? '<div><span>✅ Elden kapatılan</span><b class="vok">' +
@@ -1187,10 +1530,11 @@ function delExpense(id){
 
 function saveSettings(){
   var t = currentTrip();
-  var name = document.getElementById("sTrip").value.trim() || t.meta.name || "Tatil";
+  var name = document.getElementById("sTrip").value.trim() || t.meta.name || "Defter";
   var budget = parseFloat(document.getElementById("sBudget").value) || 0;
   op("trips/" + state.data.activeTrip + "/meta",
-    { name: name, budget: budget, created: t.meta.created || Date.now() });
+    { name: name, budget: budget, created: t.meta.created || Date.now(),
+      type: state.editType || tripType(t) });
   var fbText = document.getElementById("sFb").value.trim();
   var prev = lsGet("fbConfig", "") || "";
   lsSet("fbConfig", fbText);
@@ -1292,20 +1636,20 @@ function rwBadges(o, budget){
   if(o.total > 0 && (o.byCat.eglence || 0) / o.total >= 0.2) b.push("🎉 Eğlence düşkünü");
   if(o.total > 0 && (o.byCat.konak || 0) / o.total >= 0.35) b.push("🏨 Konfor sever");
   if((o.catCnt.market || 0) >= 5) b.push("🛒 Market avcısı");
-  if((o.catCnt.ulasim || 0) >= 5) b.push("🚕 Yollarda geçen tatil");
+  if((o.catCnt.ulasim || 0) >= 5) b.push("🚕 Yollarda geçen günler");
   if(o.total > 0 && Math.abs(o.paid1 - o.paid2) / o.total < 0.05) b.push("⚖️ Denge ustası");
   else if(o.total > 0 && o.paid1 / o.total >= 0.65) b.push("💸 Kasa " + P1);
   else if(o.total > 0 && o.paid2 / o.total >= 0.65) b.push("💸 Kasa " + P2);
   if(o.n >= 20) b.push("📋 Titiz kayıtçı · " + o.n + " masraf");
-  if(o.days.length >= 7) b.push("🏖️ Uzun tatilci · " + o.days.length + " gün");
-  if(!b.length) b.push("🌴 Tatil modu");
+  if(o.days.length >= 7) b.push("📅 Uzun soluklu · " + o.days.length + " gün");
+  if(!b.length) b.push("✨ Kayıt modu");
   return b.slice(0, 6);
 }
 
 function rwAnalysisCards(items, opts){
   var an = analyzeDescriptions(items);
   var out = [];
-  var kicker = (opts && opts.kicker) || "Bu tatilde";
+  var kicker = (opts && opts.kicker) || "Bu defterde";
   var C = (opts && opts.colors) || [RWC[2], RWC[6], RWC[7]];
 
   if(an.reps.length){
@@ -1357,18 +1701,18 @@ function rwTripCards(trip){
   if(!items.length) return null;
   var o = rwAgg(items);
   var budget = trip.meta.budget || 0;
-  var name = escapeHtml(trip.meta.name || "Tatil");
+  var name = escapeHtml(trip.meta.name || "Defter");
   var cards = [];
 
   cards.push({ bg: RWC[0], top: "Rewind", h:
-    '<div class="rwemoji">✨</div>' +
-    '<div class="rwk">Tatil rewind</div>' +
+    '<div class="rwemoji">' + typeInfo(tripType(trip)).emoji + '</div>' +
+    '<div class="rwk">' + typeInfo(tripType(trip)).emoji + ' rewind</div>' +
     '<div class="rwmid">' + name + '</div>' +
     '<div class="rwsub">' + rwRange(o.first, o.last) + '<br>Bakalım neler olmuş 👀</div>' +
     '<div class="rwsub" style="margin-top:18px;opacity:.7">ilerlemek için sağa dokun ›</div>' });
 
   cards.push({ bg: RWC[1], top: "Toplam", num: o.total, h:
-    '<div class="rwk">Bu tatilde toplam</div>' +
+    '<div class="rwk">Bu defterde toplam</div>' +
     '<div class="rwbig" id="rwNum">0</div>' +
     '<div class="rwsub">' + o.n + ' masraf · ' + o.days.length + ' gün' +
     (budget > 0 ? '<br>' + (o.total <= budget ? '🎯 Bütçenin içinde kaldınız!' : '🔥 Bütçeyi ' + fmt(o.total - budget) + ' aştınız') : '') +
@@ -1425,21 +1769,21 @@ function rwTripCards(trip){
         (o.big.payer === "p1" ? P1 : P2) + ' ödedi<br>değdi mi? 😄</div>' });
   }
 
-  rwAnalysisCards(items, { kicker: "Bu tatilde" }).forEach(function(x){ cards.push(x); });
+  rwAnalysisCards(items, { kicker: "Bu defterde" }).forEach(function(x){ cards.push(x); });
 
   var badges = rwBadges(o, budget).map(function(x){ return '<span class="rwbadge">' + x + '</span>'; }).join("");
   cards.push({ bg: RWC[7], top: "Rozetler", h:
     '<div class="rwemoji">🏅</div>' +
-    '<div class="rwk">Bu tatilden kalanlar</div>' +
+    '<div class="rwk">Bu defterden kalanlar</div>' +
     '<div style="margin-top:14px">' + badges + '</div>' });
 
   var others = Object.keys(state.data.trips || {}).length > 1;
   cards.push({ bg: RWC[8], top: "Bitti", boom: true, h:
-    '<div class="rwemoji">🌴</div>' +
+    '<div class="rwemoji">' + typeInfo(tripType(trip)).emoji + '</div>' +
     '<div class="rwk">' + name + '</div>' +
     '<div class="rwbig" style="font-size:40px">' + fmt(o.total) + '</div>' +
     '<div class="rwsub">' + o.days.length + ' gün · ' + o.n + ' masraf · sayısız anı</div>' +
-    '<div class="rwmid" style="margin-top:16px">' + P1 + ' <span class="hb">❤️</span> ' + P2 + '</div>' +
+    '<div class="rwmid" style="margin-top:16px">' + P2 + ' <span class="hb">❤️</span> ' + P1 + '</div>' +
     (others ? '<button class="rwbtn" style="color:' + RWC[8] + '" onclick="rwAll()">🌍 Tüm zamanlar rewind’i</button>' : '') });
 
   return cards;
@@ -1459,7 +1803,7 @@ function rwAllCards(){
       if(e.ts > last) last = e.ts;
       all.push(e);
     });
-    rows.push({ name: trips[id].meta.name || "Tatil", total: t, days: Object.keys(dset).length,
+    rows.push({ name: trips[id].meta.name || "Defter", total: t, days: Object.keys(dset).length,
       n: items.length, first: first, last: last });
   });
   if(!rows.length) return null;
@@ -1474,14 +1818,14 @@ function rwAllCards(){
   cards.push({ bg: RWC[8], top: "Tüm zamanlar", h:
     '<div class="rwemoji">🌍</div>' +
     '<div class="rwk">Tüm zamanlar rewind</div>' +
-    '<div class="rwmid">' + rows.length + ' tatil, tek hikâye</div>' +
+    '<div class="rwmid">' + rows.length + ' defter, tek hikâye</div>' +
     '<div class="rwsub">' + rwRange(o.first, o.last) + '</div>' +
     '<div class="rwsub" style="margin-top:18px;opacity:.7">ilerlemek için sağa dokun ›</div>' });
 
   cards.push({ bg: RWC[1], top: "Toplam", num: o.total, h:
     '<div class="rwk">Bugüne kadar birlikte</div>' +
     '<div class="rwbig" id="rwNum">0</div>' +
-    '<div class="rwsub">' + rows.length + ' tatil · ' + totalDays + ' gün · ' + o.n + ' masraf</div>' });
+    '<div class="rwsub">' + rows.length + ' defter · ' + totalDays + ' gün · ' + o.n + ' masraf</div>' });
 
   var rank = rows.slice(0, 5).map(function(r, i){
     return '<div class="rwrow"><span>' + ["🥇","🥈","🥉","4.","5."][i] + ' ' + escapeHtml(r.name) +
@@ -1489,7 +1833,7 @@ function rwAllCards(){
   }).join("");
   cards.push({ bg: RWC[2], top: "Sıralama", h:
     '<div class="rwemoji">🏆</div>' +
-    '<div class="rwk">En pahalı tatiller</div>' +
+    '<div class="rwk">En pahalı defterler</div>' +
     '<div style="margin-top:14px">' + rank + '</div>' });
 
   var tc = o.catSorted[0];
@@ -1501,7 +1845,7 @@ function rwAllCards(){
     }).join("");
     cards.push({ bg: RWC[4], top: "Değişmeyen zevk", h:
       '<div class="rwemoji">' + tcc.emoji + '</div>' +
-      '<div class="rwk">Her tatilin vazgeçilmezi</div>' +
+      '<div class="rwk">Değişmeyen alışkanlık</div>' +
       '<div class="rwmid">' + tcc.name + '</div>' +
       '<div class="rwbig" style="font-size:36px">' + fmt(o.byCat[tc]) + '</div>' +
       '<div style="margin-top:14px">' + rest + '</div>' });
@@ -1513,29 +1857,740 @@ function rwAllCards(){
     '<div class="rwbig" style="font-size:38px">' + fmt(o.total) + '</div>' +
     '<div class="rwsub">' + o.n + ' masraf · kişi başı ' + fmt(Math.round(o.total / 2)) + '</div>' });
 
-  rwAnalysisCards(all, { kicker: "Tüm tatillerde", colors: [RWC[2], RWC[6], RWC[7]] })
+  rwAnalysisCards(all, { kicker: "Tüm defterlerde", colors: [RWC[2], RWC[6], RWC[7]] })
     .forEach(function(x){ cards.push(x); });
 
   var longest = rows.slice().sort(function(a, b){ return b.days - a.days; })[0];
   cards.push({ bg: RWC[3], top: "Rekorlar", h:
     '<div class="rwemoji">📊</div>' +
-    '<div class="rwrow"><span>🏖️ En uzun tatil</span><b>' + escapeHtml(longest.name) + ' · ' + longest.days + ' gün</b></div>' +
-    '<div class="rwrow"><span>💎 En pahalı tatil</span><b>' + escapeHtml(rows[0].name) + '</b></div>' +
-    '<div class="rwrow"><span>📅 Toplam tatil günü</span><b>' + totalDays + '</b></div>' +
+    '<div class="rwrow"><span>📅 En uzun defter</span><b>' + escapeHtml(longest.name) + ' · ' + longest.days + ' gün</b></div>' +
+    '<div class="rwrow"><span>💎 En pahalı defter</span><b>' + escapeHtml(rows[0].name) + '</b></div>' +
+    '<div class="rwrow"><span>🗓️ Toplam gün</span><b>' + totalDays + '</b></div>' +
     '<div class="rwrow"><span>💸 Günlük ortalama</span><b>' + fmt(Math.round(o.total / Math.max(1, totalDays))) + '</b></div>' });
 
   cards.push({ bg: RWC[0], top: "Bitti", boom: true, h:
-    '<div class="rwemoji">🌴</div>' +
-    '<div class="rwk">' + rows.length + ' tatil · ' + totalDays + ' gün</div>' +
+    '<div class="rwemoji">✨</div>' +
+    '<div class="rwk">' + rows.length + ' defter · ' + totalDays + ' gün</div>' +
     '<div class="rwbig" style="font-size:40px">' + fmt(o.total) + '</div>' +
-    '<div class="rwsub">daha nice tatillere ✨</div>' +
-    '<div class="rwmid" style="margin-top:16px">' + P1 + ' <span class="hb">❤️</span> ' + P2 + '</div>' });
+    '<div class="rwsub">daha nicelerine ✨</div>' +
+    '<div class="rwmid" style="margin-top:16px">' + P2 + ' <span class="hb">❤️</span> ' + P1 + '</div>' });
 
   return cards;
 }
 
 function rwStart(){ closeSheets(); rwOpen(rwTripCards(currentTrip())); }
 function rwAll(){ closeSheets(); rwOpen(rwAllCards()); }
+
+function gid(x){ return document.getElementById(x); }
+var NAMES_TXT = P2 + " ❤️ " + P1;
+function rid(p){ return p + Date.now() + Math.floor(Math.random() * 1000); }
+function openSh(id){ gid("sheetBg").classList.add("open"); gid(id).classList.add("open"); }
+function showToast(msg){
+  var t = gid("toast"); if(!t) return;
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(state.toastT);
+  state.toastT = setTimeout(function(){ t.classList.remove("show"); }, 2600);
+}
+function dayNum(k){ var p = k.split("-"); return Math.round(Date.UTC(+p[0], +p[1] - 1, +p[2]) / 864e5); }
+function keyDate(k){ var p = k.split("-"); return new Date(+p[0], +p[1] - 1, +p[2], 12, 0, 0); }
+function fmtLong(k){ return new Intl.DateTimeFormat("tr-TR", {day:"numeric", month:"long", year:"numeric"}).format(keyDate(k)); }
+function fmtShortK(k){ return new Intl.DateTimeFormat("tr-TR", {day:"numeric", month:"short"}).format(keyDate(k)); }
+function pad2(n){ return String(n).padStart(2, "0"); }
+
+/* ---------------- Önemli tarihler ---------------- */
+var EVENTS = [
+  { id:"nisan", name:"Söz & Nişan", emoji:"💍", def:"2026-11-14", lbl:"Söz & Nişan'a", to:"Nişana kadar", past:"Nişanlandık" },
+  { id:"nikah", name:"Nikah", emoji:"💒", def:"", lbl:"Nikaha", to:"Nikaha kadar", past:"Nikahımız kıyıldı" }
+];
+function evInfo(id){ for(var i = 0; i < EVENTS.length; i++){ if(EVENTS[i].id === id) return EVENTS[i]; } return EVENTS[0]; }
+function evRec(id){ return ((state.data && state.data.events) || {})[id] || null; }
+function evDateStr(id){
+  var r = evRec(id);
+  if(r && typeof r.date === "string") return /^\d{4}-\d{2}-\d{2}$/.test(r.date) ? r.date : "";
+  return evInfo(id).def || "";
+}
+function evTimeStr(id){ var r = evRec(id); return (r && typeof r.time === "string" && /^\d{2}:\d{2}$/.test(r.time)) ? r.time : ""; }
+function evTs(id){
+  var d = evDateStr(id); if(!d) return Infinity;
+  var p = d.split("-"), q = (evTimeStr(id) || "00:00").split(":");
+  return new Date(+p[0], +p[1] - 1, +p[2], +q[0] || 0, +q[1] || 0, 0).getTime();
+}
+function evState(){
+  var today = dayKey(Date.now()), list = [], cur = null, prev = null;
+  EVENTS.forEach(function(e){ var d = evDateStr(e.id); if(d) list.push({ e:e, d:d, ts:evTs(e.id) }); });
+  list.sort(function(a, b){ return a.ts - b.ts; });
+  list.forEach(function(x){ if(x.d >= today){ if(!cur) cur = x; } else prev = x; });
+  return { list:list, cur:cur, prev:prev, today:today };
+}
+function agoTxt(d){
+  var n = dayNum(dayKey(Date.now())) - dayNum(d);
+  return n <= 0 ? "bugün" : (n === 1 ? "dün" : n + " gün oldu");
+}
+function prepStart(){
+  var trips = state.data.trips || {}, first = 0;
+  Object.keys(trips).forEach(function(id){
+    var t = trips[id];
+    if(tripType(t) !== "dugun" && id !== state.data.activeTrip) return;
+    validItems(t).forEach(function(e){ if(!first || e.ts < first) first = e.ts; });
+  });
+  return first;
+}
+
+function msHtml(st){
+  var now = Date.now();
+  var evs = EVENTS.map(function(e){ var d = evDateStr(e.id); return { e:e, d:d, ts: d ? evTs(e.id) : Infinity }; });
+  evs.sort(function(a, b){ return a.ts - b.ts; });
+  var out = '<div class="ms">';
+  evs.forEach(function(x, i){
+    var cls = !x.d ? "none" : (x.d < st.today ? "done" : (st.cur && st.cur.e.id === x.e.id ? "next" : "fut"));
+    if(i > 0){
+      var pv = evs[i - 1], fill = 0;
+      if(x.d && pv.d){
+        if(x.d < st.today) fill = 100;
+        else if(pv.d < st.today && x.ts > pv.ts) fill = Math.max(0, Math.min(100, (now - pv.ts) / (x.ts - pv.ts) * 100));
+      }
+      out += '<div class="mseg"><div style="width:' + fill.toFixed(1) + '%"></div></div>';
+    }
+    out += '<div class="msn ' + cls + '"><i>' + (cls === "done" ? "✓" : x.e.emoji) + '</i><b>' + x.e.name +
+      '</b><span>' + (x.d ? fmtShortK(x.d) : "tarih yok") + '</span></div>';
+  });
+  return out + '</div>';
+}
+
+function renderHero(){
+  var box = gid("evHero"); if(!box) return;
+  var st = evState(), now = Date.now();
+  state.heroDay = st.today; state.heroTarget = null;
+  var hearts = "";
+  for(var i = 0; i < 7; i++){
+    hearts += '<span class="fh" style="left:' + (6 + i * 14) + '%;animation-delay:' + (i * 1.05).toFixed(2) + 's">' +
+      (i % 3 === 0 ? "💗" : "♥") + '</span>';
+  }
+  var html = '<div class="hero">' + hearts;
+  if(!st.list.length){
+    html += '<div class="hk">Önemli tarihler</div><div class="ht">🗓️ Henüz tarih yok</div>' +
+      '<div class="hbtns2"><button onclick="openEvents()">＋ Tarih ekle</button></div></div>';
+    if(state.heroHtml !== html){ box.innerHTML = html; state.heroHtml = html; }
+    return;
+  }
+  var todayMode = false;
+  if(st.cur){
+    var c = st.cur;
+    todayMode = c.d === st.today && (!evTimeStr(c.e.id) || now >= c.ts);
+    if(todayMode){
+      html += '<div class="hk">' + fmtLong(c.d) + '</div><div class="hbig"><span class="ring">' + c.e.emoji + '</span></div>' +
+        '<div class="ht">Bugün büyük gün!</div><div class="hsub">' + c.e.name + ' · ' + NAMES_TXT + '</div>';
+    } else {
+      state.heroTarget = c.ts;
+      html += '<div class="hk">' + c.e.emoji + ' ' + c.e.lbl + '</div>' +
+        '<div class="cdn"><div><b id="hD">0</b><span>gün</span></div><div><b id="hH">00</b><span>saat</span></div>' +
+        '<div><b id="hM">00</b><span>dk</span></div><div><b id="hS">00</b><span>sn</span></div></div>' +
+        '<div class="hdate">' + fmtLong(c.d) + (evTimeStr(c.e.id) ? ' · ' + evTimeStr(c.e.id) : '') + ' · ' + NAMES_TXT + '</div>';
+    }
+    if(st.prev) html += '<div class="hsmall">' + st.prev.e.emoji + ' ' + st.prev.e.past + ' · ' + agoTxt(st.prev.d) + '</div>';
+  } else {
+    var p = st.prev;
+    html += '<div class="hk">' + fmtLong(p.d) + '</div><div class="hbig"><span class="ring">' + p.e.emoji + '</span></div>' +
+      '<div class="ht">' + p.e.past + '!</div><div class="hsub">' + agoTxt(p.d) + ' · ' + NAMES_TXT + '</div>';
+    if(!evDateStr("nikah")) html += '<div class="hsmall">💒 Nikah tarihi belli olunca ekleyin, sayaç ona geçsin</div>';
+  }
+  html += msHtml(st);
+  if(st.cur && !todayMode){
+    var start = st.prev ? st.prev.ts : prepStart();
+    if(!start || start >= st.cur.ts) start = st.cur.ts - 60 * 864e5;
+    var frac = Math.max(0, Math.min(1, (now - start) / (st.cur.ts - start)));
+    html += '<div class="hprog"><div class="pb"><div style="width:' + (frac * 100).toFixed(1) + '%"></div></div>' +
+      '<div class="pl"><span>' + (st.prev ? st.prev.e.past : "Hazırlık başladı") + ' · ' + fmtShortK(dayKey(start)) +
+      '</span><span>%' + Math.round(frac * 100) + ' yol alındı</span></div></div>';
+  }
+  html += '<div class="hbtns2"><button onclick="openEvents()">🗓️ Tarihler</button>';
+  var nd = evDateStr("nisan");
+  if(nd && nd <= st.today) html += '<button onclick="rwNisan()">✨ Nişan rewind\'i</button>';
+  else if(nd) html += '<span class="lock">🔒 Nişan rewind\'i ' + fmtShortK(nd) + '\'ta açılır</span>';
+  html += '</div></div>';
+  if(state.heroHtml !== html){ box.innerHTML = html; state.heroHtml = html; }
+  tickHero();
+}
+function setTick(id, v){
+  var el = gid(id); if(!el) return;
+  v = String(v);
+  if(el.textContent !== v){
+    el.textContent = v;
+    if(el.classList){ el.classList.remove("tickp"); void el.offsetWidth; el.classList.add("tickp"); }
+  }
+}
+function tickHero(){
+  var today = dayKey(Date.now());
+  if(state.heroDay && state.heroDay !== today){ state.heroHtml = null; render(); return; }
+  if(!state.heroTarget) return;
+  var diff = state.heroTarget - Date.now();
+  if(diff <= 0){ state.heroHtml = null; renderHero(); return; }
+  var s = Math.floor(diff / 1000);
+  setTick("hD", Math.floor(s / 86400));
+  setTick("hH", pad2(Math.floor(s / 3600) % 24));
+  setTick("hM", pad2(Math.floor(s / 60) % 60));
+  setTick("hS", pad2(s % 60));
+}
+
+function openEvents(){
+  closeSheets();
+  var h = "";
+  EVENTS.forEach(function(e){
+    h += '<div class="evrow"><div class="evh">' + e.emoji + ' ' + e.name + '</div><div class="daterow">' +
+      '<input type="date" id="evd_' + e.id + '" value="' + evDateStr(e.id) + '">' +
+      '<input type="time" id="evt_' + e.id + '" value="' + evTimeStr(e.id) + '" style="max-width:112px">' +
+      '<button type="button" onclick="clearEv(\'' + e.id + '\')">Temizle</button></div></div>';
+  });
+  h += '<div class="hint" style="margin-top:10px; line-height:1.6">Saat isteğe bağlı (girerseniz sayaç o saate kadar sayar). ' +
+    'Nikah tarihi belli olunca buradan ekleyin; nişandan sonra sayaç otomatik ona geçer.</div>';
+  gid("evForm").innerHTML = h;
+  openSh("sheet-events");
+}
+function clearEv(id){ gid("evd_" + id).value = ""; gid("evt_" + id).value = ""; }
+function saveEvents(){
+  EVENTS.forEach(function(e){
+    op("events/" + e.id, { date: gid("evd_" + e.id).value || "", time: gid("evt_" + e.id).value || "" });
+  });
+  state.heroHtml = null;
+  closeSheets();
+  render();
+  showToast("🗓️ Tarihler kaydedildi");
+}
+
+/* ---------------- Nişana kadar özeti ---------------- */
+function dueInfo(due){
+  if(!due) return { cls:"", txt:"vade yok" };
+  var dn = dayNum(due) - dayNum(dayKey(Date.now()));
+  if(dn < 0) return { cls:"late", txt:"⚠️ " + (-dn) + " gün gecikti" };
+  if(dn === 0) return { cls:"soon", txt:"⏰ bugün" };
+  if(dn <= 7) return { cls:"soon", txt:"⏳ " + dn + " gün kaldı" };
+  return { cls:"", txt: dn + " gün kaldı" };
+}
+function statBox(k, v, cls){ return '<div class="stat"><div class="k">' + k + '</div><div class="v' + (cls ? ' ' + cls : '') + '">' + v + '</div></div>'; }
+function renderPrep(trip, total){
+  var card = gid("prepCard"), box = gid("prepBox"); if(!card) return;
+  var st = evState();
+  if(!st.cur){ card.style.display = "none"; box.innerHTML = ""; return; }
+  card.style.display = "block";
+  gid("prepTitle").textContent = "📊 " + st.cur.e.to;
+  var days = dayNum(st.cur.d) - dayNum(st.today);
+  var budget = trip.meta.budget || 0;
+  var pl = planItems(trip), plSum = 0;
+  pl.forEach(function(p){ plSum += p.amt; });
+  var left = budget - total - plSum;
+  var ms = st.cur.ts - Date.now();
+  var remTxt = ms <= 0 ? "Bugün! " + st.cur.e.emoji
+    : (ms >= 864e5 ? Math.floor(ms / 864e5) + " gün " : "") + (Math.floor(ms / 36e5) % 24) + " sa";
+  var daily = "—", dcls = "";
+  if(budget > 0){
+    if(left <= 0){ daily = "bütçe doldu"; dcls = "vdue"; }
+    else daily = days > 0 ? fmt(Math.floor(left / days)) : fmt(left);
+  }
+  var html = '<div class="statgrid">' +
+    statBox("⏳ Kalan süre", remTxt) +
+    statBox("💰 Kalan bütçe", budget > 0 ? fmt(left) : "—", budget > 0 && left < 0 ? "vdue" : "") +
+    statBox("📆 Günlük harcanabilir", daily, dcls) +
+    statBox("💳 Planlı ödemeler", plSum > 0 ? fmt(plSum) : "yok") + '</div>';
+  if(budget > 0) html += '<div class="hint" style="margin-top:8px">Kalan bütçe = bütçe − harcanan − planlı ödemeler</div>';
+  else html += '<div class="hint" style="margin-top:8px">Ayarlar\'dan bu deftere bütçe girerseniz kalan ve günlük harcanabilir tutarı hesaplarım.</div>';
+  var up = pl.filter(function(p){ return p.due; }).slice(0, 3);
+  if(up.length){
+    html += '<div class="uphead">⏰ Yaklaşan ödemeler</div>';
+    up.forEach(function(p){
+      var di = dueInfo(p.due);
+      html += '<div class="uprow ' + di.cls + '"><span>' + catById(p.cat).emoji + '</span><span class="ud">' + escapeHtml(p.desc) +
+        '</span><span class="ut">' + di.txt + '</span><b>' + fmt(p.amt) + '</b></div>';
+    });
+  }
+  box.innerHTML = html;
+}
+
+/* ---------------- Ödeme planı ---------------- */
+function planItems(trip){
+  var out = [], pl = (trip && trip.plans) || {};
+  for(var k in pl){
+    var p = pl[k];
+    if(!p || typeof p.amt !== "number" || !isFinite(p.amt)) continue;
+    out.push({ _id:k, amt:p.amt, desc:p.desc || "", cat:p.cat || "diger", due:p.due || "", dep:!!p.dep, created:p.created || 0 });
+  }
+  out.sort(function(a, b){ var x = a.due || "9999-99-99", y = b.due || "9999-99-99"; return x < y ? -1 : (x > y ? 1 : a.created - b.created); });
+  return out;
+}
+function renderPlans(trip){
+  var card = gid("planCard"), box = gid("planBox"); if(!card) return;
+  var t = tripType(trip), pl = planItems(trip);
+  if(t !== "dugun" && t !== "evkur" && !pl.length){ card.style.display = "none"; box.innerHTML = ""; return; }
+  card.style.display = "block";
+  if(!pl.length){
+    box.innerHTML = '<div class="hint" style="line-height:1.6">Kapora verdiğiniz ya da ileride ödeyeceğiniz masrafları ekleyin. ' +
+      'Örn: mekan 180.000, 50.000 kapora, kalanı 1 Kasım. Vadesi yaklaşınca uyarırım.</div>';
+    return;
+  }
+  var sum = 0; pl.forEach(function(p){ sum += p.amt; });
+  var html = '<div class="plsum"><span>' + pl.length + ' bekleyen ödeme</span><b>' + fmt(sum) + '</b></div>';
+  pl.forEach(function(p){
+    var di = dueInfo(p.due);
+    html += '<div class="plrow ' + di.cls + (p._id === state.justPlan ? ' pop' : '') + '" onclick="openPlan(\'' + p._id + '\')">' +
+      '<div class="emoji">' + catById(p.cat).emoji + '</div>' +
+      '<div class="einfo"><div class="d">' + escapeHtml(p.desc) + (p.dep ? ' <span class="kchip">kalan</span>' : '') + '</div>' +
+      '<div class="m">' + (p.due ? fmtShortK(p.due) + ' · ' : '') + '<span class="dtag">' + di.txt + '</span></div></div>' +
+      '<div class="eamt">' + fmt(p.amt) + '</div>' +
+      '<button class="paybtn" onclick="event.stopPropagation(); payPlan(\'' + p._id + '\')">✓ Ödendi</button></div>';
+  });
+  box.innerHTML = html;
+}
+function buildPlanCat(){
+  var el = gid("pCat"); el.innerHTML = "";
+  catsFor(tripType(currentTrip())).forEach(function(c){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.innerHTML = "<span>" + c.emoji + "</span>" + c.name;
+    b.className = (state.planCat === c.id) ? "sel" : "";
+    b.onclick = function(){ state.planCat = c.id; buildPlanCat(); };
+    el.appendChild(b);
+  });
+}
+function buildPlanPayer(){
+  var el = gid("pPayer"); el.innerHTML = "";
+  [["p2", P2], ["p1", P1]].forEach(function(p){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.textContent = p[1];
+    b.className = (state.planPayer === p[0]) ? "sel" : "";
+    b.onclick = function(){ state.planPayer = p[0]; buildPlanPayer(); };
+    el.appendChild(b);
+  });
+}
+function openPlan(id){
+  closeSheets();
+  var trip = currentTrip(), p = id ? (trip.plans || {})[id] : null;
+  state.planEdit = p ? id : null;
+  var set = catsFor(tripType(trip)), ok = false;
+  set.forEach(function(c){ if(c.id === state.planCat) ok = true; });
+  state.planCat = p ? (p.cat || "diger") : (ok ? state.planCat : set[0].id);
+  state.planPayer = lsGet("lastPayer", "p2");
+  gid("planTitle").textContent = p ? "💳 Ödemeyi düzenle" : "💳 Ödeme planı ekle";
+  gid("pDesc").value = p ? (p.desc || "") : "";
+  gid("pNewOnly").style.display = p ? "none" : "block";
+  gid("pEditOnly").style.display = p ? "block" : "none";
+  gid("pDel").style.display = p ? "block" : "none";
+  gid("pTotal").value = ""; gid("pDep").value = "";
+  gid("pAmt").value = p ? p.amt : "";
+  gid("pDue").value = (p && p.due) ? p.due : dayKey(Date.now() + 14 * 864e5);
+  buildPlanCat(); buildPlanPayer(); planCalc();
+  openSh("sheet-plan");
+}
+function planCalc(){
+  var out = gid("pCalc");
+  if(state.planEdit){ out.innerHTML = ""; return; }
+  var tot = parseFloat(gid("pTotal").value) || 0, dep = parseFloat(gid("pDep").value) || 0;
+  gid("pDepWho").style.display = dep > 0 ? "block" : "none";
+  if(tot <= 0){ out.innerHTML = ""; return; }
+  if(dep > tot){ out.innerHTML = '<span class="vdue">Kapora toplamdan büyük olamaz</span>'; return; }
+  var rem = tot - dep, parts = [];
+  if(dep > 0) parts.push("✅ " + fmt(dep) + " kapora şimdi masraflara eklenir");
+  if(rem > 0) parts.push("💳 " + fmt(rem) + " kalan, vade tarihine planlanır");
+  else parts.push("Tamamı ödenmiş, doğrudan masraf olur");
+  out.innerHTML = parts.join("<br>");
+}
+function savePlan(){
+  var trip = currentTrip(), tid = state.data.activeTrip;
+  var desc = gid("pDesc").value.trim() || catById(state.planCat).name;
+  var due = gid("pDue").value || "";
+  if(state.planEdit){
+    var amt = parseFloat(gid("pAmt").value);
+    if(!amt || amt <= 0){ alert("Geçerli bir kalan tutar girin."); return; }
+    var old = (trip.plans || {})[state.planEdit] || {};
+    var pid0 = state.planEdit;
+    state.justPlan = pid0;
+    op("trips/" + tid + "/plans/" + pid0, { desc: desc, cat: state.planCat, amt: amt, due: due, dep: !!old.dep, created: old.created || Date.now() });
+    closeSheets();
+    showToast("✏️ Ödeme planı güncellendi");
+    return;
+  }
+  var tot = parseFloat(gid("pTotal").value) || 0, dep = parseFloat(gid("pDep").value) || 0;
+  if(tot <= 0){ alert("Toplam tutarı girin."); return; }
+  if(dep < 0 || dep > tot){ alert("Kapora 0 ile toplam tutar arasında olmalı."); return; }
+  var rem = Math.round((tot - dep) * 100) / 100;
+  if(rem > 0 && !due){ alert("Kalan ödeme için bir tarih seçin."); return; }
+  var now = Date.now();
+  if(dep > 0){
+    var eid = rid("e");
+    state.justAdded = eid;
+    op("trips/" + tid + "/expenses/" + eid, { amt: dep, desc: desc + (rem > 0 ? " · kapora" : ""), cat: state.planCat, payer: state.planPayer, ts: now });
+  }
+  if(rem > 0){
+    var pid = rid("p");
+    state.justPlan = pid;
+    op("trips/" + tid + "/plans/" + pid, { desc: desc, cat: state.planCat, amt: rem, due: due, dep: dep > 0, created: now });
+  }
+  closeSheets();
+  showToast(dep > 0 && rem > 0 ? "✅ Kapora eklendi · kalan " + fmt(rem) + " planlandı"
+    : (rem > 0 ? "💳 " + fmt(rem) + " planlandı" : "✅ Masraflara eklendi"));
+}
+function delPlan(){
+  if(!state.planEdit) return;
+  if(!confirm("Bu ödeme planı silinsin mi? (Ödenen kapora masraflarda kalır)")) return;
+  op("trips/" + state.data.activeTrip + "/plans/" + state.planEdit, null);
+  closeSheets();
+}
+function payPlan(id){
+  var p = (currentTrip().plans || {})[id]; if(!p) return;
+  closeSheets();
+  state.payId = id;
+  gid("payInfo").innerHTML = catById(p.cat).emoji + " " + escapeHtml(p.desc || "") + (p.dep ? " · kalan" : "") + "<b>" + fmt(p.amt) + "</b>";
+  openSh("sheet-pay");
+}
+function confirmPay(payer){
+  var tid = state.data.activeTrip, id = state.payId, p = (currentTrip().plans || {})[id];
+  if(!p){ closeSheets(); return; }
+  var eid = rid("e");
+  state.justAdded = eid;
+  op("trips/" + tid + "/expenses/" + eid, { amt: p.amt, desc: (p.desc || catById(p.cat).name) + (p.dep ? " · kalan" : ""), cat: p.cat || "diger", payer: payer, ts: Date.now() });
+  op("trips/" + tid + "/plans/" + id, null);
+  state.payId = null;
+  closeSheets();
+  confetti(true);
+  showToast("✅ Ödendi · masraflara eklendi, %50-%50 bölündü");
+}
+
+/* ---------------- Kategori bütçesi ---------------- */
+function openCatBudget(){
+  closeSheets();
+  var trip = currentTrip(), cb = trip.catBudgets || {}, h = "";
+  catsFor(tripType(trip)).forEach(function(c){
+    h += '<div class="cbin"><span>' + c.emoji + ' ' + c.name + '</span><input type="number" inputmode="numeric" id="cb_' + c.id +
+      '" placeholder="—" value="' + (cb[c.id] ? cb[c.id] : "") + '" oninput="cbSum()"></div>';
+  });
+  gid("cbForm").innerHTML = h;
+  cbSum();
+  openSh("sheet-catbud");
+}
+function cbSum(){
+  var trip = currentTrip(), s = 0;
+  catsFor(tripType(trip)).forEach(function(c){ var el = gid("cb_" + c.id); s += el ? (parseFloat(el.value) || 0) : 0; });
+  var b = trip.meta.budget || 0;
+  gid("cbSum").innerHTML = "Kategoriler toplamı: <b>" + fmt(s) + "</b>" +
+    (b > 0 ? " · defter bütçesi " + fmt(b) + (s > b ? ' <span class="vdue">(aşıyor)</span>' : "") : "");
+}
+function saveCatBudget(){
+  var trip = currentTrip(), obj = {}, any = false;
+  catsFor(tripType(trip)).forEach(function(c){
+    var v = parseFloat((gid("cb_" + c.id) || {}).value) || 0;
+    if(v > 0){ obj[c.id] = v; any = true; }
+  });
+  var keep = trip.catBudgets || {};
+  for(var k in keep){ if(!(k in obj) && !catsFor(tripType(trip)).some(function(c){ return c.id === k; })){ obj[k] = keep[k]; any = true; } }
+  state.catAnimTrip = null;
+  op("trips/" + state.data.activeTrip + "/catBudgets", any ? obj : null);
+  closeSheets();
+  showToast("🎯 Kategori bütçeleri kaydedildi");
+}
+function renderCats(trip, byCat, total){
+  var catBox = gid("catBox"); if(!catBox) return;
+  var cb = trip.catBudgets || {}, plByCat = {};
+  planItems(trip).forEach(function(p){ plByCat[p.cat] = (plByCat[p.cat] || 0) + p.amt; });
+  var ids = typeInfo(tripType(trip)).cats.slice();
+  CATS.forEach(function(c){ if(ids.indexOf(c.id) < 0 && ((byCat[c.id] || 0) > 0 || (plByCat[c.id] || 0) > 0)) ids.push(c.id); });
+  var rows = [];
+  ids.forEach(function(id){
+    var v = byCat[id] || 0, b = +cb[id] || 0, pl = plByCat[id] || 0;
+    if(v > 0 || b > 0 || pl > 0) rows.push({ c:catById(id), v:v, b:b, pl:pl });
+  });
+  rows.sort(function(a, b){ return (b.b > 0) - (a.b > 0) || (b.v - a.v); });
+  var anim = state.catAnimTrip !== state.data.activeTrip || state.catWasEmpty;
+  var g = anim ? " grow" : "";
+  if(!rows.length){
+    catBox.innerHTML = '<div class="hint">Masraf girince ya da kategori bütçesi belirleyince burada görünür.</div>';
+    state.catWasEmpty = true;
+  } else {
+    var h = "";
+    rows.forEach(function(r){
+      if(r.b > 0){
+        var sp = Math.min(100, r.v / r.b * 100), pp = Math.max(0, Math.min(100 - sp, r.pl / r.b * 100));
+        var over = r.v + r.pl - r.b;
+        h += '<div class="cbrow"><div class="cbtop"><span>' + r.c.emoji + ' ' + r.c.name + '</span><b>' + fmt(r.v) +
+          ' <span class="cbof">/ ' + fmt(r.b) + '</span></b></div>' +
+          '<div class="cbar2"><div class="sp' + (r.v > r.b ? ' over' : '') + g + '" style="width:' + sp.toFixed(1) + '%"></div>' +
+          (pp > 0 ? '<div class="pl' + g + '" style="width:' + pp.toFixed(1) + '%"></div>' : '') + '</div>' +
+          '<div class="cbsub">' + (r.pl > 0 ? '💳 +' + fmt(r.pl) + ' planlı · ' : '') +
+          (over > 0.01 ? '<span class="vdue">⚠️ ' + fmt(over) + ' aşım</span>' : 'kalan ' + fmt(r.b - r.v - r.pl)) + '</div></div>';
+      } else {
+        var p = total > 0 ? Math.round(r.v / total * 100) : 0;
+        h += '<div class="catrow"><span>' + r.c.emoji + '</span><span class="nm">' + r.c.name +
+          '</span><div class="cbar"><div class="' + g.trim() + '" style="width:' + p + '%"></div></div>' +
+          '<span class="amt">' + fmt(r.v) + (r.pl > 0 ? '<br><small style="color:var(--muted);font-weight:500">+' + fmtS(r.pl) + ' planlı</small>' : '') + '</span></div>';
+      }
+    });
+    catBox.innerHTML = h;
+    state.catWasEmpty = false;
+  }
+  state.catAnimTrip = state.data.activeTrip;
+}
+
+/* ---------------- Hazırlık listesi ---------------- */
+var TODO_SUG = {
+  dugun: ["Söz tepsisi", "Çikolata", "Çiçek", "Yüzükler", "Kıyafetler", "Kuaför", "Fotoğrafçı", "Mekan", "Davetli listesi", "İkram menüsü"],
+  evkur: ["Ev bakmak", "Mobilya", "Beyaz eşya", "Perde", "Halı", "Mutfak eşyaları", "Nevresim", "Aydınlatma", "Taşınma"],
+  tatil: [], genel: []
+};
+function todoItems(trip){
+  var out = [], td = (trip && trip.todos) || {};
+  for(var k in td){
+    var t = td[k];
+    if(!t || typeof t.text !== "string") continue;
+    out.push({ _id:k, text:t.text, done:!!t.done, ts:t.ts || 0, doneTs:t.doneTs || 0 });
+  }
+  out.sort(function(a, b){ return (a.done - b.done) || (a.done ? a.doneTs - b.doneTs : a.ts - b.ts); });
+  return out;
+}
+function renderTodos(trip){
+  var card = gid("todoCard"), box = gid("todoBox"); if(!card) return;
+  var t = tripType(trip), list = todoItems(trip);
+  if(t !== "dugun" && t !== "evkur" && !list.length){ card.style.display = "none"; box.innerHTML = ""; return; }
+  card.style.display = "block";
+  var done = list.filter(function(x){ return x.done; }).length;
+  var h = "";
+  if(list.length){
+    h += '<div class="tdprog"><div class="pb"><div style="width:' + Math.round(done / list.length * 100) + '%"></div></div><b>' +
+      done + '/' + list.length + (done === list.length ? ' 🎉' : '') + '</b></div>';
+    list.forEach(function(x){
+      h += '<div class="td' + (x.done ? ' done' : '') + (x._id === state.justTodo ? ' justdone' : '') + '">' +
+        '<button class="tchk" onclick="toggleTodo(\'' + x._id + '\')" aria-label="Tamamla">✓</button>' +
+        '<span class="tt">' + escapeHtml(x.text) + '</span>' +
+        '<button class="del" onclick="delTodo(\'' + x._id + '\')">✕</button></div>';
+    });
+  } else {
+    h += '<div class="hint">Hazırlıkları ekleyin, ikinizin telefonunda da görünür. Aşağıdaki önerilere dokunarak hızlıca ekleyebilirsiniz.</div>';
+  }
+  box.innerHTML = h;
+  var have = {};
+  list.forEach(function(x){ have[x.text.toLocaleLowerCase("tr-TR")] = 1; });
+  var sug = (TODO_SUG[t] || []).filter(function(s){ return !have[s.toLocaleLowerCase("tr-TR")]; }).slice(0, 6);
+  var sel = gid("todoSug");
+  sel.innerHTML = "";
+  sug.forEach(function(s){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.textContent = "＋ " + s;
+    b.onclick = function(){ addTodo(s); };
+    sel.appendChild(b);
+  });
+}
+function addTodo(text){
+  var inp = gid("todoIn");
+  text = (typeof text === "string" ? text : (inp ? inp.value : "")).trim();
+  if(!text) return;
+  op("trips/" + state.data.activeTrip + "/todos/" + rid("d"), { text: text, done: false, ts: Date.now() });
+  if(inp && typeof arguments[0] !== "string") inp.value = "";
+}
+function toggleTodo(id){
+  var trip = currentTrip(), x = (trip.todos || {})[id]; if(!x) return;
+  var nd = !x.done;
+  state.justTodo = nd ? id : null;
+  op("trips/" + state.data.activeTrip + "/todos/" + id, { text: x.text, done: nd, ts: x.ts || Date.now(), doneTs: nd ? Date.now() : 0 });
+  if(nd){
+    var list = todoItems(currentTrip());
+    if(list.length >= 2 && list.every(function(t){ return t.done; })){
+      confetti(true);
+      showToast("🎉 Hazırlık listesi tamamlandı!");
+    }
+  }
+}
+function delTodo(id){ op("trips/" + state.data.activeTrip + "/todos/" + id, null); }
+
+/* ---------------- Ödeşme kutlaması ---------------- */
+function celebrate(sub){
+  var c = gid("cele"); if(!c) return;
+  gid("ceSub").textContent = sub || "Ödeştiniz, kimsenin kimseye borcu kalmadı";
+  gid("ceNames").textContent = NAMES_TXT;
+  c.classList.remove("open"); void c.offsetWidth; c.classList.add("open");
+  confetti(true);
+  clearTimeout(state.celeT);
+  state.celeT = setTimeout(closeCele, 4200);
+}
+function closeCele(){ var c = gid("cele"); if(c) c.classList.remove("open"); }
+
+/* ---------------- Nişan rewind'i ---------------- */
+var RWN = ["#9d4d6a","#b45f7e","#7c3a5a","#c2627f","#8a4f7d","#a3485f","#6d3b6b","#b86b85","#5c2f4f"];
+function nisanData(){
+  var d = evDateStr("nisan"); if(!d) return null;
+  var p = d.split("-"), end = new Date(+p[0], +p[1] - 1, +p[2], 23, 59, 59).getTime();
+  var trips = state.data.trips || {};
+  var ids = Object.keys(trips).filter(function(id){ return tripType(trips[id]) === "dugun"; });
+  if(!ids.length) ids = [state.data.activeTrip];
+  var items = [], todos = [];
+  ids.forEach(function(id){
+    if(!trips[id]) return;
+    validItems(trips[id]).forEach(function(e){ if(e.ts <= end) items.push(e); });
+    todoItems(trips[id]).forEach(function(t){ todos.push(t); });
+  });
+  return { d:d, end:end, items:items, todos:todos };
+}
+function rwNisanCards(){
+  var n = nisanData(); if(!n || !n.items.length) return null;
+  var o = rwAgg(n.items), ev = evInfo("nisan");
+  var firstE = n.items[0], lastE = n.items[0];
+  n.items.forEach(function(e){ if(e.ts < firstE.ts) firstE = e; if(e.ts > lastE.ts) lastE = e; });
+  var prepDays = Math.max(1, dayNum(n.d) - dayNum(dayKey(firstE.ts)));
+  var cards = [];
+  cards.push({ bg: RWN[0], top: "Nişan rewind", h:
+    '<div class="rwemoji">💍</div><div class="rwk">Nişan rewind</div>' +
+    '<div class="rwmid">Hazırlık hikâyemiz</div>' +
+    '<div class="rwsub">' + fmtLong(dayKey(firstE.ts)) + ' – ' + fmtLong(n.d) + '<br>' + NAMES_TXT + '</div>' +
+    '<div class="rwsub" style="margin-top:18px;opacity:.7">ilerlemek için sağa dokun ›</div>' });
+  cards.push({ bg: RWN[1], top: "Hazırlık süreci", h:
+    '<div class="rwemoji">⏳</div><div class="rwk">İlk masraftan nişan gününe</div>' +
+    '<div class="rwbig">' + prepDays + ' gün</div>' +
+    '<div class="rwsub">her şey "' + escapeHtml(firstE.desc || catById(firstE.cat).name) + '" ile başladı</div>' });
+  cards.push({ bg: RWN[2], top: "Toplam", num: o.total, h:
+    '<div class="rwk">Nişana kadar birlikte</div><div class="rwbig" id="rwNum">0</div>' +
+    '<div class="rwsub">' + o.n + ' masraf · kişi başı ' + fmt(Math.round(o.total / 2)) + '</div>' });
+  var tl = [{ ts:firstE.ts, i:"🌱", t:"İlk masraf", s: escapeHtml(firstE.desc || "") + " · " + fmt(firstE.amt) }];
+  if(o.big && o.big._id !== firstE._id) tl.push({ ts:o.big.ts, i:"💎", t:"En büyük adım", s: escapeHtml(o.big.desc || "") + " · " + fmt(o.big.amt) });
+  if(o.maxDay){ var md = keyDate(o.maxDay).getTime(); tl.push({ ts:md, i:"🔥", t:"En yoğun gün", s: fmt(o.maxDayVal) }); }
+  if(lastE._id !== firstE._id && (!o.big || lastE._id !== o.big._id)) tl.push({ ts:lastE.ts, i:"⏱️", t:"Son hazırlık", s: escapeHtml(lastE.desc || "") });
+  tl.sort(function(a, b){ return a.ts - b.ts; });
+  tl.push({ ts:n.end, i:"💍", t:ev.name, s: NAMES_TXT });
+  var tf = new Intl.DateTimeFormat("tr-TR", {day:"numeric", month:"short"});
+  cards.push({ bg: RWN[3], top: "Zaman tüneli", h:
+    '<div class="rwk">Zaman tüneli</div><div class="tl">' + tl.map(function(x){
+      return '<div><span>' + x.i + '</span><div><b>' + x.t + '</b><small>' + tf.format(new Date(x.ts)) + ' · ' + x.s + '</small></div></div>';
+    }).join("") + '</div>' });
+  var cats = o.catSorted.slice(0, 5).map(function(c){
+    var cc = catById(c);
+    return '<div class="rwrow"><span>' + cc.emoji + ' ' + cc.name + '</span><b>' + fmt(o.byCat[c]) + '</b></div>';
+  }).join("");
+  cards.push({ bg: RWN[4], top: "Nereye gitti?", h:
+    '<div class="rwemoji">' + catById(o.catSorted[0]).emoji + '</div><div class="rwk">En büyük kalem</div>' +
+    '<div class="rwmid">' + catById(o.catSorted[0]).name + '</div><div style="margin-top:14px">' + cats + '</div>' });
+  if(n.todos.length){
+    var dn = n.todos.filter(function(t){ return t.done; }).length;
+    cards.push({ bg: RWN[5], top: "Hazırlık listesi", h:
+      '<div class="rwemoji">✅</div><div class="rwk">Birlikte hallettiğiniz</div>' +
+      '<div class="rwbig">' + dn + ' / ' + n.todos.length + '</div><div class="rwsub">görev tamamlandı</div>' });
+  }
+  rwAnalysisCards(n.items, { kicker: "Hazırlıkta", colors: [RWN[6], RWN[7], RWN[2]] }).forEach(function(x){ cards.push(x); });
+  var nk = evDateStr("nikah");
+  cards.push({ bg: RWN[8], top: "Nişanlandık", boom: true, h:
+    '<div class="rwemoji"><span class="ring">💍</span></div><div class="rwk">' + fmtLong(n.d) + '</div>' +
+    '<div class="rwmid">Nişanlandık!</div><div class="rwmid" style="margin-top:10px">' + P2 + ' <span class="hb">❤️</span> ' + P1 + '</div>' +
+    '<div class="rwsub" style="margin-top:12px">' + (nk ? "sırada: 💒 Nikah · " + fmtLong(nk) : "sırada nikah var ✨") + '</div>' });
+  return cards;
+}
+function rwNisan(){ closeSheets(); rwOpen(rwNisanCards()); }
+
+/* ---------------- Bohça alınacaklar (para yok, sadece alındı / alınacak) ---------------- */
+var BOHCA = {
+  gelin: { who: P2, emoji:"👰", title:"Gelin bohçası", std:[
+    "Gecelik & sabahlık takımı", "Pijama takımı", "Bornoz", "Terlik", "Ayakkabı", "Çanta", "Cüzdan",
+    "Şal / eşarp", "Parfüm", "Bakım & makyaj seti", "İç giyim seti", "Çorap seti", "Ayna & tarak seti", "Kolonya"] },
+  damat: { who: P1, emoji:"🤵", title:"Damat bohçası", std:[
+    "Pijama takımı", "Bornoz", "Terlik", "Gömlek", "Kravat", "Kemer", "Cüzdan", "Saat", "Parfüm",
+    "Tıraş seti", "İç çamaşırı seti", "Çorap seti", "Ayakkabı", "Kol düğmesi"] }
+};
+var BOHCA_TABS = ["gelin", "damat"];
+function bohcaSlug(t){
+  return t.toLocaleLowerCase("tr-TR").replace(/ç/g,"c").replace(/ğ/g,"g").replace(/ı/g,"i").replace(/ö/g,"o")
+    .replace(/ş/g,"s").replace(/ü/g,"u").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"");
+}
+function bohcaTab(){ var t = state.bohcaTab || lsGet("bohcaTab", "gelin"); return BOHCA[t] ? t : "gelin"; }
+function bohcaItems(tab){
+  var src = ((state.data && state.data.bohca) || {})[tab] || {}, out = [];
+  for(var k in src){
+    var x = src[k];
+    if(!x || typeof x.text !== "string" || !x.text.trim()) continue;
+    out.push({ _id:k, text:x.text, done:!!x.done, ts:x.ts || 0, doneTs:x.doneTs || 0 });
+  }
+  out.sort(function(a, b){ return (a.done - b.done) || (a.done ? a.doneTs - b.doneTs : a.ts - b.ts); });
+  return out;
+}
+function setBohcaTab(t){ state.bohcaTab = t; lsSet("bohcaTab", t); renderBohca(currentTrip()); }
+function renderBohca(trip){
+  var card = gid("bohcaCard"); if(!card) return;
+  var any = BOHCA_TABS.some(function(t){ return bohcaItems(t).length > 0; });
+  if(tripType(trip) !== "dugun" && !any){ card.style.display = "none"; return; }
+  card.style.display = "block";
+  var tab = bohcaTab(), cfg = BOHCA[tab];
+  var tabs = gid("bohcaTabs"); tabs.innerHTML = "";
+  BOHCA_TABS.forEach(function(t){
+    var l = bohcaItems(t), d = l.filter(function(x){ return x.done; }).length;
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = t === tab ? "sel" : "";
+    b.innerHTML = BOHCA[t].emoji + " " + BOHCA[t].who + "'e" + (l.length ? ' <small>' + d + '/' + l.length + '</small>' : "");
+    b.onclick = function(){ setBohcaTab(t); };
+    tabs.appendChild(b);
+  });
+  var list = bohcaItems(tab), done = list.filter(function(x){ return x.done; });
+  var h = '<div class="bsub">' + cfg.emoji + ' ' + cfg.title + ' · ' + cfg.who + ' için</div>';
+  if(list.length){
+    h += '<div class="tdprog"><div class="pb"><div style="width:' + Math.round(done.length / list.length * 100) + '%"></div></div><b>' +
+      done.length + '/' + list.length + ' alındı' + (done.length === list.length ? ' 🎉' : '') + '</b></div>';
+    var shownHead = false;
+    list.forEach(function(x){
+      if(x.done && !shownHead){ h += '<div class="bhead">Alındı ✓</div>'; shownHead = true; }
+      h += '<div class="td bitem' + (x.done ? ' done' : '') + (x._id === state.justBohca ? ' justdone' : '') + '">' +
+        '<button class="tchk" onclick="toggleBohca(\'' + tab + '\',\'' + x._id + '\')" aria-label="Alındı">✓</button>' +
+        '<span class="tt" onclick="renameBohca(\'' + tab + '\',\'' + x._id + '\')">' + escapeHtml(x.text) + '</span>' +
+        '<span class="bst">' + (x.done ? "alındı" : "alınacak") + '</span>' +
+        '<button class="del" onclick="delBohca(\'' + tab + '\',\'' + x._id + '\')" aria-label="Çıkar">✕</button></div>';
+    });
+  } else {
+    h += '<div class="hint" style="line-height:1.6">Liste boş. Aşağıdan standart listeyi ekleyin ya da kendiniz yazın.</div>';
+  }
+  gid("bohcaBox").innerHTML = h;
+  gid("bohcaIn").placeholder = cfg.who + "'e alınacak bir şey ekle...";
+  var have = {}; list.forEach(function(x){ have[x.text.toLocaleLowerCase("tr-TR")] = 1; });
+  var missing = cfg.std.filter(function(t){ return !have[t.toLocaleLowerCase("tr-TR")]; }).length;
+  var sb = gid("bohcaStd");
+  sb.style.display = missing ? "block" : "none";
+  sb.textContent = "📋 Standart listeyi ekle (" + cfg.title.toLocaleLowerCase("tr-TR") + ", " + missing + " kalem)";
+}
+function addBohca(){
+  var inp = gid("bohcaIn"), text = (inp.value || "").trim(); if(!text) return;
+  var tab = bohcaTab();
+  var dup = bohcaItems(tab).some(function(x){ return x.text.toLocaleLowerCase("tr-TR") === text.toLocaleLowerCase("tr-TR"); });
+  if(dup){ showToast("Bu zaten listede"); return; }
+  op("bohca/" + tab + "/" + rid("b"), { text: text, done: false, ts: Date.now() });
+  inp.value = "";
+}
+function addBohcaStd(){
+  var tab = bohcaTab(), cfg = BOHCA[tab], have = {}, n = 0;
+  bohcaItems(tab).forEach(function(x){ have[x.text.toLocaleLowerCase("tr-TR")] = 1; });
+  cfg.std.forEach(function(t, i){
+    if(have[t.toLocaleLowerCase("tr-TR")]) return;
+    op("bohca/" + tab + "/std_" + bohcaSlug(t), { text: t, done: false, ts: i + 1 });
+    n++;
+  });
+  if(n) showToast("📋 " + n + " kalem eklendi · istemediklerinizi ✕ ile çıkarın");
+}
+function toggleBohca(tab, id){
+  var x = (((state.data.bohca || {})[tab]) || {})[id]; if(!x) return;
+  var nd = !x.done;
+  state.justBohca = nd ? id : null;
+  op("bohca/" + tab + "/" + id, { text: x.text, done: nd, ts: x.ts || Date.now(), doneTs: nd ? Date.now() : 0 });
+  if(nd){
+    var l = bohcaItems(tab);
+    if(l.length >= 2 && l.every(function(y){ return y.done; })){
+      confetti(true);
+      showToast("🎁 " + BOHCA[tab].who + "'in bohçası tamam!");
+    }
+  }
+}
+function renameBohca(tab, id){
+  var x = (((state.data.bohca || {})[tab]) || {})[id]; if(!x) return;
+  var t = prompt("Düzenle", x.text);
+  if(t === null) return;
+  t = t.trim(); if(!t) return;
+  op("bohca/" + tab + "/" + id, { text: t, done: !!x.done, ts: x.ts || Date.now(), doneTs: x.doneTs || 0 });
+}
+function delBohca(tab, id){
+  var x = (((state.data.bohca || {})[tab]) || {})[id]; if(!x) return;
+  if(!confirm('"' + x.text + '" listeden çıkarılsın mı?')) return;
+  op("bohca/" + tab + "/" + id, null);
+}
 
 function dailyStats(items){
   var byDay = {};
@@ -1657,14 +2712,15 @@ function animateNumber(el, from, to){
   requestAnimationFrame(step);
 }
 
-function confetti(){
+function confetti(hearts){
   try{
     var cv = document.createElement("canvas");
     cv.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:300;";
     document.body.appendChild(cv);
     cv.width = window.innerWidth; cv.height = window.innerHeight;
     var ctx = cv.getContext("2d");
-    var cols = ["#0f766e","#f59e0b","#ec4899","#8b5cf6","#22c55e","#ef4444","#3b82f6"];
+    var cols = hearts ? ["#e11d48","#f472b6","#e9c46a","#be185d","#fda4af","#f2cf7e"]
+      : ["#0f766e","#f59e0b","#ec4899","#8b5cf6","#22c55e","#ef4444","#3b82f6"];
     var ps = [];
     for(var i = 0; i < 120; i++){
       ps.push({ x: Math.random()*cv.width, y: -20 - Math.random()*cv.height*0.3,
@@ -1678,7 +2734,10 @@ function confetti(){
       ps.forEach(function(p){
         p.x += p.vx; p.y += p.vy; p.r += p.vr;
         ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
-        ctx.fillStyle = p.c; ctx.fillRect(-p.s/2, -p.s/4, p.s, p.s/2); ctx.restore();
+        ctx.fillStyle = p.c;
+        if(hearts && p.s > 7){ ctx.font = Math.round(p.s * 2.4) + "px sans-serif"; ctx.fillText("♥", -p.s, p.s); }
+        else ctx.fillRect(-p.s/2, -p.s/4, p.s, p.s/2);
+        ctx.restore();
       });
       if(Date.now() - t0 < 2200) requestAnimationFrame(frame);
       else cv.remove();
@@ -1722,17 +2781,17 @@ function openKarne(){
   });
   document.getElementById("karneBox").innerHTML =
     '<div class="karne">' +
-    '<div class="kt">🌴 ' + escapeHtml(trip.meta.name || "Tatil") + '</div>' +
+    '<div class="kt">' + typeInfo(tripType(trip)).emoji + ' ' + escapeHtml(trip.meta.name || "Defter") + '</div>' +
     '<div class="kr">' + range + '</div>' +
     '<div class="kbig">' + fmt(total) + '</div>' +
-    '<div class="ksub">' + P1 + ': ' + fmt(paid1) + ' · ' + P2 + ': ' + fmt(paid2) + '</div>' +
+    '<div class="ksub">' + P2 + ': ' + fmt(paid2) + ' · ' + P1 + ': ' + fmt(paid1) + '</div>' +
     '<div class="kgrid">' +
     '<div class="kst"><div class="a">📆 Gün</div><div class="b">' + ds.keys.length + '</div></div>' +
     '<div class="kst"><div class="a">🧾 Masraf</div><div class="b">' + items.length + '</div></div>' +
     '<div class="kst"><div class="a">💸 Günlük ort.</div><div class="b">' + fmtS(ds.avg) + ' TL</div></div>' +
     '<div class="kst"><div class="a">🔥 Zirve gün</div><div class="b">' + dayLabel(maxDay) + '</div></div>' +
     '</div>' + catHtml +
-    '<div class="kfoot">' + P1 + ' <span class="hb">❤️</span> ' + P2 + '</div>' +
+    '<div class="kfoot">' + P2 + ' <span class="hb">❤️</span> ' + P1 + '</div>' +
     '</div>';
   document.getElementById("sheetBg").classList.add("open");
   document.getElementById("sheet-karne").classList.add("open");
@@ -1789,7 +2848,7 @@ function renderCalendar(items){
 
 function render(){
   var trip = currentTrip();
-  document.getElementById("tripName").textContent = "🌴 " + (trip.meta.name || "Tatil");
+  document.getElementById("tripName").textContent = typeInfo(tripType(trip)).emoji + " " + (trip.meta.name || "Defter");
 
   var items = validItems(trip);
   items.sort(function(a,b){ return b.ts - a.ts; });
@@ -1855,15 +2914,16 @@ function render(){
   }
   var debt = (paid1 - paid2) / 2 - s21 + s12;
   var settled = (total > 0 && Math.abs(debt) < 0.01);
-  if(settled && state.prevSettled === false) confetti();
+  if(settled && state.prevSettled === false && state.prevSettledTrip === state.data.activeTrip) celebrate();
   state.prevSettled = settled;
+  state.prevSettledTrip = state.data.activeTrip;
   var gross = (paid1 - paid2) / 2;
   var netS = s21 - s12;
   var sameDir = (gross > 0 && netS > 0) || (gross < 0 && netS < 0);
   var closed = sameDir ? Math.min(Math.abs(netS), Math.abs(gross)) : 0;
-  var paidLine = '<div class="paidrow"><span><span class="pdot p1"></span>' + P1 + ' ödedi <b class="v1">' +
-    fmt(paid1) + '</b></span><span><span class="pdot p2"></span>' + P2 + ' ödedi <b class="v2">' +
-    fmt(paid2) + '</b></span></div>';
+  var paidLine = '<div class="paidrow"><span><span class="pdot p2"></span>' + P2 + ' ödedi <b class="v2">' +
+    fmt(paid2) + '</b></span><span><span class="pdot p1"></span>' + P1 + ' ödedi <b class="v1">' +
+    fmt(paid1) + '</b></span></div>';
 
   if(total === 0){
     bal.innerHTML = '<div class="balpill ok">🙂 Henüz masraf yok</div>';
@@ -1871,7 +2931,7 @@ function render(){
   } else if(settled){
     bal.innerHTML = '<div class="balpill ok">✅ Ödeştiniz!</div>';
     brk.innerHTML = paidLine +
-      '<div class="balnote">Tatilin tamamı hesaplandı, kimsenin kimseye borcu kalmadı.</div>';
+      '<div class="balnote">Tüm masraflar hesaplandı, kimsenin kimseye borcu kalmadı.</div>';
     sBtn.style.display = "none"; state.curDebt = null;
   } else {
     var debtorP = debt > 0 ? "p2" : "p1";
@@ -1889,7 +2949,7 @@ function render(){
         '<span class="o">⏳ kalan ' + fmt(Math.abs(debt)) + '</span></div>';
     }
     brk.innerHTML = paidLine + bar +
-      '<div class="balnote">📌 Bu rakam <b>bugünün harcaması değil</b>; tatilin başından bugüne kadarki ' +
+      '<div class="balnote">📌 Bu rakam <b>bugünün harcaması değil</b>; bu defterdeki ' +
       items.length + ' masrafın tamamı ikiye bölündükten sonra kalan farktır.</div>';
     state.curDebt = { from: debtorP, to: debt > 0 ? "p1" : "p2", amt: Math.abs(debt), fromName: debtor, toName: creditor };
     sBtn.style.display = "block";
@@ -1910,25 +2970,16 @@ function render(){
   renderCalendar(items);
   renderAnalysis(items, dailyStats(items).keys.length);
 
-  var catBox = document.getElementById("catBox");
-  if(total === 0){
-    catBox.innerHTML = '<div class="hint">Masraf girince burada dağılım görünür.</div>';
-  } else {
-    var chtml = "";
-    CATS.forEach(function(c){
-      var v = byCat[c.id] || 0;
-      if(v <= 0) return;
-      var p = Math.round(v / total * 100);
-      chtml += '<div class="catrow"><span>' + c.emoji + '</span><span class="nm">' + c.name +
-        '</span><div class="cbar"><div style="width:' + p + '%"></div></div>' +
-        '<span class="amt">' + fmt(v) + '</span></div>';
-    });
-    catBox.innerHTML = chtml;
-  }
+  renderHero();
+  renderPrep(trip, total);
+  renderPlans(trip);
+  renderTodos(trip);
+  renderBohca(trip);
+  renderCats(trip, byCat, total);
 
   var listBox = document.getElementById("listBox");
   if(items.length === 0){
-    listBox.innerHTML = '<div class="empty"><div class="big">🏖️</div>İlk masrafı ekleyin!</div>';
+    listBox.innerHTML = '<div class="empty"><div class="big">' + typeInfo(tripType(trip)).emoji + '</div>İlk masrafı ekleyin!</div>';
   } else {
     var out = "", lastDay = "";
     var fmtDay = new Intl.DateTimeFormat("tr-TR", {day:"numeric", month:"long", weekday:"long"});
@@ -2116,7 +3167,8 @@ function dismissInstall(){
   document.getElementById("installBox").classList.remove("show");
 }
 
-applyTheme(lsGet("theme", "deniz"));
+if(!lsGet("nisanTheme1", 0)){ lsSet("nisanTheme1", 1); lsSet("theme", "nisan"); }
+applyTheme(lsGet("theme", "nisan"));
 showInstallUI();
 document.addEventListener("keydown", function(e){
   if(!document.getElementById("rw").classList.contains("open")) return;
@@ -2142,6 +3194,7 @@ if("serviceWorker" in navigator && location.protocol !== "file:"){
 }
 initSync();
 render();
+setInterval(tickHero, 1000);
 </script>
 </body>
 </html>
