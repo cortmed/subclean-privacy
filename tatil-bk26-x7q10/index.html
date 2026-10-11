@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<title>Expense</title>
+<title>Expenses</title>
 <meta name="robots" content="noindex, nofollow, noarchive">
-<meta name="theme-color" content="#0f766e">
+<meta name="theme-color" content="#b4547a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Expense">
+<meta name="apple-mobile-web-app-title" content="Expenses">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
@@ -445,6 +445,8 @@ html[data-theme=gece] .cenames{color:var(--teal-dark);}
 .bitem.done .tt{color:var(--muted); text-decoration:line-through; text-decoration-thickness:1.5px; opacity:1;}
 .bst{font-size:11px; font-weight:700; border-radius:10px; padding:3px 8px; white-space:nowrap; background:var(--duebg); color:var(--duetx);}
 .bitem.done .bst{background:var(--okbg); color:var(--oktx);}
+.card.flash{animation:cflash 1.4s ease;}
+@keyframes cflash{0%,100%{box-shadow:0 1px 3px rgba(0,0,0,.05);} 30%{box-shadow:0 0 0 3px var(--teal);}}
 </style>
 </head>
 <body>
@@ -452,10 +454,11 @@ html[data-theme=gece] .cenames{color:var(--teal-dark);}
 <header>
   <div class="wrap">
     <div>
-      <h1 id="tripName">📒 Expense</h1>
+      <h1 id="tripName">💍 Expenses</h1>
       <div class="sub"><span id="syncPill" class="pill off">yerel mod</span></div>
     </div>
     <div class="hbtns">
+      <button class="iconbtn" onclick="goBohca()" aria-label="Bohça">🎁</button>
       <button class="iconbtn" onclick="rwStart()" aria-label="Rewind">✨</button>
       <button class="iconbtn" onclick="openSheet('trips')" aria-label="Defterlerim">📒</button>
       <button class="iconbtn" onclick="openSheet('settings')" aria-label="Ayarlar">⚙️</button>
@@ -1156,7 +1159,7 @@ function downloadBackup(){
   var blob = new Blob([JSON.stringify(state.data, null, 2)], { type: "application/json" });
   var a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "expense-yedek-" + dayKey(Date.now()) + ".json";
+  a.download = "expenses-yedek-" + dayKey(Date.now()) + ".json";
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -1208,7 +1211,7 @@ function restoreBackup(file){
     var d = null;
     try { d = JSON.parse(r.result); } catch(e){ d = null; }
     if(!d || typeof d !== "object" || !d.trips || typeof d.trips !== "object"){
-      alert("Bu geçerli bir Expense yedeği değil 😕\nAyarlar'dan indirdiğiniz .json dosyasını seçin.");
+      alert("Bu geçerli bir Expenses yedeği değil 😕\nAyarlar'dan indirdiğiniz .json dosyasını seçin.");
       return;
     }
     var tn = 0, en = 0, names = [];
@@ -2506,11 +2509,16 @@ function bohcaItems(tab){
   out.sort(function(a, b){ return (a.done - b.done) || (a.done ? a.doneTs - b.doneTs : a.ts - b.ts); });
   return out;
 }
+function goBohca(){
+  closeSheets();
+  var c = gid("bohcaCard"); if(!c) return;
+  c.style.display = "block";
+  try{ c.scrollIntoView({ behavior:"smooth", block:"start" }); }catch(e){ c.scrollIntoView(); }
+  c.classList.remove("flash"); void c.offsetWidth; c.classList.add("flash");
+}
 function setBohcaTab(t){ state.bohcaTab = t; lsSet("bohcaTab", t); renderBohca(currentTrip()); }
 function renderBohca(trip){
   var card = gid("bohcaCard"); if(!card) return;
-  var any = BOHCA_TABS.some(function(t){ return bohcaItems(t).length > 0; });
-  if(tripType(trip) !== "dugun" && !any){ card.style.display = "none"; return; }
   card.style.display = "block";
   var tab = bohcaTab(), cfg = BOHCA[tab];
   var tabs = gid("bohcaTabs"); tabs.innerHTML = "";

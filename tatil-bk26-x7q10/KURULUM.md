@@ -1,4 +1,4 @@
-# 💸 Expense — Ahmed & Buket ortak masraf defteri
+# 💍 Expenses — Buket & Ahmed ortak masraf defteri
 
 Tatil, düğün, ev... her şey için ortak masraf takibi. iPhone ve Android'de aynı anda, kendi ikonuyla tam ekran uygulama olarak çalışır.
 
@@ -6,7 +6,7 @@ Tatil, düğün, ev... her şey için ortak masraf takibi. iPhone ve Android'de 
 
 ## Güncelleme yapıyorsanız (mevcut kurulum var)
 
-Bu güncellemede (💍 Nişan sürümü) **sadece `index.html`** değişti. GitHub'da `tatil-bk26-x7q10/index.html`'in üzerine yazın, telefonlarda uygulamayı kapatıp açın (gerekirse iki kez).
+Son güncellemede (isim + logo) şu dosyalar değişti: **`index.html`, `manifest.json`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`, `icon-maskable.png` (yeni)**. GitHub'da `tatil-bk26-x7q10/` klasöründe hepsinin üzerine yazın, telefonlarda uygulamayı kapatıp açın (gerekirse iki kez).
 
 Verileriniz Firebase'de, hiçbiri kaybolmaz. Eski defterler olduğu gibi kalır.
 
@@ -66,7 +66,7 @@ Tür sonradan Ayarlar'dan değiştirilebilir; masraflarınız etkilenmez. Defter
 - **🎯 Kategori bütçesi**: Kategoriler kartındaki düğme. Her kategoriye ayrı bütçe; çubukta düz kısım harcanan, çizgili kısım planlı ödeme, aşınca kırmızı
 - **📊 Nişana kadar**: kalan süre, kalan bütçe (bütçe − harcanan − planlı), günlük harcanabilir tutar, yaklaşan ödemeler
 - **✅ Hazırlık listesi**: ortak yapılacaklar, önerilere dokunarak hızlı ekleme, iki telefonda senkron
-- **🎁 Bohça · alınacaklar**: iki sekme: 👰 Buket'e (gelin bohçası) ve 🤵 Ahmed'e (damat bohçası). Para/tutar yok, sadece alınacak / alındı. "📋 Standart listeyi ekle" ile hazır liste gelir (14'er kalem); istemediğinizi ✕ ile çıkarın, kendi kaleminizi yazıp ekleyin, yazıya dokunarak düzenleyin. Alınanlar üstü çizili olarak "Alındı ✓" bölümüne iner. Liste iki telefonda ortak
+- **🎁 Bohça · alınacaklar**: başlıktaki 🎁 düğmesi doğrudan listeye götürür (her defterde görünür). İki sekme: 👰 Buket'e (gelin bohçası) ve 🤵 Ahmed'e (damat bohçası). Para/tutar yok, sadece alınacak / alındı. "📋 Standart listeyi ekle" ile hazır liste gelir (14'er kalem); istemediğinizi ✕ ile çıkarın, kendi kaleminizi yazıp ekleyin, yazıya dokunarak düzenleyin. Alınanlar üstü çizili olarak "Alındı ✓" bölümüne iner. Liste iki telefonda ortak
 - **💞 Ödeşme kutlaması**: "Ödeştik" deyince iki yüzük birleşir, "Tamamlandı ✅", kalp konfeti (iki telefonda da)
 - **✨ Nişan rewind'i**: 14 Kasım'da açılır. Hazırlık süreci, zaman tüneli (ilk masraf → en büyük adım → en yoğun gün → nişan günü), kategoriler, liste, analizler
 - **🌸 Nişan teması**: güncellemeyle otomatik açılır, Ayarlar'dan değiştirilebilir
